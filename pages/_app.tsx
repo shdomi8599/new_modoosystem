@@ -1,4 +1,5 @@
 import "@/styles/App.css";
+import "antd/dist/reset.css";
 import type { AppProps } from "next/app";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
