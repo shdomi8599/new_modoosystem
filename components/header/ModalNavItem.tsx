@@ -1,9 +1,9 @@
-import { NavContent } from "@/types";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { TbTriangleInvertedFilled } from "react-icons/tb";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { TbTriangleInvertedFilled } from "react-icons/tb";
+import styled from "styled-components";
+import { NavContent } from "@/types";
 
 type Props = {
   name: string;

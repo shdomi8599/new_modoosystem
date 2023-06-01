@@ -4,7 +4,7 @@ export const HEADER_NAV: { name: string; content: NavContent }[] = [
   {
     name: "회사소개",
     content: [
-      { name: "인사말", href: "" },
+      { name: "인사말", href: "/about" },
       { name: "조직도", href: "" },
       { name: "찾아오시는 길", href: "" },
     ],

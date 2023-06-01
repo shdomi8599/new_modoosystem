@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { headerNavState } from "@/recoil/atom";
+import { useEffect } from "react";
+import { HEADER_NAV } from "@/contants";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
-import { HEADER_NAV } from "@/contants";
-import whiteLogo from "../public/logo/white_logo.png";
-import NavItem from "./NavItem";
-import ModalNavItem from "./ModalNavItem";
+import whiteLogo from "../../public/logo/white_logo.png";
 import { useOffResize } from "@/hooks/useOffResize";
+import ModalNavItem from "./ModalNavItem";
+import NavItem from "./NavItem";
 
 const Header = () => {
   const router = useRouter();

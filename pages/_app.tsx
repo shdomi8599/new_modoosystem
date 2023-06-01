@@ -6,7 +6,8 @@ import { firebaseConfig } from "@/firebase.config";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import styled from "styled-components";
-import Header from "@/components/Header";
+import Header from "@/components/header/Header";
+import { useRouter } from "next/router";
 
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
@@ -22,13 +23,20 @@ const queryClient = new QueryClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  const { pathname } = router;
+  const isBoxVisible = pathname === "/about";
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <Header />
-        <Box>
+        {isBoxVisible ? (
           <Component {...pageProps} />
-        </Box>
+        ) : (
+          <Box>
+            <Component {...pageProps} />
+          </Box>
+        )}
       </RecoilRoot>
     </QueryClientProvider>
   );

@@ -1,7 +1,7 @@
-import { NavContent } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
+import { NavContent } from "@/types";
 
 type Props = {
   content: NavContent;
@@ -32,10 +32,10 @@ const NavItem = ({ name, content }: Props) => {
   );
 };
 export default NavItem;
-
 const Box = styled.li`
   flex-direction: column;
   position: relative;
+
   width: 140px;
   cursor: pointer;
   font-size: 20px;
