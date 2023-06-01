@@ -1,11 +1,14 @@
 import styled from "styled-components";
-import blackLogo from "../public/logo/black_logo.png";
 import whiteLogo from "../public/logo/white_logo.png";
 import Image from "next/image";
 import { HEADER_NAV } from "@/contants";
 import NavItem from "./NavItem";
+import { FaBars } from "react-icons/fa";
+import { useRecoilState } from "recoil";
+import { headerNavState } from "@/recoil/atom";
 
 const Header = () => {
+  const [headerNav, setHeaderNav] = useRecoilState(headerNavState);
   return (
     <Box>
       <div className="logo-box">
@@ -18,6 +21,9 @@ const Header = () => {
           ))}
         </ul>
       </nav>
+      <div className="modal-nav">
+        <FaBars />
+      </div>
     </Box>
   );
 };
@@ -25,14 +31,20 @@ const Header = () => {
 export default Header;
 
 const Box = styled.header`
+  width: 100%;
+  position: fixed;
+  z-index: 9999;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 104px;
-  padding: 0px calc((100% - 1280px) / 2);
   background-color: var(--main-color);
 
   .logo-box {
+    padding-left: calc((100% - 1280px) / 2);
+    @media (max-width: 1280px) {
+      padding-left: 12px;
+    }
     img {
       cursor: pointer;
     }
@@ -40,10 +52,25 @@ const Box = styled.header`
 
   .nav-box {
     height: 100%;
+    padding-right: calc((100% - 1280px) / 2);
     > ul {
       height: 100%;
       display: flex;
-      gap: 24px;
+    }
+    @media (max-width: 960px) {
+      display: none;
+    }
+  }
+
+  .modal-nav {
+    padding-right: 20px;
+    > svg {
+      cursor: pointer;
+      color: white;
+      font-size: 32px;
+    }
+    @media (min-width: 960px) {
+      display: none;
     }
   }
 `;

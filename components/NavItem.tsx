@@ -71,7 +71,6 @@ const Box = styled.li`
         background: #000000;
         border-radius: 8px;
       }
-
       a {
         font-size: 18px;
         color: white;
