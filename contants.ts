@@ -1,4 +1,6 @@
-export const HEADER_NAV = [
+import { NavContent } from "./types";
+
+export const HEADER_NAV: { name: string; content: NavContent }[] = [
   {
     name: "회사소개",
     content: [
