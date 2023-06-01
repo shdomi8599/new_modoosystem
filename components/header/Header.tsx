@@ -27,7 +27,12 @@ const Header = () => {
   return (
     <Box headerNav={headerNav}>
       <div className="logo-box">
-        <Image src={whiteLogo} alt="logo" width={260} />
+        <Image
+          onClick={() => router.push("/")}
+          src={whiteLogo}
+          alt="logo"
+          width={260}
+        />
       </div>
       <nav className="nav-box">
         <ul>

@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import logo from "../public/logo/white_logo.png";
-import StarBg from "@/components/StarBg";
 import HeadTitle from "@/components/HeadTitle";
 
 const aboutPage = () => {
@@ -12,7 +11,6 @@ const aboutPage = () => {
       <Container>
         <Background className="bg" />
         <Background className="bg bg2" />
-        <StarBg />
         <Background className="bg bg3" />
         <div className="box">
           <div className="text-box">
@@ -92,6 +90,7 @@ const Container = styled.div`
       line-height: 1.3;
       font-weight: 100;
       padding-left: 16.5%;
+      padding-top: 48px;
       @media (max-width: 960px) {
         width: 100%;
         padding: 0px calc((100% - 400px) / 2);
