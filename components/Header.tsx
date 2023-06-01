@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <Box>
       <div className="logo-box">
-        <Image src={blackLogo} alt="logo" width={260} />
+        <Image src={whiteLogo} alt="logo" width={260} />
       </div>
       <nav className="nav-box">
         <ul>
@@ -25,15 +25,23 @@ const Header = () => {
 export default Header;
 
 const Box = styled.header`
-  border: 1px solid black;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 104px;
   padding: 0px calc((100% - 1280px) / 2);
+  background-color: var(--main-color);
+
+  .logo-box {
+    img {
+      cursor: pointer;
+    }
+  }
 
   .nav-box {
+    height: 100%;
     > ul {
+      height: 100%;
       display: flex;
       gap: 24px;
     }

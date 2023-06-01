@@ -36,11 +36,46 @@ export default NavItem;
 const Box = styled.li`
   flex-direction: column;
   position: relative;
-  width: 128px;
+  width: 140px;
   cursor: pointer;
+  color: white;
+  font-size: 20px;
+
   > ul {
+    width: 100%;
     position: absolute;
-    top: 16px;
+    top: 88px;
     flex-direction: column;
+    background: #545c63;
+    padding: 8px;
+    border-radius: 0.4em;
+
+    :after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border: 20px solid transparent;
+      border-bottom-color: #545c63;
+      border-top: 0;
+      margin-left: -20px;
+      margin-top: -20px;
+    }
+    > li {
+      padding: 12px 0px;
+      width: 100%;
+      text-align: center;
+      :hover {
+        background: #000000;
+        border-radius: 8px;
+      }
+
+      a {
+        font-size: 18px;
+        color: white;
+      }
+    }
   }
 `;
