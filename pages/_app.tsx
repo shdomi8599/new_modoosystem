@@ -45,4 +45,5 @@ export default function App({ Component, pageProps }: AppProps) {
 const Box = styled.main`
   padding: 0px calc((100% - 1280px) / 2);
   padding-top: 104px;
+  height: 100vh;
 `;

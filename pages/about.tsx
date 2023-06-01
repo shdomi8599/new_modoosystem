@@ -8,7 +8,7 @@ const aboutPage = () => {
   return (
     <>
       <HeadTitle name="모두시스템 - 인사말" />
-      <Container>
+      <Box>
         <Background className="bg" />
         <Background className="bg bg2" />
         <Background className="bg bg3" />
@@ -53,14 +53,14 @@ const aboutPage = () => {
             <Image src={logo} alt="logo" width={500} />
           </div>
         </div>
-      </Container>
+      </Box>
     </>
   );
 };
 
 export default aboutPage;
 
-const Container = styled.div`
+const Box = styled.main`
   position: relative;
   width: 100%;
   height: 100vh;
@@ -102,24 +102,6 @@ const Container = styled.div`
       }
       .text {
         padding-left: 16px;
-      }
-
-      .title {
-        font-size: 70px;
-        font-weight: bold;
-
-        @media (max-width: 960px) {
-          font-size: 50px;
-        }
-        @media (max-width: 768px) {
-          font-size: 30px;
-        }
-      }
-
-      .sub-title {
-        font-weight: 500;
-        margin-top: -10px;
-        margin-bottom: 20px;
       }
     }
 
