@@ -38,7 +38,6 @@ const Box = styled.li`
   position: relative;
   width: 140px;
   cursor: pointer;
-  color: white;
   font-size: 20px;
 
   > ul {
