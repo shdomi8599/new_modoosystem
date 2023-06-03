@@ -2,14 +2,14 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { headerNavState } from "@/recoil";
+import { headerNavState } from "@/recoil/recoil";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
 import whiteLogo from "../../public/logo/white_logo.png";
 import { useOffResize } from "@/hooks/useOffResize";
-import { HEADER_NAV } from "@/contants";
 import ModalNavItem from "./ModalNavItem";
 import NavItem from "./NavItem";
+import { HEADER_ITEMS } from "@/constants/constants";
 
 const Header = () => {
   const router = useRouter();
@@ -36,7 +36,7 @@ const Header = () => {
       </div>
       <nav className="nav-box">
         <ul>
-          {HEADER_NAV.map((item) => (
+          {HEADER_ITEMS.map((item) => (
             <NavItem key={item.name} name={item.name} content={item.content} />
           ))}
         </ul>
@@ -46,7 +46,7 @@ const Header = () => {
       </div>
       <nav className="modal-nav">
         <ul className="modal-nav-list">
-          {HEADER_NAV.map((item) => (
+          {HEADER_ITEMS.map((item) => (
             <ModalNavItem
               key={item.name}
               name={item.name}

@@ -8,6 +8,7 @@ import { RecoilRoot } from "recoil";
 import styled from "styled-components";
 import Header from "@/components/header/Header";
 import { useRouter } from "next/router";
+import Footer from "@/components/Footer";
 
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
@@ -37,6 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </Box>
         )}
+        <Footer />
       </RecoilRoot>
     </QueryClientProvider>
   );
