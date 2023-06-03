@@ -62,7 +62,6 @@ export default GreetingsPage;
 const Box = styled.main`
   position: relative;
   width: 100%;
-  height: 100vh;
 
   .box {
     position: absolute;
@@ -89,7 +88,6 @@ const Box = styled.main`
       word-wrap: break-word;
       line-height: 1.5;
       font-weight: 100;
-      padding-top: 48px;
       text-align: center;
       @media (max-width: 960px) {
         width: 100%;

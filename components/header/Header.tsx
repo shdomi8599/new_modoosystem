@@ -116,7 +116,7 @@ const Box = styled.header<BoxProps>`
     transition: 1.2s;
     width: 40%;
     height: 100%;
-    right: ${(props) => (props.headerNav ? "0" : "-50%")};
+    right: ${(props) => (props.headerNav ? "0" : "-70%")};
     padding: 20px;
     background-color: var(--main-color);
     .modal-nav-list {

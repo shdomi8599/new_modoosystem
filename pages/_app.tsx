@@ -47,5 +47,9 @@ export default function App({ Component, pageProps }: AppProps) {
 const Box = styled.main`
   padding: 0px calc((100% - 1280px) / 2);
   padding-top: 104px;
-  min-height: 100vh;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;

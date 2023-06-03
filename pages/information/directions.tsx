@@ -1,15 +1,50 @@
-import HeadTitle from "@/components/common/HeadTitle";
-import KakaoMap from "@/components/kakao/KakaoMap";
+import { KAKAO_SDK_URL } from "@/config";
 import { DIRECTIONS_PUBLIC } from "@/constants/constants";
+import Head from "next/head";
+import { useEffect, useState } from "react";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
 import styled from "styled-components";
+//맵 좌표
+const center = { lat: 37.501496, lng: 127.140322 };
 
 const DirectionsPage = () => {
+  //스크립트 파일보다 랜더링이 먼저되는 바람에 카카오 맵이 보이지 않아,
+  //load를 상태로 관리하여 카카오 맵이 랜더링될 수 있도록 수정함
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
+
+  useEffect(() => {
+    const handleMapLoad = () => {
+      setIsMapLoaded(true);
+    };
+
+    const script = document.createElement("script");
+    script.src = KAKAO_SDK_URL;
+    script.onload = handleMapLoad;
+
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  if (!isMapLoaded) return <div>로딩중입니다.</div>;
+
   return (
     <>
-      <HeadTitle name="모두시스템 - 찾아오시는 길" />
+      <Head>
+        <title>모두시스템 - 찾아오시는 길</title>
+      </Head>
       <Box>
         <div className="map-box">
-          <KakaoMap />
+          <Map
+            level={1}
+            center={center}
+            style={{ width: "100%", height: "100%" }}
+          >
+            <MapMarker position={center}>
+              <div className="marker">모두시스템</div>
+            </MapMarker>
+          </Map>
         </div>
         <div className="content-box">
           <div className="top">
@@ -23,7 +58,7 @@ const DirectionsPage = () => {
             <div className="title">대중교통</div>
             <div className="content">
               {DIRECTIONS_PUBLIC.map((data) => (
-                <div className="item">
+                <div className="item" key={data.name}>
                   <div className="title">※{data.name}※</div>
                   <div className="content">
                     {data.content.map((data) => (
@@ -42,7 +77,7 @@ const DirectionsPage = () => {
 export default DirectionsPage;
 
 const Box = styled.div`
-  padding-top: 80px;
+  padding-top: 40px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -52,7 +87,11 @@ const Box = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 50%;
+    height: 100%;
+
+    .marker {
+      padding: 12px 42px;
+    }
   }
   .content-box {
     width: 75%;
@@ -73,7 +112,6 @@ const Box = styled.div`
         font-size: 20px;
       }
       > .content {
-        padding-left: 24px;
         .item {
           margin-bottom: 40px;
           > .title {
