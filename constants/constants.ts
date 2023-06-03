@@ -76,3 +76,17 @@ export const FOOTER_ITEMS: FooterItem[] = [
     content: [{ name: "견적의뢰", href: "/request" }],
   },
 ];
+
+export const DIRECTIONS_PUBLIC = [
+  {
+    name: "버스",
+    content: [
+      "[3315] 송파두산위브, 송파소방서 하차, 도보 200M",
+      "[3316 / 3214 / 3317] 거여초등학교 하차, 도보 600M",
+    ],
+  },
+  {
+    name: "지하철",
+    content: ["5호선 개롱역 1번출구에서 도보10분"],
+  },
+];
