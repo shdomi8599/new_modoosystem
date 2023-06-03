@@ -24,13 +24,13 @@ const Footer = () => {
       </div>
       <div className="items-box">
         {FOOTER_ITEMS.map((item) => (
-          <div className="item">
+          <div key={item.name} className="item">
             <div className="item-name">
               <span>{item.name}</span>
             </div>
             <ul className="content">
               {item.content.map((content) => (
-                <li>
+                <li key={content.name}>
                   <Link
                     onClick={(e) => onClickLink(e, content.href)}
                     href={content.href}

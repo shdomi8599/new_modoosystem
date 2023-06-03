@@ -1,9 +1,12 @@
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const TopTitle = ({ name }: { name: string }) => {
+  const router = useRouter();
+  const { asPath } = router;
   return (
     <Box className="top-title">
-      <div>▶ {name}</div>
+      <div>{asPath !== "/information/greetings" && <span>▶ {name}</span>}</div>
     </Box>
   );
 };
@@ -18,5 +21,6 @@ const Box = styled.div`
   div {
     padding: 0px calc((100% - 1280px) / 2);
     margin-left: 10px;
+    height: 16px;
   }
 `;
