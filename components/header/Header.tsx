@@ -79,9 +79,7 @@ const Box = styled.header<BoxProps>`
   }
 
   .logo-box {
-    @media (max-width: 1280px) {
-      padding-left: 12px;
-    }
+    margin-left: 8px;
     padding-left: calc((100% - 1280px) / 2);
     img {
       cursor: pointer;

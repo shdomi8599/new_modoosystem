@@ -54,6 +54,7 @@ const Box = styled.footer`
   }
 
   .logo-box {
+    margin-left: 8px;
   }
 
   .items-box {
@@ -69,7 +70,7 @@ const Box = styled.footer`
       flex-direction: column;
       align-items: center;
       gap: 16px;
-      padding: 0px 16px;
+      padding: 0px 12px;
       @media (max-width: 960px) {
         text-align: center;
       }
