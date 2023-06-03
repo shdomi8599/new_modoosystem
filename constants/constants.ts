@@ -1,5 +1,26 @@
 import { FooterItem, HeaderItem } from "../types";
 
+export const ROUTER = [
+  { name: "인사말", href: "/information/greetings" },
+  { name: "조직도", href: "/information/organization" },
+  { name: "찾아오시는 길", href: "/information/directions" },
+  { name: "차량차단기", href: "/products/차량차단기" },
+  { name: "리모콘방식", href: "/products/리모콘방식" },
+  { name: "RF카드방식", href: "/products/RF카드방식" },
+  { name: "주차권발행방식", href: "/products/주차권발행방식" },
+  { name: "차량번호인식방식", href: "/products/차량번호인식방식" },
+  { name: "요금계산기", href: "/products/요금계산기" },
+  { name: "주차부스", href: "/products/주차부스" },
+  { name: "신호관제", href: "/products/신호관제" },
+  { name: "기타제품", href: "/products/기타제품" },
+  { name: "설치현황", href: "/status/installation" },
+  { name: "사진자료", href: "/status/photo" },
+  { name: "자료실", href: "/service/reference" },
+  { name: "공지사항", href: "/service/announcement" },
+  { name: "게시판", href: "/service/board" },
+  { name: "견적의뢰", href: "/request" },
+];
+
 export const HEADER_ITEMS: HeaderItem[] = [
   {
     name: "회사소개",

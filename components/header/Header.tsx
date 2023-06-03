@@ -7,12 +7,15 @@ import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
 import whiteLogo from "@/public/logo/white_logo.png";
 import { useOffResize } from "@/hooks/useOffResize";
-import { HEADER_ITEMS } from "@/constants/constants";
+import { HEADER_ITEMS, ROUTER } from "@/constants/constants";
 import ModalNavItem from "./ModalNavItem";
 import NavItem from "./NavItem";
+import TopTitle from "../common/TopTitle";
 
 const Header = () => {
   const router = useRouter();
+  const { asPath } = router;
+  const pageName = ROUTER.find((data) => data.href === asPath)?.name;
   const [headerNav, setHeaderNav] = useRecoilState(headerNavState);
   useOffResize(960, "up", setHeaderNav);
 
@@ -24,37 +27,44 @@ const Header = () => {
     setHeaderNav(false);
   }, [router]);
   return (
-    <Box headerNav={headerNav}>
-      <div className="logo-box">
-        <Image
-          onClick={() => router.push("/")}
-          src={whiteLogo}
-          alt="logo"
-          width={260}
-        />
-      </div>
-      <nav className="nav-box">
-        <ul>
-          {HEADER_ITEMS.map((item) => (
-            <NavItem key={item.name} name={item.name} content={item.content} />
-          ))}
-        </ul>
-      </nav>
-      <div className="modal-btn-box">
-        <FaBars onClick={navHandler} />
-      </div>
-      <nav className="modal-nav">
-        <ul className="modal-nav-list">
-          {HEADER_ITEMS.map((item) => (
-            <ModalNavItem
-              key={item.name}
-              name={item.name}
-              content={item.content}
-            />
-          ))}
-        </ul>
-      </nav>
-    </Box>
+    <>
+      <Box headerNav={headerNav}>
+        <div className="logo-box">
+          <Image
+            onClick={() => router.push("/")}
+            src={whiteLogo}
+            alt="logo"
+            width={260}
+          />
+        </div>
+        <nav className="nav-box">
+          <ul>
+            {HEADER_ITEMS.map((item) => (
+              <NavItem
+                key={item.name}
+                name={item.name}
+                content={item.content}
+              />
+            ))}
+          </ul>
+        </nav>
+        <div className="modal-btn-box">
+          <FaBars onClick={navHandler} />
+        </div>
+        <nav className="modal-nav">
+          <ul className="modal-nav-list">
+            {HEADER_ITEMS.map((item) => (
+              <ModalNavItem
+                key={item.name}
+                name={item.name}
+                content={item.content}
+              />
+            ))}
+          </ul>
+        </nav>
+      </Box>
+      {pageName && <TopTitle name={pageName} />}
+    </>
   );
 };
 

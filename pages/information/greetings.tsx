@@ -62,7 +62,7 @@ export default GreetingsPage;
 const Box = styled.main`
   position: relative;
   width: 100%;
-
+  margin-bottom: 40px;
   .box {
     position: absolute;
     top: 0;

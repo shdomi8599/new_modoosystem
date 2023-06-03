@@ -2,7 +2,6 @@ import HeadTitle from "@/components/common/HeadTitle";
 import Image from "next/image";
 import styled from "styled-components";
 import organization from "@/public/organization/organization.jpg";
-
 const OrganizationPage = () => {
   return (
     <>
@@ -17,8 +16,8 @@ export default OrganizationPage;
 
 const Box = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 40px;
   min-width: 320px;
   img {
     width: 100%;

@@ -7,7 +7,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import styled from "styled-components";
 import Header from "@/components/header/Header";
-import { useRouter } from "next/router";
 import Footer from "@/components/common/Footer";
 
 export const app = initializeApp(firebaseConfig);
@@ -24,20 +23,13 @@ const queryClient = new QueryClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-  const { pathname } = router;
-  const isBoxVisible = pathname === "/about";
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <Header />
-        {isBoxVisible ? (
+        <Box>
           <Component {...pageProps} />
-        ) : (
-          <Box>
-            <Component {...pageProps} />
-          </Box>
-        )}
+        </Box>
         <Footer />
       </RecoilRoot>
     </QueryClientProvider>
@@ -46,8 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 const Box = styled.main`
   padding: 0px calc((100% - 1280px) / 2);
-  padding-top: 104px;
-  min-height: 80vh;
+  min-height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;

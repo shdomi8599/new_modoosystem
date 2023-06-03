@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react";
+import styled from "styled-components";
 import { KAKAO_SDK_URL } from "@/config";
 import { DIRECTIONS_PUBLIC } from "@/constants/constants";
-import Head from "next/head";
-import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
-import styled from "styled-components";
+import HeadTitle from "@/components/common/HeadTitle";
+import TopTitle from "@/components/common/TopTitle";
 //맵 좌표
 const center = { lat: 37.501496, lng: 127.140322 };
 
@@ -31,9 +32,7 @@ const DirectionsPage = () => {
 
   return (
     <>
-      <Head>
-        <title>모두시스템 - 찾아오시는 길</title>
-      </Head>
+      <HeadTitle name="모두시스템 - 찾아오시는 길" />
       <Box>
         <div className="map-box">
           <Map
@@ -83,6 +82,7 @@ const Box = styled.div`
   flex-direction: column;
   gap: 60px;
   height: 800px;
+  width: 75%;
   .map-box {
     display: flex;
     justify-content: center;
@@ -94,7 +94,7 @@ const Box = styled.div`
     }
   }
   .content-box {
-    width: 75%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 60px;
