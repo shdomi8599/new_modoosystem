@@ -5,11 +5,11 @@ import { useRecoilState } from "recoil";
 import { headerNavState } from "@/recoil/recoil";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
-import whiteLogo from "../../public/logo/white_logo.png";
+import whiteLogo from "@/public/logo/white_logo.png";
 import { useOffResize } from "@/hooks/useOffResize";
+import { HEADER_ITEMS } from "@/constants/constants";
 import ModalNavItem from "./ModalNavItem";
 import NavItem from "./NavItem";
-import { HEADER_ITEMS } from "@/constants/constants";
 
 const Header = () => {
   const router = useRouter();

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
-import whiteLogo from "../public/logo/white_logo.png";
+import whiteLogo from "@/public/logo/white_logo.png";
 import { FOOTER_ITEMS } from "@/constants/constants";
 import Link from "next/link";
 

@@ -1,7 +1,8 @@
 import Image from "next/image";
 import styled, { keyframes } from "styled-components";
-import logo from "../public/logo/white_logo.png";
-import HeadTitle from "@/components/HeadTitle";
+import logo from "@/public/logo/white_logo.png";
+import HeadTitle from "@/components/common/HeadTitle";
+
 
 const aboutPage = () => {
   return (

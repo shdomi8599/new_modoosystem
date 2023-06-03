@@ -1,4 +1,4 @@
-import HeadTitle from "@/components/HeadTitle";
+import HeadTitle from "@/components/common/HeadTitle";
 import styled from "styled-components";
 
 export default function Home() {
