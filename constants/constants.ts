@@ -57,20 +57,6 @@ export const FOOTER_ITEMS: FooterItem[] = [
     ],
   },
   {
-    name: "제품소개",
-    content: [
-      { name: "차량차단기", href: "" },
-      { name: "리모콘방식", href: "" },
-      { name: "RF카드방식", href: "" },
-      { name: "주차권발행방식", href: "" },
-      { name: "차량번호인식방식", href: "" },
-      { name: "요금계산기", href: "" },
-      { name: "주차부스", href: "" },
-      { name: "신호관제", href: "" },
-      { name: "기타제품", href: "" },
-    ],
-  },
-  {
     name: "주요설치현황",
     content: [
       { name: "설치현황", href: "" },

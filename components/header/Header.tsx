@@ -20,7 +20,6 @@ const Header = () => {
     setHeaderNav(!headerNav);
   };
 
-  //라우터 변경 시, 네비가 off되도록
   useEffect(() => {
     setHeaderNav(false);
   }, [router]);
