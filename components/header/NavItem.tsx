@@ -1,14 +1,9 @@
+import { HeaderItem } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
-import { NavContent } from "@/types";
 
-type Props = {
-  content: NavContent;
-  name: string;
-};
-
-const NavItem = ({ name, content }: Props) => {
+const NavItem = ({ name, content }: HeaderItem) => {
   const [hover, setHover] = useState(false);
   const onHover = () => {
     setHover(true);
@@ -45,7 +40,7 @@ const Box = styled.li`
     position: absolute;
     top: 88px;
     flex-direction: column;
-    background: #545c63;
+    background: var(--sub-color);
     padding: 8px;
     border-radius: 0.4em;
 
@@ -57,7 +52,7 @@ const Box = styled.li`
       width: 0;
       height: 0;
       border: 20px solid transparent;
-      border-bottom-color: #545c63;
+      border-bottom-color: var(--sub-color);
       border-top: 0;
       margin-left: -20px;
       margin-top: -20px;

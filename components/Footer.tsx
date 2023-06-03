@@ -78,7 +78,7 @@ const Box = styled.footer`
         span {
           border-radius: 10px;
           padding: 6px;
-          background-color: #596fec;
+          background-color: var(--sub-color);
           color: #ffffff;
         }
       }

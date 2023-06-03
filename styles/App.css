@@ -4,6 +4,7 @@
 :root {
   font-family: "Noto Sans KR", sans-serif;
   --main-color: #388fe4;
+  --sub-color: #4b4d4e;
 }
 
 .flex-center {
