@@ -2,7 +2,7 @@ import "@/styles/App.css";
 import type { AppProps } from "next/app";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { firebaseConfig } from "@/firebase.config";
+import { firebaseConfig } from "@/config";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import styled from "styled-components";
