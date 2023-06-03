@@ -3,8 +3,10 @@ import styled from "styled-components";
 import whiteLogo from "@/public/logo/white_logo.png";
 import { FOOTER_ITEMS } from "@/constants/constants";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Footer = () => {
+  const router = useRouter();
   const onClickLink = (e: { preventDefault: () => void }, href: string) => {
     if (!href) {
       e.preventDefault();
@@ -13,7 +15,12 @@ const Footer = () => {
   return (
     <Box>
       <div className="logo-box">
-        <Image src={whiteLogo} height={50} alt="logo" />
+        <Image
+          onClick={() => router.push("/")}
+          src={whiteLogo}
+          height={50}
+          alt="logo"
+        />
       </div>
       <div className="items-box">
         {FOOTER_ITEMS.map((item) => (
@@ -69,17 +76,16 @@ const Box = styled.footer`
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 24px;
       padding: 0px 12px;
       @media (max-width: 960px) {
-        text-align: center;
       }
 
       .item-name {
         span {
           border-radius: 10px;
           padding: 6px;
-          background-color: var(--sub-color);
+          border: 2px solid white;
           color: #ffffff;
         }
       }

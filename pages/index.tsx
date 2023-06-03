@@ -1,7 +1,7 @@
 import HeadTitle from "@/components/common/HeadTitle";
 import styled from "styled-components";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       <HeadTitle name="모두시스템" />

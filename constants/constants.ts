@@ -4,9 +4,9 @@ export const HEADER_ITEMS: HeaderItem[] = [
   {
     name: "회사소개",
     content: [
-      { name: "인사말", href: "/about" },
-      { name: "조직도", href: "" },
-      { name: "찾아오시는 길", href: "" },
+      { name: "인사말", href: "/information/greetings" },
+      { name: "조직도", href: "/information/organization" },
+      { name: "찾아오시는 길", href: "/information/directions" },
     ],
   },
   {

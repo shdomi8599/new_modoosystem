@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import logo from "@/public/logo/white_logo.png";
 import HeadTitle from "@/components/common/HeadTitle";
 
-const aboutPage = () => {
+const GreetingsPage = () => {
   return (
     <>
       <HeadTitle name="모두시스템 - 인사말" />
@@ -57,7 +57,7 @@ const aboutPage = () => {
   );
 };
 
-export default aboutPage;
+export default GreetingsPage;
 
 const Box = styled.main`
   position: relative;
