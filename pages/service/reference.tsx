@@ -1,9 +1,10 @@
 import { BRANCH_COLUMNS_DATA } from "@/constants/constants";
 import usePagination from "@/hooks/usePagination";
+import { getData } from "@/util/react-query";
 import TableContent from "@/components/table/TableContent";
 import { dehydrate, QueryClient } from "react-query";
 import { BranchContent } from "@/types";
-import { getData } from "@/util/react-query";
+import TableSkeleton from "@/components/skeleton/TableSkeleton";
 
 const mainQueryKey = "reference";
 
@@ -17,19 +18,26 @@ const ReferencePage = () => {
     isLoading,
     isError,
   } = usePagination<BranchContent>({ mainQueryKey });
-  if (isLoading) return <div>로딩중입니다.</div>;
   if (isError) return <div>잠시 후에 다시 시도해주세요.</div>;
-  if (data && totalElements)
-    return (
-      <TableContent
-        dataSource={data}
-        columns={BRANCH_COLUMNS_DATA}
-        page={page}
-        size={size}
-        handlePageChange={handlePageChange}
-        totalElements={totalElements}
-      />
-    );
+  return (
+    <>
+      {isLoading ? (
+        <TableSkeleton />
+      ) : (
+        data &&
+        totalElements && (
+          <TableContent
+            dataSource={data}
+            columns={BRANCH_COLUMNS_DATA}
+            page={page}
+            size={size}
+            handlePageChange={handlePageChange}
+            totalElements={totalElements}
+          />
+        )
+      )}
+    </>
+  );
 };
 export default ReferencePage;
 

@@ -42,7 +42,7 @@ export default TableContent;
 
 const Box = styled.div`
   padding: 40px 0px;
-  width: 100%;
+  width: 90%;
 
   .table {
     margin-bottom: 40px;
