@@ -1,10 +1,30 @@
-import styled from "styled-components";
+import { BRANCH_COLUMNS_DATA } from "@/constants/constants";
+import usePagination from "@/hooks/usePagination";
+import { BranchContent } from "@/types";
+import { api } from "@/util/api";
+import TableContent from "@/components/table/TableContent";
 
-const BoardPage = () => {
+const BoardPage = ({ data }: { data: BranchContent[] }) => {
+  const { page, size, pagedData, handlePageChange } = usePagination(data);
+
   return (
-      <Box>게시판</Box>
+    <TableContent
+      dataSource={pagedData}
+      columns={BRANCH_COLUMNS_DATA}
+      page={page}
+      size={size}
+      handlePageChange={handlePageChange}
+      totalElements={data.length}
+    />
   );
 };
 export default BoardPage;
 
-const Box = styled.div``;
+export async function getServerSideProps() {
+  const branchData = await api("api/board").then((res) => res.data);
+  return {
+    props: {
+      data: branchData,
+    },
+  };
+}
