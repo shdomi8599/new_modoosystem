@@ -1,9 +1,9 @@
+import { dehydrate, QueryClient } from "react-query";
 import { BRANCH_COLUMNS_DATA } from "@/constants/constants";
 import usePagination from "@/hooks/usePagination";
 import { getData } from "@/util/react-query";
-import TableContent from "@/components/table/TableContent";
-import { dehydrate, QueryClient } from "react-query";
 import { BranchContent } from "@/types";
+import TableContent from "@/components/table/TableContent";
 import TableSkeleton from "@/components/skeleton/TableSkeleton";
 
 const mainQueryKey = "board";
