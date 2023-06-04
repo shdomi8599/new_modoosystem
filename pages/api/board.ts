@@ -4,7 +4,12 @@ import { BranchContent } from "@/types";
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<BranchContent[]>
+  res: NextApiResponse<{ data: BranchContent[]; totalElements: number }>
 ) {
-  res.status(200).json(branchData);
+  const { page, size } = req.query;
+  const startIndex = (Number(page) - 1) * Number(size);
+  const endIndex = startIndex + Number(size);
+  const data = branchData.slice(startIndex, endIndex);
+  const totalElements = branchData.length;
+  res.status(200).json({ data, totalElements });
 }

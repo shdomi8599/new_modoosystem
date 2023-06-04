@@ -3,16 +3,17 @@ import type { AppProps } from "next/app";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { firebaseConfig } from "@/config";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
 import { RecoilRoot } from "recoil";
 import styled from "styled-components";
 import Header from "@/components/header/Header";
 import Footer from "@/components/common/Footer";
+import { useState } from "react";
 
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-const queryClient = new QueryClient({
+const options = {
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
@@ -20,18 +21,21 @@ const queryClient = new QueryClient({
       staleTime: 1000 * 60 * 5,
     },
   },
-});
+};
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient(options));
   return (
     <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <Header />
-        <Box>
-          <Component {...pageProps} />
-        </Box>
-        <Footer />
-      </RecoilRoot>
+      <Hydrate state={pageProps.dehydratedState}>
+        <RecoilRoot>
+          <Header />
+          <Box>
+            <Component {...pageProps} />
+          </Box>
+          <Footer />
+        </RecoilRoot>
+      </Hydrate>
     </QueryClientProvider>
   );
 }
