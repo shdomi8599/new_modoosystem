@@ -22,7 +22,7 @@ const BoardPage = () => {
   return (
     <>
       {isLoading ? (
-        <TableSkeleton />
+        <TableSkeleton size={size} />
       ) : (
         data &&
         totalElements && (

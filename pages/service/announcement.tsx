@@ -22,7 +22,7 @@ const AnnouncementPage = () => {
   return (
     <>
       {isLoading ? (
-        <TableSkeleton />
+        <TableSkeleton size={size} />
       ) : (
         data &&
         totalElements && (

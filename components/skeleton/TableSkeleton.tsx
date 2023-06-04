@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Skeleton from "./Skeleton";
 
-const TableSkeleton = () => {
-  const skeletonLength = Array(11).fill(1);
+const TableSkeleton = ({ size }: { size: number }) => {
+  const skeletonLength = Array(size+1).fill(1);
   return (
     <Box>
       <div className="main">
