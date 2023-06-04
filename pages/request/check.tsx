@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const PhotoPage = () => {
+const CheckPage = () => {
   return (
-      <Box>사진자료</Box>
+      <Box>견적확인</Box>
   );
 };
-export default PhotoPage;
+export default CheckPage;
 
 const Box = styled.div``;

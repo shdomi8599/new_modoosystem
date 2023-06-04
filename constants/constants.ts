@@ -19,6 +19,7 @@ export const ROUTER = [
   { name: "공지사항", href: "/service/announcement" },
   { name: "게시판", href: "/service/board" },
   { name: "견적의뢰", href: "/request" },
+  { name: "견적신청확인", href: "/request/check" },
 ];
 
 export const HEADER_ITEMS: HeaderItem[] = [
@@ -61,7 +62,10 @@ export const HEADER_ITEMS: HeaderItem[] = [
   },
   {
     name: "온라인견적",
-    content: [{ name: "견적의뢰", href: "/request" }],
+    content: [
+      { name: "견적의뢰", href: "/request" },
+      { name: "견적신청확인", href: "/request/check" },
+    ],
   },
 ];
 
@@ -94,7 +98,10 @@ export const FOOTER_ITEMS: FooterItem[] = [
   },
   {
     name: "온라인견적",
-    content: [{ name: "견적의뢰", href: "/request" }],
+    content: [
+      { name: "견적의뢰", href: "/request" },
+      { name: "견적신청확인", href: "/request/check" },
+    ],
   },
 ];
 

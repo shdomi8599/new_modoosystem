@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { KAKAO_SDK_URL } from "@/config";
 import { DIRECTIONS_PUBLIC } from "@/constants/constants";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
-import HeadTitle from "@/components/common/HeadTitle";
 //맵 좌표
 const center = { lat: 37.501496, lng: 127.140322 };
 
@@ -30,46 +29,43 @@ const DirectionsPage = () => {
   if (!isMapLoaded) return <div>로딩중입니다.</div>;
 
   return (
-    <>
-      <HeadTitle name="모두시스템 - 찾아오시는 길" />
-      <Box>
-        <div className="map-box">
-          <Map
-            level={1}
-            center={center}
-            style={{ width: "100%", height: "100%" }}
-          >
-            <MapMarker position={center}>
-              <div className="marker">모두시스템</div>
-            </MapMarker>
-          </Map>
-        </div>
-        <div className="content-box">
-          <div className="top">
-            <div className="title">차량</div>
-            <div>
-              주차공간이 협소합니다. 인근 공영주차장을 이용하시거나 가급적
-              대중교통을 이용해주세요.
-            </div>
+    <Box>
+      <div className="map-box">
+        <Map
+          level={1}
+          center={center}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <MapMarker position={center}>
+            <div className="marker">모두시스템</div>
+          </MapMarker>
+        </Map>
+      </div>
+      <div className="content-box">
+        <div className="top">
+          <div className="title">차량</div>
+          <div>
+            주차공간이 협소합니다. 인근 공영주차장을 이용하시거나 가급적
+            대중교통을 이용해주세요.
           </div>
-          <div className="bottom">
-            <div className="title">대중교통</div>
-            <div className="content">
-              {DIRECTIONS_PUBLIC.map((data) => (
-                <div className="item" key={data.name}>
-                  <div className="title">※{data.name}※</div>
-                  <div className="content">
-                    {data.content.map((data) => (
-                      <div key={data}>{data}</div>
-                    ))}
-                  </div>
+        </div>
+        <div className="bottom">
+          <div className="title">대중교통</div>
+          <div className="content">
+            {DIRECTIONS_PUBLIC.map((data) => (
+              <div className="item" key={data.name}>
+                <div className="title">※{data.name}※</div>
+                <div className="content">
+                  {data.content.map((data) => (
+                    <div key={data}>{data}</div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
-      </Box>
-    </>
+      </div>
+    </Box>
   );
 };
 export default DirectionsPage;

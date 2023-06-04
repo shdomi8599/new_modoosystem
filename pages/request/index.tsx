@@ -7,8 +7,6 @@ import "dayjs/locale/ko";
 import koKR from "antd/es/date-picker/locale/ko_KR";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { KakaoAdress, FormItem } from "@/types";
-import HeadTitle from "@/components/common/HeadTitle";
-
 const layout = {
   labelCol: {
     span: 4,
@@ -57,8 +55,6 @@ const RequestPage = () => {
     console.log(values);
   };
   return (
-    <>
-      <HeadTitle name="모두시스템 - 견적의뢰" />
       <Box>
         <Form form={form} {...layout} name="control-hooks" onFinish={onFinish}>
           <Form.Item
@@ -154,7 +150,6 @@ const RequestPage = () => {
           </Form.Item>
         </Form>
       </Box>
-    </>
   );
 };
 export default RequestPage;

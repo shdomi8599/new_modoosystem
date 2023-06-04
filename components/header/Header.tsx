@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { headerNavState } from "@/recoil/recoil";
+import { currentPageNameState, headerNavState } from "@/recoil/recoil";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
 import whiteLogo from "@/public/logo/white_logo.png";
@@ -11,12 +11,18 @@ import { HEADER_ITEMS, ROUTER } from "@/constants/constants";
 import ModalNavItem from "./ModalNavItem";
 import NavItem from "./NavItem";
 import TopTitle from "../common/TopTitle";
+import HeadTitle from "../common/HeadTitle";
 
 const Header = () => {
   const router = useRouter();
   const { asPath } = router;
   const { product } = router.query;
   const pageName = ROUTER.find((data) => data.href === asPath)?.name;
+  const [currentPageName, setCurrentPageName] =
+    useRecoilState(currentPageNameState);
+  useEffect(() => {
+    pageName && setCurrentPageName(pageName);
+  }, [pageName]);
   const [headerNav, setHeaderNav] = useRecoilState(headerNavState);
   useOffResize(960, "up", setHeaderNav);
 
@@ -29,6 +35,7 @@ const Header = () => {
   }, [router]);
   return (
     <>
+      <HeadTitle name={`모두시스템 - ${currentPageName}`} />
       <Box headerNav={headerNav}>
         <div className="logo-box">
           <Image

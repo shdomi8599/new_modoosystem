@@ -5,3 +5,8 @@ export const headerNavState = atom({
   key: "headerNavState",
   default: false,
 });
+
+export const currentPageNameState = atom({
+  key: "currentPageNameState",
+  default: "",
+});
