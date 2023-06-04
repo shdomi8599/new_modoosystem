@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 
 const usePagination = <T extends {}>(
-  initialPage = 1,
-  initialSize = 10,
   data: T[]
 ) => {
-  const [page, setPage] = useState(initialPage);
-  const [size, setSize] = useState(initialSize);
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(10);
   const [pagedData, setPagedData] = useState<T[]>([]);
 
   useEffect(() => {

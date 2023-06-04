@@ -1,5 +1,5 @@
-import { Button, Pagination, Table } from "antd";
-import { BranchContent, TableColumn } from "@/types";
+import { Pagination, Table } from "antd";
+import { TableColumn } from "@/types";
 import styled from "styled-components";
 
 type Props<T> = {
@@ -11,7 +11,7 @@ type Props<T> = {
   totalElements: number;
 };
 
-const TableContent = <T extends BranchContent>({
+const TableContent = <T extends {}>({
   page,
   size,
   handlePageChange,
