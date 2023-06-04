@@ -18,3 +18,19 @@ export interface KakaoAdress {
 export interface FormItem {
   [key: string]: string;
 }
+
+export interface BranchContent {
+  id: number;
+  branchName: string;
+  isAvailable: number;
+  isExamined: number;
+  numberOfUnits: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type TableColumn = {
+  title: string;
+  dataIndex: string;
+  key: string;
+};

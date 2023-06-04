@@ -118,3 +118,41 @@ export const DIRECTIONS_PUBLIC = [
     content: ["5호선 개롱역 1번출구에서 도보10분"],
   },
 ];
+
+export const BRANCH_COLUMNS_DATA = [
+  {
+    title: "순번",
+    dataIndex: "id",
+    key: "id",
+  },
+  {
+    title: "창고명",
+    dataIndex: "branchName",
+    key: "branchName",
+  },
+  {
+    title: "운영상태",
+    dataIndex: "isAvailable",
+    key: "isAvailable",
+  },
+  {
+    title: "검수상태",
+    dataIndex: "isExamined",
+    key: "isExamined",
+  },
+  {
+    title: "유닛",
+    dataIndex: "numberOfUnits",
+    key: "numberOfUnits",
+  },
+  {
+    title: "등록일",
+    dataIndex: "createdAt",
+    key: "createdAt",
+  },
+  {
+    title: "수정일",
+    dataIndex: "updatedAt",
+    key: "updatedAt",
+  },
+];

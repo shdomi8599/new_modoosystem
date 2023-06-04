@@ -17,6 +17,8 @@ const CheckPage = () => {
   const onFinish = (values: FormItem) => {
     console.log(values);
   };
+
+  //의뢰번호 까먹는다면 연락처를 통해 찾을수있도록 마련???
   return (
     <Box>
       <Form form={form} {...layout} name="control-hooks" onFinish={onFinish}>
@@ -34,7 +36,7 @@ const CheckPage = () => {
         </Form.Item>
         <Form.Item className="btn-box">
           <Button type="primary" htmlType="submit">
-            신청하기
+            확인
           </Button>
         </Form.Item>
       </Form>
