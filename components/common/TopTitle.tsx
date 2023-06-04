@@ -1,12 +1,13 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
-const TopTitle = ({ name }: { name: string }) => {
+const TopTitle = ({ name }: { name: string | string[] | undefined }) => {
   const router = useRouter();
   const { asPath } = router;
+  const isName = ["information/greetings", "/"].includes(asPath);
   return (
     <Box className="top-title">
-      <div>{asPath !== "/information/greetings" && <span>▶ {name}</span>}</div>
+      <div>{!isName && <span>▶ {name}</span>}</div>
     </Box>
   );
 };

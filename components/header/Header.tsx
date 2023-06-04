@@ -15,6 +15,7 @@ import TopTitle from "../common/TopTitle";
 const Header = () => {
   const router = useRouter();
   const { asPath } = router;
+  const { product } = router.query;
   const pageName = ROUTER.find((data) => data.href === asPath)?.name;
   const [headerNav, setHeaderNav] = useRecoilState(headerNavState);
   useOffResize(960, "up", setHeaderNav);
@@ -63,7 +64,7 @@ const Header = () => {
           </ul>
         </nav>
       </Box>
-      {pageName && <TopTitle name={pageName} />}
+      <TopTitle name={product ? product : pageName} />
     </>
   );
 };

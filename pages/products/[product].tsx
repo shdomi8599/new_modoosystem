@@ -1,11 +1,14 @@
 import HeadTitle from "@/components/common/HeadTitle";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const ProductPage = () => {
+  const router = useRouter();
+  const { product } = router.query;
   return (
     <>
-      <HeadTitle name="모두시스템 - 상품명" />
-      <Box>상품</Box>;
+      <HeadTitle name={`모두시스템 - ${product}`} />
+      <Box>상품</Box>
     </>
   );
 };

@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 const Box = styled.main`
   padding: 0px calc((100% - 1280px) / 2);
-  min-height: 60vh;
+  min-height: 64vh;
   display: flex;
   justify-content: center;
   align-items: center;

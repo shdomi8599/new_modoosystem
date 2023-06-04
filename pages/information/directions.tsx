@@ -4,7 +4,6 @@ import { KAKAO_SDK_URL } from "@/config";
 import { DIRECTIONS_PUBLIC } from "@/constants/constants";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import HeadTitle from "@/components/common/HeadTitle";
-import TopTitle from "@/components/common/TopTitle";
 //맵 좌표
 const center = { lat: 37.501496, lng: 127.140322 };
 
@@ -61,7 +60,7 @@ const DirectionsPage = () => {
                   <div className="title">※{data.name}※</div>
                   <div className="content">
                     {data.content.map((data) => (
-                      <div>{data}</div>
+                      <div key={data}>{data}</div>
                     ))}
                   </div>
                 </div>
