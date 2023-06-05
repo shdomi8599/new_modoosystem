@@ -1,13 +1,13 @@
 import { dehydrate, QueryClient } from "react-query";
 import { BRANCH_COLUMNS_DATA } from "@/constants/constants";
 import usePagination from "@/hooks/usePagination";
-import { BranchContent } from "@/types";
 import TableContent from "@/components/table/TableContent";
 import TableSkeleton from "@/components/skeleton/TableSkeleton";
 import { getData } from "@/util/api/rest-api";
+import { Board } from "@/types/pageData";
 const initialPage = 1;
 const initialSize = 10;
-const endPoint = "board";
+const endPoint = "boards";
 
 const BoardPage = () => {
   const {
@@ -18,7 +18,7 @@ const BoardPage = () => {
     totalElements,
     isLoading,
     isError,
-  } = usePagination<BranchContent>({ endPoint });
+  } = usePagination<Board>({ endPoint });
   if (isError) return <div>잠시 후에 다시 시도해주세요.</div>;
   return (
     <>
@@ -45,7 +45,7 @@ export default BoardPage;
 export async function getServerSideProps() {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery([endPoint, initialPage], () =>
-    getData(endPoint, initialPage, initialSize)
+    getData<Board>(endPoint, initialPage, initialSize)
   );
   return {
     props: {

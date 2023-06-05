@@ -4,10 +4,11 @@ import usePagination from "@/hooks/usePagination";
 import TableContent from "@/components/table/TableContent";
 import TableSkeleton from "@/components/skeleton/TableSkeleton";
 import { getData } from "@/util/api/rest-api";
-import { Reference } from "@/types";
+import { Reference } from "@/types/pageData";
+
 const initialPage = 1;
 const initialSize = 10;
-const endPoint = "reference";
+const endPoint = "references";
 
 const ReferencePage = () => {
   const {

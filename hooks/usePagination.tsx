@@ -27,7 +27,7 @@ const usePagination = <T extends {}>({ endPoint }: Props) => {
     totalElements: number;
   }>({
     queryKey: [endPoint, page],
-    queryFn: () => getData(endPoint, page, size),
+    queryFn: () => getData<T>(endPoint, page, size),
   });
 
   return {
