@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 
 interface Props {
-  mainQueryKey: string;
+  endPoint: string;
 }
 
-const usePagination = <T extends {}>({ mainQueryKey }: Props) => {
+const usePagination = <T extends {}>({ endPoint }: Props) => {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
 
@@ -26,8 +26,8 @@ const usePagination = <T extends {}>({ mainQueryKey }: Props) => {
     data: T[];
     totalElements: number;
   }>({
-    queryKey: [mainQueryKey, page],
-    queryFn: () => getData(mainQueryKey, page, size),
+    queryKey: [endPoint, page],
+    queryFn: () => getData(endPoint, page, size),
   });
 
   return {

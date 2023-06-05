@@ -7,7 +7,7 @@ import TableSkeleton from "@/components/skeleton/TableSkeleton";
 import { getData } from "@/util/api/rest-api";
 const initialPage = 1;
 const initialSize = 10;
-const mainQueryKey = "board";
+const endPoint = "board";
 
 const BoardPage = () => {
   const {
@@ -18,7 +18,7 @@ const BoardPage = () => {
     totalElements,
     isLoading,
     isError,
-  } = usePagination<BranchContent>({ mainQueryKey });
+  } = usePagination<BranchContent>({ endPoint });
   if (isError) return <div>잠시 후에 다시 시도해주세요.</div>;
   return (
     <>
@@ -44,8 +44,8 @@ export default BoardPage;
 
 export async function getServerSideProps() {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery([mainQueryKey, initialPage], () =>
-    getData(mainQueryKey, initialPage, initialSize)
+  await queryClient.prefetchQuery([endPoint, initialPage], () =>
+    getData(endPoint, initialPage, initialSize)
   );
   return {
     props: {
