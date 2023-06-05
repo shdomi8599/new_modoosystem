@@ -10,6 +10,7 @@ import {
 
 /**
  * 컬렉션명과 이름이 일치하는 데이터의 값을 수정할 수 있음
+ * 일치하는 컬렉션명이 없다면 셋팅과 동시에 데이터를 추가할 수 있음
  */
 export const updateDbData = async <T extends {}>(
   collectionName: string,
@@ -26,7 +27,6 @@ export const updateDbData = async <T extends {}>(
 export const deleteDbData = async (collectionName: string, id: string) => {
   const docRef = doc(db, collectionName, id);
   await deleteDoc(docRef);
-  console.log("Document deleted successfully");
 };
 
 /**
@@ -37,8 +37,7 @@ export const addDbData = async <T extends {}>(
   collectionName: string,
   data: T
 ) => {
-  const newDocRef = await addDoc(collection(db, collectionName), data);
-  console.log("Added document with ID: ", newDocRef.id);
+  await addDoc(collection(db, collectionName), data);
 };
 
 /**
@@ -46,8 +45,8 @@ export const addDbData = async <T extends {}>(
  */
 export const getDbData = async (collectionName: string) => {
   const querySnapshot = await getDocs(collection(db, collectionName));
-  querySnapshot.forEach((doc) => {
-    console.log(doc.id, doc.data());
+  return querySnapshot.forEach((doc) => {
+    doc.data();
   });
 };
 
@@ -57,5 +56,5 @@ export const getDbData = async (collectionName: string) => {
 export const getDbAllData = async (collectionName: string) => {
   const querySnapshot = await getDocs(collection(db, collectionName));
   const dataArray = querySnapshot.docs.map((doc) => doc.data());
-  console.log(dataArray);
+  return dataArray;
 };
