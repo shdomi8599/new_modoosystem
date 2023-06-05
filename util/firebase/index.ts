@@ -53,8 +53,8 @@ export const getDbData = async (collectionName: string) => {
 /**
  * 한 컬렉션에 대한 전체 데이터 조회
  */
-export const getDbAllData = async (collectionName: string) => {
+export const getDbAllData = async <T>(collectionName: string): Promise<T[]> => {
   const querySnapshot = await getDocs(collection(db, collectionName));
-  const dataArray = querySnapshot.docs.map((doc) => doc.data());
+  const dataArray = querySnapshot.docs.map((doc) => doc.data() as T);
   return dataArray;
 };

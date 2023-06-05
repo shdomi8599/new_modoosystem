@@ -19,14 +19,15 @@ export interface FormItem {
   [key: string]: string;
 }
 
-export interface BranchContent {
-  id: number;
-  branchName: string;
-  isAvailable: number;
-  isExamined: number;
-  numberOfUnits: number;
+export interface Reference {
+  author: string;
+  content: string;
+  createAt: string;
   createdAt: string;
-  updatedAt: string;
+  id: string;
+  key: string;
+  link: string;
+  title: string;
 }
 
 export type TableColumn = {
