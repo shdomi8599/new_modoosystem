@@ -1,4 +1,4 @@
-import { getData } from "@/util/react-query";
+import { getData } from "@/util/api/rest-api";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 

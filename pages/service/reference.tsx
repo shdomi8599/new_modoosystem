@@ -1,11 +1,12 @@
 import { dehydrate, QueryClient } from "react-query";
 import { BRANCH_COLUMNS_DATA } from "@/constants/constants";
 import usePagination from "@/hooks/usePagination";
-import { getData } from "@/util/react-query";
 import { BranchContent } from "@/types";
 import TableContent from "@/components/table/TableContent";
 import TableSkeleton from "@/components/skeleton/TableSkeleton";
-
+import { getData } from "@/util/api/rest-api";
+const initialPage = 1;
+const initialSize = 10;
 const mainQueryKey = "reference";
 
 const ReferencePage = () => {
@@ -43,8 +44,8 @@ export default ReferencePage;
 
 export async function getServerSideProps() {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery([mainQueryKey, 1], () =>
-    getData(mainQueryKey, 1, 10)
+  await queryClient.prefetchQuery([mainQueryKey, initialPage], () =>
+    getData(mainQueryKey, initialPage, initialSize)
   );
   return {
     props: {
