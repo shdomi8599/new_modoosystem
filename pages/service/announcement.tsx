@@ -1,6 +1,6 @@
 import { Announcement } from "@/types/pageData";
 import PaginationPage from "@/components/page/PaginationPage";
-import { createPaginationPage } from "@/util/ssr/createPaginationPage";
+import { generatePaginationProps } from "@/util/ssr/generatePaginationProps";
 const initialPage = 1;
 const initialSize = 10;
 const endPoint = "announcements";
@@ -9,5 +9,5 @@ const AnnouncementPage = () => PaginationPage<Announcement>(endPoint);
 export default AnnouncementPage;
 
 export async function getServerSideProps() {
-  return createPaginationPage<Announcement>(endPoint, initialPage, initialSize);
+  return generatePaginationProps<Announcement>(endPoint, initialPage, initialSize);
 }

@@ -1,6 +1,7 @@
 import { Pagination, Table } from "antd";
 import { TableColumn } from "@/types";
 import styled from "styled-components";
+import { Announcement } from "@/types/pageData";
 
 type Props<T> = {
   dataSource: T[];
@@ -11,7 +12,7 @@ type Props<T> = {
   totalElements: number;
 };
 
-const TableContent = <T extends {}>({
+const TableContent = <T extends Announcement>({
   page,
   size,
   handlePageChange,
@@ -46,10 +47,19 @@ const Box = styled.div`
 
   .table {
     margin-bottom: 40px;
+    min-height: 605px;
   }
 
   .pagination {
     display: flex;
     justify-content: flex-end;
+  }
+  thead {
+    th:first-child {
+      text-align: center;
+    }
+  }
+  td:first-child {
+    text-align: center;
   }
 `;
