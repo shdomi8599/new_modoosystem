@@ -18,5 +18,11 @@ export interface Reference extends Announcement {
 }
 
 export interface Board extends Announcement {
-  password: string;
+  password?: string;
+  answers: Answer[];
 }
+
+type Answer = {
+  content: string;
+  createAt: string;
+};

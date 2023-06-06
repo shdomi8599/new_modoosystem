@@ -34,5 +34,11 @@ export const createViewPageApiHandler =
     const { id } = req.query;
     const apiData = await getDbAllData<T>(endPoint);
     const data = apiData.find((data) => String(data.id) === id);
-    res.status(200).json(data as T);
+    if (endPoint === "boards") {
+      const boardData = { ...data, password: "" };
+      const { password, ...rest } = boardData;
+      res.status(200).json(rest as T);
+    } else {
+      res.status(200).json(data as T);
+    }
   };

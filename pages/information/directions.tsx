@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Spin } from "antd";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { KAKAO_SDK_URL } from "@/config";
 import { DIRECTIONS_PUBLIC } from "@/datas/constants/constants";
@@ -26,7 +27,7 @@ const DirectionsPage = () => {
     };
   }, []);
 
-  if (!isMapLoaded) return <div>로딩중입니다.</div>;
+  if (!isMapLoaded) return <Spin />;
 
   return (
     <Box>

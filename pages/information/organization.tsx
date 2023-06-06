@@ -3,9 +3,9 @@ import styled from "styled-components";
 import organization from "@/public/organization/organization.jpg";
 const OrganizationPage = () => {
   return (
-      <Box>
-        <Image width={800} src={organization} alt="organization" />
-      </Box>
+    <Box>
+      <Image width={800} src={organization} alt="organization" />
+    </Box>
   );
 };
 export default OrganizationPage;
