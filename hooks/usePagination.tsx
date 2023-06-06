@@ -1,4 +1,5 @@
-import { getData } from "@/util/api/rest-api";
+import { Announcement } from "@/types/pageData";
+import { getPageData } from "@/util/api/rest-api";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 
@@ -6,7 +7,7 @@ interface Props {
   endPoint: string;
 }
 
-const usePagination = <T extends {}>({ endPoint }: Props) => {
+const usePagination = <T extends Announcement>({ endPoint }: Props) => {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
 
@@ -27,7 +28,7 @@ const usePagination = <T extends {}>({ endPoint }: Props) => {
     totalElements: number;
   }>({
     queryKey: [endPoint, page],
-    queryFn: () => getData<T>(endPoint, page, size),
+    queryFn: () => getPageData<T>(endPoint, page, size),
   });
 
   return {

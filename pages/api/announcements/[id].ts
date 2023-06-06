@@ -1,7 +1,7 @@
 import { Announcement } from "@/types/pageData";
-import { createPageApiHandler } from "@/util/api/apiHandler";
+import { createViewPageApiHandler } from "@/util/api/apiHandler";
 const endPoint = "announcements";
 
-const handler = createPageApiHandler<Announcement>(endPoint);
+const handler = createViewPageApiHandler<Announcement>(endPoint);
 
 export default handler;

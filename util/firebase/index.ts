@@ -40,15 +40,15 @@ export const addDbData = async <T extends {}>(
   await addDoc(collection(db, collectionName), data);
 };
 
-/**
- * 컬렉션 데이터 단일 조회
- */
-export const getDbData = async (collectionName: string) => {
-  const querySnapshot = await getDocs(collection(db, collectionName));
-  return querySnapshot.forEach((doc) => {
-    doc.data();
-  });
-};
+// /**
+//  * 컬렉션 데이터 단일 조회
+//  */
+// export const getDbData = async <T>(collectionName: string) => {
+//   const querySnapshot = await getDocs(collection(db, collectionName));
+//   return querySnapshot.forEach((doc) => {
+//     doc.data();
+//   });
+// };
 
 /**
  * 한 컬렉션에 대한 전체 데이터 조회

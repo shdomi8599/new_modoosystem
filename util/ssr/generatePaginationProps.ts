@@ -1,5 +1,5 @@
 import { Announcement } from "@/types/pageData";
-import { getData } from "../api/rest-api";
+import { getPageData } from "../api/rest-api";
 import { QueryClient, dehydrate } from "react-query";
 
 export const generatePaginationProps = async <T extends Announcement>(
@@ -9,7 +9,7 @@ export const generatePaginationProps = async <T extends Announcement>(
 ) => {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery([endPoint, initialPage], () =>
-    getData<T>(endPoint, initialPage, initialSize)
+  getPageData<T>(endPoint, initialPage, initialSize)
   );
   return {
     props: {

@@ -27,3 +27,12 @@ export const createPageApiHandler =
     const totalElements = apiData.length;
     res.status(200).json({ data, totalElements });
   };
+
+export const createViewPageApiHandler =
+  <T extends Announcement>(endPoint: string) =>
+  async (req: NextApiRequest, res: NextApiResponse<T>) => {
+    const { id } = req.query;
+    const apiData = await getDbAllData<T>(endPoint);
+    const data = apiData.find((data) => String(data.id) === id);
+    res.status(200).json(data as T);
+  };

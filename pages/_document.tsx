@@ -19,7 +19,7 @@ const MyDocument = ({ styles }: Props) => {
           property="og:description"
           content="주차관제 전문회사 모두시스템입니다."
         />
-        <meta property="og:image" content="../logo/black_logo.png" />
+        <meta property="og:image" content="@/public/logo/black_logo.png" />
         <meta property="og:url" content="https://sidequest.co.kr/" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="모두시스템" />
@@ -27,9 +27,9 @@ const MyDocument = ({ styles }: Props) => {
           name="twitter:description"
           content="주차관제 전문회사 모두시스템입니다."
         />
-        <meta name="twitter:image" content="../logo/black_logo.png" />
+        <meta name="twitter:image" content="@/public/logo/black_logo.png" />
         <link rel="canonical" href="https://sidequest.co.kr/" />
-        <link rel="icon" href="../logo/favicon.png" />
+        <link rel="icon" href="@/public/logo/favicon.png" />
         {styles}
       </Head>
       <body>

@@ -1,3 +1,5 @@
+import { ParsedUrlQuery } from "querystring";
+
 export interface HeaderItemContent {
   name: string;
   href: string;
@@ -24,3 +26,7 @@ export type TableColumn = {
   dataIndex: string;
   key: string;
 };
+
+export interface MyQuery extends ParsedUrlQuery {
+  id: string;
+}
