@@ -18,7 +18,7 @@ const Header = () => {
   const router = useRouter();
   const { asPath } = router;
   const { product } = router.query;
-  const pageName = ROUTER.find((data) => data.href === asPath)?.name;
+  const pageName = ROUTER.find((data) => asPath.includes(data.href))?.name;
   const [currentPageName, setCurrentPageName] =
     useRecoilState(currentPageNameState);
   useEffect(() => {

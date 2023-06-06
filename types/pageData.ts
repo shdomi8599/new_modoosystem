@@ -10,10 +10,10 @@ export interface Announcement {
   createAt: string;
   id: number;
   title: string;
+  key: string;
 }
 
 export interface Reference extends Announcement {
-  key: string;
   link: string;
 }
 
