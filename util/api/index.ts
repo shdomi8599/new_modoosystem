@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: "http://localhost:3000",
   timeout: 3000,
   headers: {
@@ -8,4 +8,29 @@ const api = axios.create({
   },
 });
 
-export { api };
+export const getPageData = async <T>(
+  endPoint: string,
+  page: number,
+  size: number
+): Promise<{ data: T[]; totalElements: number }> => {
+  return await api(`api/${endPoint}?page=${page}&size=${size}`).then(
+    (res) => res.data
+  );
+};
+
+export const getData = async <T>(endPoint: string, id: string): Promise<T> => {
+  return await api(`api/${endPoint}/${id}`).then((res) => res.data);
+};
+
+export default async function uploadFile(file: File) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await api.post("/images/upload", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
+  return response.data;
+}

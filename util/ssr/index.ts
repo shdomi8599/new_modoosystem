@@ -1,6 +1,6 @@
 import { Announcement } from "@/types/pageData";
-import { getData, getPageData } from "../api/rest-api";
 import { QueryClient, dehydrate } from "react-query";
+import { getData, getPageData } from "../api";
 
 export const generatePaginationProps = async <T extends Announcement>(
   endPoint: string,
@@ -23,7 +23,7 @@ export const generateViewProps = async <T extends Announcement>(
   id: string
 ) => {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery([endPoint, id], () =>
+  await queryClient.prefetchQuery([endPoint, "view", id], () =>
     getData<T>(endPoint, id)
   );
   return {

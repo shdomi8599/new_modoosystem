@@ -1,5 +1,5 @@
 import { Announcement } from "@/types/pageData";
-import { getPageData } from "@/util/api/rest-api";
+import { getPageData } from "@/util/api";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 
