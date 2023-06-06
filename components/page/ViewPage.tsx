@@ -33,10 +33,13 @@ const ViewPage = <T extends Announcement>(endPoint: string) => {
             <div className="title">{title}</div>
             <div className="sub">
               <div>
-                <span>작성일</span> : {createAt}
+                <span>작성일</span> : <span>{createAt}</span>
               </div>
               <div>
-                <span>작성자</span> : {author}
+                <span>작성자</span> :{" "}
+                <span className={author === "관리자" ? "master" : ""}>
+                  {author}
+                </span>
               </div>
             </div>
             <div className="content">{content}</div>
@@ -65,7 +68,7 @@ const ViewPage = <T extends Announcement>(endPoint: string) => {
                       </div>
                       <div>
                         <span>작성자</span> :{" "}
-                        <span className="owner">관리자</span>
+                        <span className="master">관리자</span>
                       </div>
                     </div>
                     <div className="bottom">{answer.content}</div>
@@ -90,6 +93,9 @@ const Box = styled.div`
   margin-top: 20px;
   margin-bottom: 32px;
   gap: 40px;
+  .master {
+    color: red;
+  }
   > .title {
     font-weight: 700;
     font-size: 24px;
@@ -140,9 +146,6 @@ const Box = styled.div`
         display: flex;
         flex-direction: column;
         gap: 20px;
-        .owner {
-          color: red;
-        }
         .top {
           display: flex;
           gap: 20px;
@@ -151,9 +154,6 @@ const Box = styled.div`
           span {
             font-weight: 700;
           }
-        }
-        .bottom {
-          font-size: 18px;
         }
       }
     }
