@@ -1,4 +1,5 @@
 import { db } from "@/pages/_app";
+import { Announcement } from "@/types/pageData";
 import {
   addDoc,
   collection,
@@ -8,11 +9,15 @@ import {
   setDoc,
 } from "firebase/firestore";
 
+//언젠가는 파이어베이스의 문서이름들을 id와 통일시켜서 id만으로 데이터를
+//바로 가져올 수 있도록 리팩토링을 해야할 필요성을 느꼈다.
+//만약에 데이터가 많아진다면 나중에 최적화를 고려해보자.
+
 /**
  * 컬렉션명과 이름이 일치하는 데이터의 값을 수정할 수 있음
  * 일치하는 컬렉션명이 없다면 셋팅과 동시에 데이터를 추가할 수 있음
  */
-export const updateDbData = async <T extends {}>(
+export const updateDbData = async <T extends Announcement>(
   collectionName: string,
   id: string,
   data: T
@@ -33,7 +38,7 @@ export const deleteDbData = async (collectionName: string, id: string) => {
  * 컬렉션에 데이터를 추가
  * 셋팅과 동시에 데이터를 추가할 수 있음
  */
-export const addDbData = async <T extends {}>(
+export const addDbData = async <T extends Announcement>(
   collectionName: string,
   data: T
 ) => {
