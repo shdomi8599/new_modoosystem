@@ -2,6 +2,7 @@ export interface InstallStatus {
   category: string[];
   src: string[];
   title: string;
+  key: number;
 }
 
 export interface Announcement {
@@ -10,7 +11,7 @@ export interface Announcement {
   createAt: string;
   id: number;
   title: string;
-  key: string;
+  key: number;
 }
 
 export interface Reference extends Announcement {

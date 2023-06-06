@@ -2,12 +2,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getDbAllData } from "@/util/firebase";
 import { Announcement } from "@/types/pageData";
 
-interface CreateHandlerResponse<T> {
+export interface CreateHandlerResponse<T> {
   data: T[];
   totalElements: number;
 }
+
 export const createPageApiHandler =
-  <T extends Announcement>(endPoint: string) =>
+  <T>(endPoint: string) =>
   async (
     req: NextApiRequest,
     res: NextApiResponse<CreateHandlerResponse<T>>
@@ -16,11 +17,10 @@ export const createPageApiHandler =
     const { page, size } = req.query;
     const startIndex = (Number(page) - 1) * Number(size);
     const endIndex = startIndex + Number(size);
-    const data = apiData.slice(startIndex, endIndex).map((data) => {
-      const { id } = data;
+    const data = apiData.slice(startIndex, endIndex).map((data, idx) => {
       return {
         ...data,
-        key: id,
+        key: idx,
       };
     });
 

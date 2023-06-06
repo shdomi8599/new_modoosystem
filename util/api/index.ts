@@ -21,16 +21,3 @@ export const getPageData = async <T>(
 export const getData = async <T>(endPoint: string, id: string): Promise<T> => {
   return await api(`api/${endPoint}/${id}`).then((res) => res.data);
 };
-
-export default async function uploadFile(file: File) {
-  const formData = new FormData();
-  formData.append("file", file);
-
-  const response = await api.post("/images/upload", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
-
-  return response.data;
-}
