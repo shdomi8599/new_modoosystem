@@ -35,9 +35,9 @@ export const HEADER_ITEMS: HeaderItem[] = [
   {
     name: "고객서비스",
     content: [
-      { name: "자료실", href: "/service/reference" },
-      { name: "공지사항", href: "/service/announcement" },
-      { name: "게시판", href: "/service/board" },
+      { name: "자료실", href: "/service/references" },
+      { name: "공지사항", href: "/service/announcements" },
+      { name: "게시판", href: "/service/boards" },
     ],
   },
   {

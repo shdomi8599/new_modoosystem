@@ -4,7 +4,8 @@ import styled from "styled-components";
 const TopTitle = ({ name }: { name: string | string[] | undefined }) => {
   const router = useRouter();
   const { asPath } = router;
-  const isName = ["information/greetings", "/"].includes(asPath);
+  const isName = ["/information/greetings", "/"].includes(asPath);
+
   return (
     <Box className="top-title">
       <div>{!isName && <span>▶ {name}</span>}</div>

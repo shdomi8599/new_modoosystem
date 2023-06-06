@@ -2,13 +2,16 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getDbAllData } from "@/util/firebase";
 import { Announcement } from "@/types/pageData";
 
-type ApiHandlerResponse<T> = {
+interface CreateHandlerResponse<T> {
   data: T[];
   totalElements: number;
-};
-export const createApiHandler =
+}
+export const createPageApiHandler =
   <T extends Announcement>(endPoint: string) =>
-  async (req: NextApiRequest, res: NextApiResponse<ApiHandlerResponse<T>>) => {
+  async (
+    req: NextApiRequest,
+    res: NextApiResponse<CreateHandlerResponse<T>>
+  ) => {
     const apiData = await getDbAllData<T>(endPoint);
     const { page, size } = req.query;
     const startIndex = (Number(page) - 1) * Number(size);
