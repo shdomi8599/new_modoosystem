@@ -1,4 +1,4 @@
-import { Announcement } from "@/types/pageData";
+import { Announcement, Board } from "@/types/pageData";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -11,14 +11,27 @@ const TableTitleItem = <T extends Announcement>({ text, data }: Props<T>) => {
   const router = useRouter();
   const { asPath } = router;
   const { id } = data;
+  const { answers } = data as T extends Board ? T : never;
   const moveView = () => {
     router.push(`${asPath}/${id}`);
   };
-  return <Box onClick={moveView}>{text}</Box>;
+  return (
+    <Box onClick={moveView}>
+      <span>{text}</span>
+      {answers && <span className="tag">답변완료</span>}
+    </Box>
+  );
 };
 
 export default TableTitleItem;
 
 const Box = styled.span`
   cursor: pointer;
+  .tag {
+    font-size: 11px;
+    background-color: #e9e9e9;
+    padding: 2px;
+    color: #25bb25;
+    border-radius: 5px;
+  }
 `;

@@ -23,7 +23,7 @@ const TableContent = <T extends Announcement>({
 }: Props<T>) => {
   const router = useRouter();
   const { asPath } = router;
-  const isBtn = asPath === "/service/board";
+  const isBtn = asPath === "/service/boards";
   const moveCreate = () => {
     router.push(`${asPath}/create`);
   };
