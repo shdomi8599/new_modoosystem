@@ -26,6 +26,8 @@ const TableTitleItem = <T extends Announcement>({ text, data }: Props<T>) => {
 export default TableTitleItem;
 
 const Box = styled.span`
+  display: flex;
+  gap: 4px;
   cursor: pointer;
   .tag {
     font-size: 11px;

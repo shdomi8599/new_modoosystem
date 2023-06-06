@@ -93,6 +93,7 @@ const Box = styled.div`
   margin-top: 20px;
   margin-bottom: 32px;
   gap: 40px;
+
   .master {
     color: red;
   }
@@ -154,6 +155,9 @@ const Box = styled.div`
           span {
             font-weight: 700;
           }
+        }
+        .bottom {
+          line-height: 24px;
         }
       }
     }
