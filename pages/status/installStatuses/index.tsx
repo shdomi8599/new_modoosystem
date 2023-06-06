@@ -1,30 +1,13 @@
-import { InstallStatus } from "@/types/pageData";
-import { getPageData } from "@/util/api";
 import { useEffect, useRef } from "react";
-import { useInfiniteQuery } from "react-query";
 import styled from "styled-components";
+import useInfinite from "@/hooks/useInfinite";
+
 const endPoint = "installStatuses";
 const page_limit = 4;
 
-type PageProps = { data: InstallStatus[]; totalElements: number };
-
 const InstallationPage = () => {
   const { isLoading, error, data, fetchNextPage, hasNextPage, isFetching } =
-    useInfiniteQuery(
-      endPoint,
-      async ({ pageParam = 1 }) =>
-        getPageData<InstallStatus>(endPoint, pageParam, page_limit),
-      {
-        getNextPageParam: (lastPage: PageProps, allPages: PageProps[]) => {
-          console.log(allPages);
-          console.log(lastPage);
-          if (lastPage.data.length < page_limit) {
-            return null;
-          }
-          return allPages.length + 1;
-        },
-      }
-    );
+    useInfinite(endPoint, page_limit);
 
   //무한 스크롤 effect
   const target = useRef<HTMLDivElement>(null);
