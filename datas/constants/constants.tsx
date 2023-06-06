@@ -1,4 +1,6 @@
+import TableTitleItem from "@/components/table/TableTitleItem";
 import { HeaderItem } from "@/types";
+import { Announcement } from "@/types/pageData";
 
 export const HEADER_ITEMS: HeaderItem[] = [
   {
@@ -71,6 +73,9 @@ export const COLUMNS_DATA = [
     title: "제목",
     dataIndex: "title",
     key: "title",
+    render: <T extends Announcement>(text: string, data: T) => (
+      <TableTitleItem text={text} data={data} />
+    ),
   },
   {
     title: "작성일",

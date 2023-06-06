@@ -1,9 +1,14 @@
 import { FooterItem } from "@/types";
 import { HEADER_ITEMS } from "../constants/constants";
 
-const footerItemNames = ["주요설치현황", "고객서비스", "온라인견적"];
+const HEADER_ROUTER = HEADER_ITEMS.flatMap((item) => item.content);
 
-export const ROUTER = HEADER_ITEMS.flatMap((item) => item.content);
+export const ROUTER = [
+  { name: "게시글 작성", href: "/service/board/create" },
+  ...HEADER_ROUTER,
+];
+
+const footerItemNames = ["주요설치현황", "고객서비스", "온라인견적"];
 
 const footerItems = HEADER_ITEMS.filter((headerItem) =>
   footerItemNames.includes(headerItem.name)

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { KAKAO_SDK_URL } from "@/config";
-import { DIRECTIONS_PUBLIC } from "@/constants/constants";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { KAKAO_SDK_URL } from "@/config";
+import { DIRECTIONS_PUBLIC } from "@/datas/constants/constants";
 //맵 좌표
 const center = { lat: 37.501496, lng: 127.140322 };
 

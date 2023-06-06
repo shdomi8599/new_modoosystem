@@ -1,7 +1,8 @@
-import { Pagination, Table } from "antd";
+import { Pagination, Table, Button } from "antd";
 import { TableColumn } from "@/types";
 import styled from "styled-components";
 import { Announcement } from "@/types/pageData";
+import { useRouter } from "next/router";
 
 type Props<T> = {
   dataSource: T[];
@@ -20,8 +21,19 @@ const TableContent = <T extends Announcement>({
   columns,
   totalElements,
 }: Props<T>) => {
+  const router = useRouter();
+  const { asPath } = router;
+  const isBtn = asPath === "/service/board";
+  const moveCreate = () => {
+    router.push(`${asPath}/create`);
+  };
   return (
     <Box>
+      {isBtn && (
+        <div className="btn-box">
+          <Button onClick={moveCreate}>글쓰기</Button>
+        </div>
+      )}
       <Table
         className="table"
         style={{ width: "100%" }}
@@ -44,6 +56,13 @@ export default TableContent;
 const Box = styled.div`
   padding: 40px 0px;
   width: 90%;
+  position: relative;
+
+  .btn-box {
+    position: absolute;
+    top: -4px;
+    right: 0px;
+  }
 
   .table {
     margin-bottom: 40px;
