@@ -8,7 +8,7 @@ export interface Announcement {
   author: string;
   content: string;
   createAt: string;
-  id: string;
+  id: number;
   title: string;
 }
 

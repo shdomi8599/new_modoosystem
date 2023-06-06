@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { currentPageNameState, headerNavState } from "@/recoil/recoil";
@@ -7,11 +7,12 @@ import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
 import whiteLogo from "@/public/logo/white_logo.png";
 import { useOffResize } from "@/hooks/useOffResize";
-import { HEADER_ITEMS, ROUTER } from "@/constants/constants";
-import ModalNavItem from "./ModalNavItem";
-import NavItem from "./NavItem";
+import { HEADER_ITEMS } from "@/datas/constants/constants";
+import { ROUTER } from "@/datas/data/data";
 import TopTitle from "../common/TopTitle";
 import HeadTitle from "../common/HeadTitle";
+import NavItem from "./NavItem";
+import ModalNavItem from "./ModalNavItem";
 
 const Header = () => {
   const router = useRouter();
