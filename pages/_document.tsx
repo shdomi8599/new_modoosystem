@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import type { DocumentContext, DocumentInitialProps } from "next/document";
+import Script from "next/script";
 import { ServerStyleSheet } from "styled-components";
 
 type Props = {
@@ -34,7 +35,7 @@ const MyDocument = ({ styles }: Props) => {
       </Head>
       <body>
         <Main />
-        <script
+        <Script
           type="text/javascript"
           src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_APP_KEY}&autoload=false`}
         />
