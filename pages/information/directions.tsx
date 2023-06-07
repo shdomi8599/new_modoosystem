@@ -1,34 +1,10 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Spin } from "antd";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
-import { KAKAO_SDK_URL } from "@/config";
 import { DIRECTIONS_PUBLIC } from "@/datas/constants/constants";
 //맵 좌표
 const center = { lat: 37.501496, lng: 127.140322 };
 
 const DirectionsPage = () => {
-  //스크립트 파일보다 랜더링이 먼저되는 바람에 카카오 맵이 보이지 않아,
-  //load를 상태로 관리하여 카카오 맵이 랜더링될 수 있도록 수정함
-  const [isMapLoaded, setIsMapLoaded] = useState(false);
-
-  useEffect(() => {
-    const handleMapLoad = () => {
-      setIsMapLoaded(true);
-    };
-
-    const script = document.createElement("script");
-    script.src = KAKAO_SDK_URL;
-    script.onload = handleMapLoad;
-
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  if (!isMapLoaded) return <Spin />;
-
   return (
     <Box>
       <div className="map-box">
