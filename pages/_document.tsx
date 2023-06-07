@@ -34,14 +34,6 @@ const MyDocument = ({ styles }: Props) => {
       </Head>
       <body>
         <Main />
-        <script
-          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_APP_KEY}&autoload=false`}
-          async
-        />
-        <script
-          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_APP_KEY}&autoload=false`}
-          defer
-        />
         <NextScript />
       </body>
     </Html>
