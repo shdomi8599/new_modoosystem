@@ -35,6 +35,10 @@ const MyDocument = ({ styles }: Props) => {
       <body>
         <Main />
         <NextScript />
+        <script
+          type="text/javascript"
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_APP_KEY}&libraries=services,clusterer`}
+        ></script>
       </body>
     </Html>
   );
