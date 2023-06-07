@@ -36,7 +36,7 @@ const InstallationPage = () => {
         observer.unobserve(target.current);
       }
     };
-  }, [target.current, data?.pageParams, fetchNextPage, hasNextPage]);
+  }, [data?.pageParams, fetchNextPage, hasNextPage]);
 
   const skeletonCard = Array(4).fill(1);
   const flatData = data?.pages.flatMap((page) => page.data);
