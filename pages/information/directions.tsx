@@ -1,11 +1,31 @@
 import styled from "styled-components";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { DIRECTIONS_PUBLIC } from "@/datas/constants/constants";
+import { useEffect, useState } from "react";
+import { Spin } from "antd";
 
 //맵 좌표
 const center = { lat: 37.501496, lng: 127.140322 };
 
 const DirectionsPage = () => {
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
+
+  useEffect(() => {
+    const handleMapLoad = () => {
+      setIsMapLoaded(true);
+    };
+
+    const script = document.createElement("script");
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=d9c8da4f69cb2eaf68d388c57d8b31af&autoload=false`;
+    script.onload = handleMapLoad;
+
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  if (!isMapLoaded) return <Spin />;
   return (
     <Box>
       <div className="map-box">
