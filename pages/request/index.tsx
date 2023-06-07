@@ -4,9 +4,9 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Button, DatePicker, Form, Input, Upload, Space } from "antd";
 import { Dayjs } from "dayjs";
 import "dayjs/locale/ko";
-import koKR from "antd/es/date-picker/locale/ko_KR";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { KakaoAdress, FormItem } from "@/types";
+
 const layout = {
   labelCol: {
     span: 4,
@@ -122,11 +122,7 @@ const RequestPage = () => {
           <Input />
         </Form.Item>
         <Form.Item label="방문 희망일">
-          <DatePicker
-            locale={koKR}
-            placeholder="날짜 선택"
-            onChange={handleChange}
-          />
+          <DatePicker placeholder="날짜 선택" onChange={handleChange} />
         </Form.Item>
         <Form.Item name="requirement" label="요구사항">
           <TextArea rows={4} />
