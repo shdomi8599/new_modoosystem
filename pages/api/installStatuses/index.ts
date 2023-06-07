@@ -1,7 +1,7 @@
 import { InstallStatus } from "@/types/pageData";
-import { createPageApiHandler } from "@/util/api/apiHandler";
+import { paginationHandler } from "@/util/api/apiHandler";
 const endPoint = "installStatuses";
 
-const handler = createPageApiHandler<InstallStatus>(endPoint);
+const handler = paginationHandler<InstallStatus>(endPoint);
 
 export default handler;

@@ -1,7 +1,7 @@
 import { Board } from "@/types/pageData";
-import { createPageApiHandler } from "@/util/api/apiHandler";
+import { paginationHandler } from "@/util/api/apiHandler";
 const endPoint = "boards";
 
-const handler = createPageApiHandler<Board>(endPoint);
+const handler = paginationHandler<Board>(endPoint);
 
 export default handler;

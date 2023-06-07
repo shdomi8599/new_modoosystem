@@ -1,7 +1,7 @@
 import { Board } from "@/types/pageData";
-import { createViewPageApiHandler } from "@/util/api/apiHandler";
+import { singleViewHandler } from "@/util/api/apiHandler";
 const endPoint = "boards";
 
-const handler = createViewPageApiHandler<Board>(endPoint);
+const handler = singleViewHandler<Board>(endPoint);
 
 export default handler;
