@@ -1,7 +1,6 @@
 import { Pagination, Table, Button } from "antd";
 import { TableColumn } from "@/types";
 import styled from "styled-components";
-import { Announcement } from "@/types/pageData";
 import { useRouter } from "next/router";
 
 type Props<T> = {
@@ -13,7 +12,7 @@ type Props<T> = {
   totalElements: number;
 };
 
-const TableContent = <T extends Announcement>({
+const TableContent = <T extends object>({
   page,
   size,
   handlePageChange,

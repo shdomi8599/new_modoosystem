@@ -1,10 +1,9 @@
 import usePagination from "@/hooks/usePagination";
 import TableContent from "@/components/table/TableContent";
 import TableSkeleton from "@/components/skeleton/TableSkeleton";
-import { Announcement } from "@/types/pageData";
 import { COLUMNS_DATA } from "@/datas/constants/constants";
 
-const PaginationPage = <T extends Announcement>(endPoint:string) => {
+const PaginationPage = <T extends object>(endPoint: string) => {
   const {
     page,
     size,

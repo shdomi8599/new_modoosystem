@@ -7,7 +7,7 @@ import styled from "styled-components";
 import HeadTitle from "../common/HeadTitle";
 import { AiFillFileText } from "react-icons/ai";
 
-const ViewPage = <T extends Announcement>(endPoint: string) => {
+const ViewPage = <T,>(endPoint: string) => {
   const router = useRouter();
   const { id } = router.query;
   const { data, isLoading, isError } = useQuery<T>({
@@ -17,7 +17,9 @@ const ViewPage = <T extends Announcement>(endPoint: string) => {
 
   const isReference = router.asPath.includes("references");
   const isBoard = router.asPath.includes("boards");
-  const { title, content, createAt, author } = data as Announcement;
+  const { title, content, createAt, author } = data as T extends Announcement
+    ? T
+    : never;
   const { link } = data as T extends Reference ? T : never;
   const { answers } = data as T extends Board ? T : never;
 

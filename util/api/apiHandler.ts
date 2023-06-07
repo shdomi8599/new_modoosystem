@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getDbAllData } from "@/util/firebase";
-import { Announcement } from "@/types/pageData";
 
-export interface CreateHandlerResponse<T> {
+export interface paginationHandlerResponse<T> {
   data: T[];
   totalElements: number;
 }
@@ -11,7 +10,7 @@ export const paginationHandler =
   <T>(endPoint: string) =>
   async (
     req: NextApiRequest,
-    res: NextApiResponse<CreateHandlerResponse<T>>
+    res: NextApiResponse<paginationHandlerResponse<T>>
   ) => {
     const apiData = await getDbAllData<T>(endPoint);
     const { page, size } = req.query;
@@ -29,7 +28,7 @@ export const paginationHandler =
   };
 
 export const singleViewHandler =
-  <T extends Announcement>(endPoint: string) =>
+  <T extends { id: number }>(endPoint: string) =>
   async (req: NextApiRequest, res: NextApiResponse<T>) => {
     const { id } = req.query;
     const apiData = await getDbAllData<T>(endPoint);

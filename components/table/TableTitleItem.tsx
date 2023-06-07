@@ -1,4 +1,4 @@
-import { Announcement, Board } from "@/types/pageData";
+import { Board } from "@/types/pageData";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -7,7 +7,7 @@ interface Props<T> {
   data: T;
 }
 
-const TableTitleItem = <T extends Announcement>({ text, data }: Props<T>) => {
+const TableTitleItem = <T extends { id: number }>({ text, data }: Props<T>) => {
   const router = useRouter();
   const { asPath } = router;
   const { id } = data;

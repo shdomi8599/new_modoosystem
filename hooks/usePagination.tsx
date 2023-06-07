@@ -1,4 +1,3 @@
-import { Announcement } from "@/types/pageData";
 import { getPageData } from "@/util/api";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
@@ -7,7 +6,7 @@ interface Props {
   endPoint: string;
 }
 
-const usePagination = <T extends Announcement>({ endPoint }: Props) => {
+const usePagination = <T,>({ endPoint }: Props) => {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
 
