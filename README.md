@@ -1,6 +1,6 @@
 # ***개발중입니다.***
 
-### Next.js을 활용하여 SSR을 구현하고 커스텀 서버와 Firebase를 활용하여 DB를 구현하는게 목표인 개인프로젝트입니다.
+### Next.js을 활용하여 커스텀 서버와 SSR을 구현하고 Firebase를 활용하여 DB를 구현하는게 목표인 개인프로젝트입니다.
 
 ## Frontend 기술 스택
 |Next.js|Typescript|react-query|
