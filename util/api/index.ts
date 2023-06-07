@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://new-modoosystem.vercel.app",
+  baseURL: "https://new-modoosystem-shdomi8599.vercel.app",
   timeout: 3000,
   headers: {
     "Content-Type": "application/json",
