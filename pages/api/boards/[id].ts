@@ -1,5 +1,6 @@
+import { singleViewHandler } from "@/handler";
 import { Board } from "@/types/pageData";
-import { singleViewHandler } from "@/util/api/apiHandler";
+
 const endPoint = "boards";
 
 const handler = singleViewHandler<Board>(endPoint);
