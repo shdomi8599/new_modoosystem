@@ -3,6 +3,7 @@ import styled from "styled-components";
 import useInfinite from "@/hooks/useInfinite";
 import { Card, Skeleton, Spin } from "antd";
 import { InstallStatus } from "@/types/pageData";
+const { Meta } = Card;
 
 const endPoint = "installStatuses";
 const page_limit = 4;
@@ -48,14 +49,21 @@ const InstallationPage = () => {
         <div className="page-box">
           {flatData?.map((data) => (
             <Card
+              className="card"
               hoverable
-              style={{ width: 240 }}
+              style={{ width: 240, height: 240 }}
               cover={<img alt="example" src={data.src[0]} />}
-            />
+            >
+              <Meta title={data.title} />
+            </Card>
           ))}
           {isFetching &&
             skeletonCard.map((x, i) => (
-              <Card style={{ width: 240 }} key={i}>
+              <Card
+                className="card"
+                style={{ width: 240, height: 240 }}
+                key={i}
+              >
                 <Skeleton avatar active />
               </Card>
             ))}
@@ -69,18 +77,33 @@ export default InstallationPage;
 
 const Box = styled.div`
   margin: 40px 0px;
+  width: 90%;
   .page-box {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     margin-top: 16px;
-    gap: 16px;
-    @media (max-width: 1300px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    @media (max-width: 960px) {
+    gap: 20px;
+    flex-wrap: wrap;
+    @media (max-width: 1150px) {
       display: flex;
-      flex-direction: column;
-      gap: 2px;
+      justify-content: center;
+      align-items: center;
+    }
+    .card {
+      .ant-card-cover {
+        height: 80%;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .ant-card-body {
+        height: 20%;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 `;
