@@ -6,6 +6,8 @@ type Props = {
   styles: React.ReactElement[];
 };
 
+const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_APP_KEY}&autoload=false`;
+
 const MyDocument = ({ styles }: Props) => {
   return (
     <Html lang="ko">
@@ -35,10 +37,7 @@ const MyDocument = ({ styles }: Props) => {
       <body>
         <Main />
         <NextScript />
-        <script
-          type="text/javascript"
-          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_APP_KEY}&libraries=services,clusterer`}
-        ></script>
+        <script type="text/javascript" src={KAKAO_SDK_URL}></script>
       </body>
     </Html>
   );
