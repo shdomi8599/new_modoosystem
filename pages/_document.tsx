@@ -36,8 +36,8 @@ const MyDocument = ({ styles }: Props) => {
       </Head>
       <body>
         <Main />
+        <script type="text/javascript" src={KAKAO_SDK_URL} />
         <NextScript />
-        <script type="text/javascript" src={KAKAO_SDK_URL}></script>
       </body>
     </Html>
   );

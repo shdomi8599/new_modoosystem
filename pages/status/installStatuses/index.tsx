@@ -36,7 +36,7 @@ const InstallationPage = () => {
         observer.unobserve(target.current);
       }
     };
-  }, [target.current, data?.pageParams]);
+  }, [target.current, data?.pageParams, fetchNextPage, hasNextPage]);
 
   const skeletonCard = Array(4).fill(1);
   const flatData = data?.pages.flatMap((page) => page.data);
@@ -47,8 +47,9 @@ const InstallationPage = () => {
     <>
       <Box>
         <div className="page-box">
-          {flatData?.map((data) => (
+          {flatData?.map((data, idx) => (
             <Card
+              key={idx}
               className="card"
               hoverable
               style={{ width: 240, height: 240 }}

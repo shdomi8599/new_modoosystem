@@ -23,7 +23,7 @@ const Header = () => {
     useRecoilState(currentPageNameState);
   useEffect(() => {
     pageName && setCurrentPageName(pageName);
-  }, [pageName]);
+  }, [pageName, setCurrentPageName]);
   const [headerNav, setHeaderNav] = useRecoilState(headerNavState);
   useOffResize(960, "up", setHeaderNav);
 
@@ -33,7 +33,7 @@ const Header = () => {
 
   useEffect(() => {
     setHeaderNav(false);
-  }, [router]);
+  }, [router, setHeaderNav]);
   return (
     <>
       <HeadTitle name={`모두시스템 - ${currentPageName}`} />

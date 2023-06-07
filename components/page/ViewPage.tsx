@@ -60,8 +60,8 @@ const ViewPage = <T extends Announcement>(endPoint: string) => {
             <div className="title">답변</div>
             <div className="content">
               {answers ? (
-                answers.map((answer) => (
-                  <div className="answer">
+                answers.map((answer, idx) => (
+                  <div key={idx} className="answer">
                     <div className="top">
                       <div>
                         <span>작성일</span> : {answer.createAt}
