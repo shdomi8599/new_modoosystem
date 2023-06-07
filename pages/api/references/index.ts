@@ -1,7 +1,7 @@
 import { Reference } from "@/types/pageData";
-import { createPageApiHandler } from "@/util/api/apiHandler";
+import { paginationHandler } from "@/util/api/apiHandler";
 const endPoint = "references";
 
-const handler = createPageApiHandler<Reference>(endPoint);
+const handler = paginationHandler<Reference>(endPoint);
 
 export default handler;

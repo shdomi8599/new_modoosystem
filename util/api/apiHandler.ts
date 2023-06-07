@@ -7,7 +7,7 @@ export interface CreateHandlerResponse<T> {
   totalElements: number;
 }
 
-export const createPageApiHandler =
+export const paginationHandler =
   <T>(endPoint: string) =>
   async (
     req: NextApiRequest,
@@ -28,7 +28,7 @@ export const createPageApiHandler =
     res.status(200).json({ data, totalElements });
   };
 
-export const createViewPageApiHandler =
+export const singleViewHandler =
   <T extends Announcement>(endPoint: string) =>
   async (req: NextApiRequest, res: NextApiResponse<T>) => {
     const { id } = req.query;
