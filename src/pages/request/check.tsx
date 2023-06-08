@@ -35,7 +35,7 @@ const CheckPage = () => {
         <CheckBox>
           <Descriptions bordered title="견적신청조회">
             {FORM_ITEMS.map((item) => (
-              <Descriptions.Item label={item.name}>
+              <Descriptions.Item key={item.name} label={item.name}>
                 {data[item.id] ? data[item.id] : "정보없음"}
               </Descriptions.Item>
             ))}
