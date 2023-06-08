@@ -75,7 +75,7 @@ const CheckPage = () => {
 export default CheckPage;
 
 const CheckBox = styled.div`
-  width: 90%;
+  width: 80%;
 `;
 
 const Box = styled.div`
