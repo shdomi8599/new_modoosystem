@@ -3,6 +3,7 @@ export interface InstallStatus {
   src: string[];
   title: string;
   key: number;
+  id: number;
 }
 
 export interface Announcement {
