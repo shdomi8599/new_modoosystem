@@ -7,7 +7,7 @@ const CardSkeleton = ({ size }: { size: number }) => {
     <>
       {skeletonLength.map((_: 1, idx) => (
         <Box key={idx}>
-          <Skeleton width={"240px"} height={"160px"} key={idx} />
+          <Skeleton width={"240px"} height={"160px"} />
           <Skeleton width={"240px"} height={"60px"} />
         </Box>
       ))}
