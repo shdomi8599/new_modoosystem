@@ -93,7 +93,7 @@ const Header = () => {
 export default Header;
 
 const Loading = styled.div`
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   display: flex;
