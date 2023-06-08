@@ -1,5 +1,7 @@
+import { routerLoadingState } from "@/recoil/recoil";
 import { Board } from "@/types/pageData";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
 interface Props<T> {
@@ -12,7 +14,9 @@ const TableTitleItem = <T extends { id: number }>({ text, data }: Props<T>) => {
   const { asPath } = router;
   const { id } = data;
   const { answers } = data as T extends Board ? T : never;
+  const [, setRouterLoading] = useRecoilState(routerLoadingState);
   const moveView = () => {
+    setRouterLoading(true);
     router.push(`${asPath}/${id}`);
   };
   return (

@@ -10,3 +10,8 @@ export const currentPageNameState = atom({
   key: "currentPageNameState",
   default: "",
 });
+
+export const routerLoadingState = atom({
+  key: "routerLoadingState",
+  default: false,
+});

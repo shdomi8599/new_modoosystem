@@ -23,7 +23,7 @@ const PaginationPage = <T extends object>(endPoint: string) => {
       ) : (
         data &&
         totalElements && (
-          <TableContent
+          <TableContent<T>
             dataSource={data}
             columns={COLUMNS_DATA}
             page={page}

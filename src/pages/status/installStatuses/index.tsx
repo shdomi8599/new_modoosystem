@@ -108,7 +108,7 @@ const Box = styled.div`
           background-color: #000000;
           opacity: 0.5;
           height: 80%;
-          width: 100%;
+          width: 240px;
           display: flex;
           justify-content: center;
           align-items: center;

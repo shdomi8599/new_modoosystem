@@ -1,9 +1,20 @@
+import { routerLoadingState } from "@/recoil/recoil";
 import { HeaderItem } from "@/types";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
 const NavItem = ({ name, content }: HeaderItem) => {
+  const router = useRouter();
+  const [, setRouterLoading] = useRecoilState(routerLoadingState);
+  const routerLoadingHandler = () => {
+    setRouterLoading(true);
+  };
+  useEffect(() => {
+    setRouterLoading(false);
+  }, [router]);
   const [hover, setHover] = useState(false);
   const onHover = () => {
     setHover(true);
@@ -18,7 +29,9 @@ const NavItem = ({ name, content }: HeaderItem) => {
         <ul className="flex-center">
           {content.map((item) => (
             <li key={item.name}>
-              <Link href={item.href}>{item.name}</Link>
+              <Link onClick={routerLoadingHandler} href={item.href}>
+                {item.name}
+              </Link>
             </li>
           ))}
         </ul>

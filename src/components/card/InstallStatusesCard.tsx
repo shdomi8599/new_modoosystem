@@ -12,7 +12,7 @@ const InstallStatusesCard = ({ data }: { data: InstallStatus }) => {
     setCategory(false);
   };
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [currentImg, setCurrentImg] = useState(0);
   const currentImgHandler = (idx: number) => {
     setLoading(true);

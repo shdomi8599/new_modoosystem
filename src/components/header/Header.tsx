@@ -2,7 +2,11 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { currentPageNameState, headerNavState } from "@/recoil/recoil";
+import {
+  currentPageNameState,
+  headerNavState,
+  routerLoadingState,
+} from "@/recoil/recoil";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
 import whiteLogo from "../../../public/logo/white_logo.png";
@@ -13,6 +17,7 @@ import { HEADER_ITEMS } from "@/datas/constants/constants";
 import HeadTitle from "../common/HeadTitle";
 import NavItem from "./NavItem";
 import ModalNavItem from "./ModalNavItem";
+import { Spin } from "antd";
 
 const Header = () => {
   const router = useRouter();
@@ -35,6 +40,8 @@ const Header = () => {
   useEffect(() => {
     setHeaderNav(false);
   }, [router, setHeaderNav]);
+
+  const [routerLoading] = useRecoilState(routerLoadingState);
   return (
     <>
       <HeadTitle name={`모두시스템 - ${currentPageName}`} />
@@ -73,12 +80,29 @@ const Header = () => {
           </ul>
         </nav>
       </Box>
+      {routerLoading && (
+        <Loading>
+          <Spin />
+        </Loading>
+      )}
       <TopTitle name={product ? product : pageName || subPageName} />
     </>
   );
 };
 
 export default Header;
+
+const Loading = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  opacity: 0.3;
+  z-index: 100;
+`;
 
 type BoxProps = {
   headerNav: boolean;
