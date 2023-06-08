@@ -6,7 +6,6 @@ import "dayjs/locale/ko";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { KakaoAdress, FormItem, RequestForm } from "@/types";
 import { postRequest } from "@/util/api";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 const layout = {
@@ -20,15 +19,7 @@ const layout = {
 
 const { TextArea } = Input;
 
-const normFile = (e: any) => {
-  if (Array.isArray(e)) {
-    return e;
-  }
-  return e?.fileList;
-};
-
 const RequestPage = () => {
-  const router = useRouter();
   //날짜 추출
   const [date, setDate] = useState<string | null>(null);
   const handleChange = (value: Dayjs | null) => {
