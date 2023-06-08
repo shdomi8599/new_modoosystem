@@ -1,5 +1,5 @@
 export interface InstallStatus {
-  category: string[];
+  categori: string[];
   src: string[];
   title: string;
   key: number;

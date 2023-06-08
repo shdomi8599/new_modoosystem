@@ -1,8 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useInfinite from "@/hooks/useInfinite";
-import { Card, Skeleton, Spin } from "antd";
+import { Card, Spin } from "antd";
 import { InstallStatus } from "@/types/pageData";
+import CardSkeleton from "@/components/skeleton/CardSkeleton";
+import CategoryItem from "@/components/category/CategoryItem";
 const { Meta } = Card;
 
 const endPoint = "installStatuses";
@@ -38,8 +40,8 @@ const InstallationPage = () => {
     };
   }, [data?.pageParams, fetchNextPage, hasNextPage]);
 
-  const skeletonCard = Array(4).fill(1);
   const flatData = data?.pages.flatMap((page) => page.data);
+  console.log(flatData);
 
   if (error) return <div>잠시 후에 다시 시도해주세요.</div>;
   if (isLoading) return <Spin />;
@@ -52,18 +54,18 @@ const InstallationPage = () => {
               key={idx}
               className="card"
               hoverable
-              cover={<img alt="example" src={data.src[0]} />}
+              cover={<img alt="install" src={data.src[0]} />}
             >
               <Meta title={data.title} />
+              <CategoryItem categori={data.categori} />
             </Card>
           ))}
-          {isFetching &&
-            skeletonCard.map((x, i) => (
-              <Skeleton className="skeleton" active />
-            ))}
+          {isFetching && <CardSkeleton size={4} />}
         </div>
       </Box>
-      <div ref={target} className="observer"></div>
+      <Observer ref={target}>
+        {!hasNextPage && <div>마지막 데이터입니다.</div>}
+      </Observer>
     </>
   );
 };
@@ -72,13 +74,6 @@ export default InstallationPage;
 const Box = styled.div`
   margin: 40px 0px;
   width: 90%;
-  .skeleton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 240px;
-    height: 240px;
-  }
   .page-box {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -91,6 +86,7 @@ const Box = styled.div`
       align-items: center;
     }
     .card {
+      position: relative;
       width: 240px;
       height: 240px;
       .ant-card-cover {
@@ -109,4 +105,8 @@ const Box = styled.div`
       }
     }
   }
+`;
+
+const Observer = styled.div`
+  height: 100px;
 `;
