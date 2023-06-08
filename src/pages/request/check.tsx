@@ -1,6 +1,6 @@
 import { CheckForm } from "@/types";
 import styled from "styled-components";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Descriptions } from "antd";
 import { postCheckRequest } from "@/util/api";
 import { useState } from "react";
 import { FORM_ITEMS } from "@/datas/constants/constants";
@@ -33,14 +33,13 @@ const CheckPage = () => {
     <>
       {data ? (
         <CheckBox>
-          {FORM_ITEMS.map((item) => (
-            <div key={item.name} className="item">
-              <div className="name">{item.name}</div>
-              <div className="content">
+          <Descriptions bordered title="견적신청조회">
+            {FORM_ITEMS.map((item) => (
+              <Descriptions.Item label={item.name}>
                 {data[item.id] ? data[item.id] : "정보없음"}
-              </div>
-            </div>
-          ))}
+              </Descriptions.Item>
+            ))}
+          </Descriptions>
         </CheckBox>
       ) : (
         <Box>
@@ -76,25 +75,7 @@ const CheckPage = () => {
 export default CheckPage;
 
 const CheckBox = styled.div`
-  width: 210px;
-  border: 1px solid #e9e6e6;
-  border-radius: 20px;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  word-break: break-all;
-  gap: 20px;
-  .item {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    .name {
-      font-weight: 700;
-    }
-    .content {
-      font-size: 14px;
-    }
-  }
+  width: 90%;
 `;
 
 const Box = styled.div`

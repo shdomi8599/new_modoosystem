@@ -4,7 +4,7 @@ import organization from "../../../public/organization/organization.jpg";
 const OrganizationPage = () => {
   return (
     <Box>
-      <Image width={800} src={organization} alt="organization" />
+      {/* <Image width={800} src={organization} alt="organization" /> */}
     </Box>
   );
 };
