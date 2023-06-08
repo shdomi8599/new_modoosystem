@@ -1,12 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import useInfinite from "@/hooks/useInfinite";
-import { Card, Spin } from "antd";
+import { Spin } from "antd";
 import { InstallStatus } from "@/types/pageData";
 import CardSkeleton from "@/components/skeleton/CardSkeleton";
-import CategoryItem from "@/components/category/CategoryItem";
-const { Meta } = Card;
-
+import InstallStatusesCard from "@/components/card/InstallStatusesCard";
 const endPoint = "installStatuses";
 const page_limit = 4;
 
@@ -41,7 +39,6 @@ const InstallationPage = () => {
   }, [data?.pageParams, fetchNextPage, hasNextPage]);
 
   const flatData = data?.pages.flatMap((page) => page.data);
-  console.log(flatData);
 
   if (error) return <div>잠시 후에 다시 시도해주세요.</div>;
   if (isLoading) return <Spin />;
@@ -50,15 +47,7 @@ const InstallationPage = () => {
       <Box>
         <div className="page-box">
           {flatData?.map((data, idx) => (
-            <Card
-              key={idx}
-              className="card"
-              hoverable
-              cover={<img alt="install" src={data.src[0]} />}
-            >
-              <Meta title={data.title} />
-              <CategoryItem categori={data.categori} />
-            </Card>
+            <InstallStatusesCard data={data} key={idx} />
           ))}
           {isFetching && <CardSkeleton size={4} />}
         </div>
@@ -89,6 +78,24 @@ const Box = styled.div`
       position: relative;
       width: 240px;
       height: 240px;
+      .tag-box {
+        position: absolute;
+        left: 0px;
+        bottom: 50px;
+        span {
+          margin-right: 4px;
+          cursor: pointer;
+        }
+      }
+      .category-box {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+        padding: 4px;
+      }
       .ant-card-cover {
         height: 80%;
         img {
