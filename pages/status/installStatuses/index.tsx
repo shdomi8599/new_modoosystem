@@ -95,6 +95,7 @@ const Box = styled.div`
         color: white;
         border-radius: 5px;
         padding: 4px;
+        text-align: center;
       }
       .ant-card-cover {
         height: 80%;

@@ -74,11 +74,13 @@ const CheckPage = () => {
 export default CheckPage;
 
 const CheckBox = styled.div`
+  width: 210px;
   border: 1px solid #e9e6e6;
   border-radius: 20px;
   padding: 40px;
   display: flex;
   flex-direction: column;
+  word-break: break-all;
   gap: 20px;
   .item {
     display: flex;

@@ -77,7 +77,7 @@ const RequestPage = () => {
               },
             ]}
           >
-            <Input />
+            <Input maxLength={15} />
           </Form.Item>
           <Form.Item
             name="phone"
