@@ -176,9 +176,6 @@ const Box = styled.div`
     display: flex;
     justify-content: center;
   }
-  .upload-label {
-    margin-top: 8px;
-  }
   textarea {
     resize: none;
   }

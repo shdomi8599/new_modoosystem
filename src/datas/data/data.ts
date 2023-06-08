@@ -4,7 +4,7 @@ import { HEADER_ITEMS } from "../constants/constants";
 const HEADER_ROUTER = HEADER_ITEMS.flatMap((item) => item.content);
 
 export const ROUTER = [
-  { name: "게시글 작성", href: "/service/board/create" },
+  { name: "게시글 작성", href: "/service/boards/create" },
   ...HEADER_ROUTER,
 ];
 

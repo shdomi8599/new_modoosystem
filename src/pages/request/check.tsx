@@ -23,7 +23,7 @@ const CheckPage = () => {
       if (res) {
         setData(res);
       } else {
-        return alert("의뢰번호를 확인해주세요.");
+        return alert("신청번호를 확인해주세요.");
       }
     });
   };
@@ -51,11 +51,11 @@ const CheckPage = () => {
           >
             <Form.Item
               name="requestId"
-              label="의뢰번호"
+              label="신청번호"
               rules={[
                 {
                   required: true,
-                  message: "의뢰번호를 입력해주세요.",
+                  message: "신청번호를 입력해주세요.",
                 },
               ]}
             >

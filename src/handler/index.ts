@@ -2,6 +2,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { addDbData, getDbAllData } from "@/util/firebase";
 import { v4 as uuidv4 } from "uuid";
 import { CheckForm } from "@/types";
+import { Board } from "@/types/pageData";
+import dayjs from "dayjs";
+import "dayjs/locale/ko";
+import { formatDate } from "@/util/date";
 
 export interface paginationHandlerResponse<T> {
   data: T[];
@@ -9,7 +13,7 @@ export interface paginationHandlerResponse<T> {
 }
 
 export const paginationHandler =
-  <T>(endPoint: string) =>
+  <T extends { id: number }>(endPoint: string) =>
   async (
     req: NextApiRequest,
     res: NextApiResponse<paginationHandlerResponse<T>>
@@ -18,12 +22,15 @@ export const paginationHandler =
     const { page, size } = req.query;
     const startIndex = (Number(page) - 1) * Number(size);
     const endIndex = startIndex + Number(size);
-    const data = apiData.slice(startIndex, endIndex).map((data, idx) => {
-      return {
-        ...data,
-        key: idx,
-      };
-    });
+    const data = apiData
+      .slice(startIndex, endIndex)
+      .map((data, idx) => {
+        return {
+          ...data,
+          key: idx,
+        };
+      })
+      .sort((x, y) => y.id - x.id);
 
     const totalElements = apiData.length;
     res.status(200).json({ data, totalElements });
@@ -58,4 +65,20 @@ export const requestCheckHandler =
     const apiData = await getDbAllData<CheckForm>("requestForm");
     const findData = apiData.find((data) => data.id === requestId);
     res.status(200).json(findData);
+  };
+
+export const boardsCreateHandler =
+  () => async (req: NextApiRequest, res: NextApiResponse) => {
+    const endPoint = "boards";
+    const apiData = await getDbAllData<Board>(endPoint);
+    const totalElements = apiData.length;
+    const id = totalElements + 1;
+    const createAt = formatDate(String(new Date()));
+    const data = req.body;
+    const postData = {
+      ...data,
+      id,
+      createAt,
+    };
+    addDbData(endPoint, postData).then(() => res.status(200).json("success"));
   };

@@ -20,7 +20,7 @@ export interface Reference extends Announcement {
 
 export interface Board extends Announcement {
   password?: string;
-  answers: Answer[];
+  answers?: Answer[];
 }
 
 type Answer = {

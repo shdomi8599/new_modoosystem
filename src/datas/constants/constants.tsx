@@ -29,7 +29,6 @@ export const HEADER_ITEMS: HeaderItem[] = [
     name: "주요설치현황",
     content: [
       { name: "설치현황", href: "/status/installStatuses" },
-      { name: "사진자료", href: "/status/photos" },
     ],
   },
   {
