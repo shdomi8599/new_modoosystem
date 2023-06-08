@@ -1,5 +1,5 @@
 import { InstallStatus } from "@/types/pageData";
-import { Card, Tag } from "antd";
+import { Card, Spin, Tag } from "antd";
 import { useState } from "react";
 const { Meta } = Card;
 
@@ -12,15 +12,33 @@ const InstallStatusesCard = ({ data }: { data: InstallStatus }) => {
     setCategory(false);
   };
 
+  const [loading, setLoading] = useState(true);
   const [currentImg, setCurrentImg] = useState(0);
   const currentImgHandler = (idx: number) => {
+    setLoading(true);
     setCurrentImg(idx);
+  };
+  const handleImageLoad = () => {
+    setLoading(false);
   };
   return (
     <Card
       className="card"
       hoverable
-      cover={<img alt="install" src={data.src[currentImg]} />}
+      cover={
+        <>
+          {loading && (
+            <div className="spin-box">
+              <Spin />
+            </div>
+          )}
+          <img
+            onLoad={handleImageLoad}
+            alt="install"
+            src={data.src[currentImg]}
+          />
+        </>
+      }
     >
       <Meta title={data.title} />
       <div

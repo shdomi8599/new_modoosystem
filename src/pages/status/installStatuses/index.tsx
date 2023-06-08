@@ -103,6 +103,16 @@ const Box = styled.div`
           width: 100%;
           height: 100%;
         }
+        .spin-box {
+          position: absolute;
+          background-color: #000000;
+          opacity: 0.5;
+          height: 80%;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
       .ant-card-body {
         height: 20%;

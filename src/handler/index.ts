@@ -3,8 +3,6 @@ import { addDbData, getDbAllData } from "@/util/firebase";
 import { v4 as uuidv4 } from "uuid";
 import { CheckForm } from "@/types";
 import { Board } from "@/types/pageData";
-import dayjs from "dayjs";
-import "dayjs/locale/ko";
 import { formatDate } from "@/util/date";
 
 export interface paginationHandlerResponse<T> {
