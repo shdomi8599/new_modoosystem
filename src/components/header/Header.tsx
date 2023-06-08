@@ -18,7 +18,8 @@ const Header = () => {
   const router = useRouter();
   const { asPath } = router;
   const { product } = router.query;
-  const pageName = ROUTER.find((data) => asPath.includes(data.href))?.name;
+  const pageName = ROUTER.find((data) => asPath === data.href)?.name;
+  const subPageName = ROUTER.find((data) => asPath.includes(data.href))?.name;
   const [currentPageName, setCurrentPageName] =
     useRecoilState(currentPageNameState);
   useEffect(() => {
@@ -72,7 +73,7 @@ const Header = () => {
           </ul>
         </nav>
       </Box>
-      <TopTitle name={product ? product : pageName} />
+      <TopTitle name={product ? product : pageName || subPageName} />
     </>
   );
 };
