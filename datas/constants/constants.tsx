@@ -44,7 +44,7 @@ export const HEADER_ITEMS: HeaderItem[] = [
     name: "온라인견적",
     content: [
       { name: "견적의뢰", href: "/request" },
-      { name: "견적신청확인", href: "/request/check" },
+      { name: "견적신청조회", href: "/request/check" },
     ],
   },
 ];
@@ -87,4 +87,13 @@ export const COLUMNS_DATA = [
     dataIndex: "author",
     key: "author",
   },
+];
+
+export const FORM_ITEMS = [
+  { name: "회사명/성함", id: "name" },
+  { name: "연락처", id: "phone" },
+  { name: "주소", id: "address" },
+  { name: "상세주소", id: "detailAddress" },
+  { name: "방문 희망일", id: "date" },
+  { name: "요구사항", id: "requirement" },
 ];

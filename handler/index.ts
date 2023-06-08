@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getDbAllData } from "@/util/firebase";
+import { addDbData, getDbAllData } from "@/util/firebase";
+import { v4 as uuidv4 } from "uuid";
+import { CheckForm } from "@/types";
 
 export interface paginationHandlerResponse<T> {
   data: T[];
@@ -40,4 +42,20 @@ export const singleViewHandler =
     } else {
       res.status(200).json(data as T);
     }
+  };
+
+export const requestHandler =
+  () => async (req: NextApiRequest, res: NextApiResponse) => {
+    const data = req.body;
+    const id = uuidv4();
+    const postData = { ...data, id };
+    addDbData("requestForm", postData).then(() => res.status(200).json(id));
+  };
+
+export const requestCheckHandler =
+  () => async (req: NextApiRequest, res: NextApiResponse) => {
+    const { requestId } = req.body;
+    const apiData = await getDbAllData<CheckForm>("requestForm");
+    const findData = apiData.find((data) => data.id === requestId);
+    res.status(200).json(findData);
   };
