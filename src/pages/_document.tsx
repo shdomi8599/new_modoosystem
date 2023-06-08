@@ -20,7 +20,7 @@ const MyDocument = ({ styles }: Props) => {
           content="주차관제 전문회사 모두시스템입니다."
         />
         <meta property="og:image" content="/logo/black_logo.png" />
-        <meta property="og:url" content="https://sidequest.co.kr/" />
+        <meta property="og:url" content="https://new-modoosystem.vercel.app/" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="모두시스템" />
         <meta
@@ -28,7 +28,7 @@ const MyDocument = ({ styles }: Props) => {
           content="주차관제 전문회사 모두시스템입니다."
         />
         <meta name="twitter:image" content="/logo/black_logo.png" />
-        <link rel="canonical" href="https://sidequest.co.kr/" />
+        <link rel="canonical" href="https://new-modoosystem.vercel.app/" />
         <link rel="icon" href="/logo/favicon.png" />
         {styles}
       </Head>

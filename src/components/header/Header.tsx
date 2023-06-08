@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { currentPageNameState, headerNavState } from "@/recoil/recoil";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
-import whiteLogo from "@/public/logo/white_logo.png";
+import whiteLogo from "../../../public/logo/white_logo.png";
 import { useOffResize } from "@/hooks/useOffResize";
 import { ROUTER } from "@/datas/data/data";
 import TopTitle from "../common/TopTitle";
