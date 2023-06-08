@@ -52,7 +52,6 @@ const InstallationPage = () => {
               key={idx}
               className="card"
               hoverable
-              style={{ width: 240, height: 240 }}
               cover={<img alt="example" src={data.src[0]} />}
             >
               <Meta title={data.title} />
@@ -60,13 +59,7 @@ const InstallationPage = () => {
           ))}
           {isFetching &&
             skeletonCard.map((x, i) => (
-              <Card
-                className="card"
-                style={{ width: 240, height: 240 }}
-                key={i}
-              >
-                <Skeleton avatar active />
-              </Card>
+              <Skeleton className="skeleton" active />
             ))}
         </div>
       </Box>
@@ -79,6 +72,13 @@ export default InstallationPage;
 const Box = styled.div`
   margin: 40px 0px;
   width: 90%;
+  .skeleton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 240px;
+  }
   .page-box {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -91,6 +91,8 @@ const Box = styled.div`
       align-items: center;
     }
     .card {
+      width: 240px;
+      height: 240px;
       .ant-card-cover {
         height: 80%;
         img {
