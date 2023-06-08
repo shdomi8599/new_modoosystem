@@ -41,3 +41,9 @@ export const postCheckRequest = async (data: {
 export const postBoard = async (data: FormItem) => {
   return await api.post(`api/boards/create`, data).then((res) => res.data);
 };
+
+export const deleteBoard = async (id: number, password: string) => {
+  return await api
+    .delete(`api/boards/delete/${id}?password=${password}`)
+    .then((res) => res.data);
+};

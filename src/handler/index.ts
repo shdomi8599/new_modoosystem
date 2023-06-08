@@ -1,5 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { addDbData, getDbAllData } from "@/util/firebase";
+import {
+  addDbData,
+  deleteDbData,
+  getDbAllData,
+  getDbAllDataAndId,
+} from "@/util/firebase";
 import { v4 as uuidv4 } from "uuid";
 import { CheckForm } from "@/types";
 import { Board } from "@/types/pageData";
@@ -29,7 +34,6 @@ export const paginationHandler =
         };
       })
       .sort((x, y) => y.id - x.id);
-
     const totalElements = apiData.length;
     res.status(200).json({ data, totalElements });
   };
@@ -69,8 +73,8 @@ export const boardsCreateHandler =
   () => async (req: NextApiRequest, res: NextApiResponse) => {
     const endPoint = "boards";
     const apiData = await getDbAllData<Board>(endPoint);
-    const totalElements = apiData.length;
-    const id = totalElements + 1;
+    const sortData = apiData.sort((x, y) => y.id - x.id);
+    const id = sortData[0].id + 1;
     const createAt = formatDate(String(new Date()));
     const data = req.body;
     const postData = {
@@ -79,4 +83,19 @@ export const boardsCreateHandler =
       createAt,
     };
     addDbData(endPoint, postData).then(() => res.status(200).json("success"));
+  };
+
+export const boardsDeleteHandler =
+  () => async (req: NextApiRequest, res: NextApiResponse) => {
+    const { id, password } = req.query;
+    const endPoint = "boards";
+    const apiData = await getDbAllDataAndId<Board>(endPoint);
+    const findData = apiData.find(
+      (data) =>
+        data.docData.id === Number(id) && data.docData.password === password
+    );
+    const targetId = findData?.docId;
+    deleteDbData(endPoint, targetId as string)
+      .then(() => res.status(200).json("success"))
+      .catch(() => res.status(404).json("failed"));
   };

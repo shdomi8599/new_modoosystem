@@ -62,3 +62,17 @@ export const getDbAllData = async <T>(collectionName: string): Promise<T[]> => {
   const dataArray = querySnapshot.docs.map((doc) => doc.data() as T);
   return dataArray;
 };
+
+/**
+ * 한 컬렉션에 대한 전체 데이터와 아이디를 한 번에 조회
+ */
+export const getDbAllDataAndId = async <T>(
+  collectionName: string
+): Promise<{ docId: string; docData: T }[]> => {
+  const querySnapshot = await getDocs(collection(db, collectionName));
+  const dataArray = querySnapshot.docs.map((doc) => {
+    const data = { docId: doc.id, docData: doc.data() as T };
+    return data;
+  });
+  return dataArray;
+};

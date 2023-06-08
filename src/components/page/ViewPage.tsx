@@ -1,11 +1,14 @@
 import { Announcement, Board, Reference } from "@/types/pageData";
-import { getData } from "@/util/api";
+import { deleteBoard, getData } from "@/util/api";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
-import { Spin } from "antd";
+import { Button, Collapse, Input, Spin } from "antd";
 import styled from "styled-components";
 import HeadTitle from "../common/HeadTitle";
 import { AiFillFileText } from "react-icons/ai";
+import { SetStateAction, useState } from "react";
+
+const { Panel } = Collapse;
 
 const ViewPage = <T,>(endPoint: string) => {
   const router = useRouter();
@@ -23,6 +26,20 @@ const ViewPage = <T,>(endPoint: string) => {
   const { link } = data as T extends Reference ? T : never;
   const { answers } = data as T extends Board ? T : never;
 
+  const [input, setInput] = useState("");
+  const inputHandler = (e: { target: { value: SetStateAction<string> } }) => {
+    setInput(e.target.value);
+  };
+
+  const deleteEvent = () => {
+    deleteBoard(Number(id), input)
+      .then(() => {
+        alert("성공적으로 삭제되었습니다.");
+        router.back();
+      })
+      .catch(() => alert("비밀번호를 확인해주세요."));
+  };
+
   if (isError) return <div>잠시 후에 다시 시도해주세요.</div>;
   return (
     <>
@@ -32,6 +49,19 @@ const ViewPage = <T,>(endPoint: string) => {
           <Spin />
         ) : (
           <>
+            {isBoard && (
+              <div className="btn-box">
+                <Collapse defaultActiveKey={[]}>
+                  <Panel className="panel" header="삭제하기" key="1">
+                    <Input
+                      onChange={inputHandler}
+                      placeholder="비밀번호 입력"
+                    />
+                    <Button onClick={deleteEvent}>삭제하기</Button>
+                  </Panel>
+                </Collapse>
+              </div>
+            )}
             <div className="title">{title}</div>
             <div className="sub">
               <div>
@@ -95,6 +125,17 @@ const Box = styled.div`
   margin-top: 20px;
   margin-bottom: 32px;
   gap: 40px;
+  position: relative;
+
+  .btn-box {
+    position: absolute;
+    right: 0px;
+    top: -70px;
+    .ant-collapse-content-box {
+      display: flex;
+      gap: 8px;
+    }
+  }
 
   .master {
     color: red;
@@ -115,6 +156,7 @@ const Box = styled.div`
   > .content {
     flex: 1;
     line-height: 24px;
+    white-space: pre-line;
   }
   > .link {
     a {
