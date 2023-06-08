@@ -38,8 +38,5 @@ export const postRequest = async (data: RequestForm): Promise<string> => {
 export const postCheckRequest = async (data: {
   requestId: string;
 }): Promise<CheckForm> => {
-  return await api
-    .post(`api/request/check`, data)
-    .then((res) => res.data)
-    .catch(() => alert("잠시 후에 다시 시도해주세요."));
+  return await api.post(`api/request/check`, data).then((res) => res.data);
 };

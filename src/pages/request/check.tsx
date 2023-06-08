@@ -36,7 +36,9 @@ const CheckPage = () => {
           {FORM_ITEMS.map((item) => (
             <div key={item.name} className="item">
               <div className="name">{item.name}</div>
-              <div className="content">{data[item.id]}</div>
+              <div className="content">
+                {data[item.id] ? data[item.id] : "정보없음"}
+              </div>
             </div>
           ))}
         </CheckBox>
