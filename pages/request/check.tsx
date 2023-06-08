@@ -34,7 +34,7 @@ const CheckPage = () => {
       {data ? (
         <CheckBox>
           {FORM_ITEMS.map((item) => (
-            <div className="item">
+            <div key={item.name} className="item">
               <div className="name">{item.name}</div>
               <div className="content">{data[item.id]}</div>
             </div>
