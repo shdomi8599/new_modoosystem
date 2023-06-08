@@ -103,24 +103,24 @@ export const DEPARTMENTS = [
     name: "관리부",
     key: "관리부",
     subDepartments: [
-      { name: "총무팀", key: "총무팀" },
-      { name: "회계팀", key: "회계팀" },
+      { name: "총무팀", content: "cc" },
+      { name: "회계팀", content: "dd" },
     ],
   },
   {
     name: "영업부",
     key: "영업부",
     subDepartments: [
-      { name: "영업1팀", key: "영업1팀" },
-      { name: "영업2팀", key: "영업2팀" },
+      { name: "영업1팀", content: "ff" },
+      { name: "영업2팀", content: "ee" },
     ],
   },
   {
     name: "기술부",
     key: "기술부",
     subDepartments: [
-      { name: "시공팀", key: "시공팀" },
-      { name: "연구개발팀", key: "연구개발팀" },
+      { name: "시공팀", content: "qq" },
+      { name: "연구개발팀", content: "ee" },
     ],
   },
 ];
