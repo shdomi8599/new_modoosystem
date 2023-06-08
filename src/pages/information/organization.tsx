@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
-import organization from "@/public/organization/organization.jpg";
+import organization from "../../../public/organization/organization.jpg";
 const OrganizationPage = () => {
   return (
     <Box>

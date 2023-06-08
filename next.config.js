@@ -4,6 +4,9 @@ const nextConfig = {
   experimental: {
     forceSwcTransforms: true, //실험적 기능 체험해보는 중,
   },
+  compiler: {
+    styledComponents: true,
+  },
 };
 
 module.exports = nextConfig;

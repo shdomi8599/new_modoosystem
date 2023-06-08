@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styled, { keyframes } from "styled-components";
-import logo from "@/public/logo/white_logo.png";
+import logo from "../../../public/logo/white_logo.png";
 
 const GreetingsPage = () => {
   return (
