@@ -21,17 +21,14 @@ const PaginationPage = <T extends object>(endPoint: string) => {
       {isLoading ? (
         <TableSkeleton size={size} />
       ) : (
-        data &&
-        totalElements && (
-          <TableContent<T>
-            dataSource={data}
-            columns={COLUMNS_DATA}
-            page={page}
-            size={size}
-            handlePageChange={handlePageChange}
-            totalElements={totalElements}
-          />
-        )
+        <TableContent<T>
+          dataSource={data as T[] | []}
+          columns={COLUMNS_DATA}
+          page={page}
+          size={size}
+          handlePageChange={handlePageChange}
+          totalElements={totalElements as number}
+        />
       )}
     </>
   );

@@ -1,14 +1,18 @@
 import useRouterLoading from "@/hooks/useRouterLoading";
+import { searchState } from "@/recoil/recoil";
 import { HeaderItem } from "@/types";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
 const NavItem = ({ name, content }: HeaderItem) => {
   const router = useRouter();
+  const [, setSearch] = useRecoilState(searchState);
   const { offRouterLoading, onRouterLoading } = useRouterLoading();
   useEffect(() => {
+    setSearch({ category: "", searchVal: "" });
     offRouterLoading();
   }, [router]);
   const [hover, setHover] = useState(false);
