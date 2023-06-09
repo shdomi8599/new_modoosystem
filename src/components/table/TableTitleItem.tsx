@@ -20,7 +20,7 @@ const TableTitleItem = <T extends { id: number }>({ text, data }: Props<T>) => {
   const moveView = () => {
     onRouterLoading();
     if (asPath.includes("admin")) {
-      return router.push(`${asPath}/${id}?endPoint=${adminEndPoint}`);
+      return router.push(`${asPath}/${adminEndPoint}/${id}`);
     }
     router.push(`${asPath}/${id}`);
   };

@@ -24,9 +24,9 @@ const AdminViewPage = () => {
 export default AdminViewPage;
 
 export async function getServerSideProps({ query }: { query: MyQuery }) {
-  const { id, endPoint } = query;
+  const { id, category } = query;
   return generateViewProps<Board | Announcement | Reference>(
-    endPoint as string,
+    category as string,
     id
   );
 }
