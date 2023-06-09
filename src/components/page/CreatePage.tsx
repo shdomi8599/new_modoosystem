@@ -19,12 +19,12 @@ const layout = {
 const { TextArea } = Input;
 
 const CreatePage = ({ endPoint }: { endPoint: string }) => {
-  const { onRouterLoading, offRouterLoading } = useRouterLoading();
   const router = useRouter();
   const { asPath } = router;
   const isBoardPage = asPath.includes("boards");
   const isAdminPage = asPath.includes("admin");
   const isReferencePage = asPath.includes("references");
+  const { onRouterLoading, offRouterLoading } = useRouterLoading();
   //폼 데이터 관리
   const [form] = Form.useForm();
   const onFinish = (values: FormItem) => {
