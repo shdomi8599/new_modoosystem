@@ -3,6 +3,7 @@ import { Button, Form, Input } from "antd";
 import { FormItem } from "@/types";
 import { postBoard } from "@/util/api";
 import { useRouter } from "next/router";
+import useRouterLoading from "@/hooks/useRouterLoading";
 
 const layout = {
   labelCol: {
@@ -16,16 +17,21 @@ const layout = {
 const { TextArea } = Input;
 
 const CreatePage = () => {
+  const { onRouterLoading, offRouterLoading } = useRouterLoading();
   const router = useRouter();
   //폼 데이터 관리
   const [form] = Form.useForm();
   const onFinish = (values: FormItem) => {
+    onRouterLoading();
     postBoard(values)
       .then(() => {
         alert("게시글이 등록되었습니다.");
         router.back();
       })
-      .catch(() => alert("잠시 후에 다시 시도해주세요."));
+      .catch(() => {
+        offRouterLoading();
+        alert("잠시 후에 다시 시도해주세요.");
+      });
   };
   return (
     <Box>

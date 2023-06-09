@@ -15,6 +15,9 @@ const InstallStatusesCard = ({ data }: { data: InstallStatus }) => {
   const [loading, setLoading] = useState(false);
   const [currentImg, setCurrentImg] = useState(0);
   const currentImgHandler = (idx: number) => {
+    if (idx === currentImg) {
+      return;
+    }
     setLoading(true);
     setCurrentImg(idx);
   };

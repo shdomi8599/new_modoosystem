@@ -7,6 +7,9 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 import { KakaoAdress, FormItem, RequestForm } from "@/types";
 import { postRequest } from "@/util/api";
 import Link from "next/link";
+import { useRecoilState } from "recoil";
+import { routerLoadingState } from "@/recoil/recoil";
+import useRouterLoading from "@/hooks/useRouterLoading";
 
 const layout = {
   labelCol: {
@@ -20,6 +23,7 @@ const layout = {
 const { TextArea } = Input;
 
 const RequestPage = () => {
+  const { onRouterLoading, offRouterLoading } = useRouterLoading();
   //날짜 추출
   const [date, setDate] = useState<string | null>(null);
   const handleChange = (value: Dayjs | null) => {
@@ -51,6 +55,7 @@ const RequestPage = () => {
   //폼 데이터 관리
   const [form] = Form.useForm();
   const onFinish = (values: FormItem) => {
+    onRouterLoading();
     const data: RequestForm = {
       ...address,
       ...values,
@@ -60,8 +65,12 @@ const RequestPage = () => {
       .then((res: string) => {
         setSuccess(true);
         setFormId(res);
+        offRouterLoading();
       })
-      .catch(() => alert("잠시 후에 다시 시도해주세요."));
+      .catch(() => {
+        offRouterLoading();
+        alert("잠시 후에 다시 시도해주세요.");
+      });
   };
   return (
     <Box>
@@ -149,7 +158,9 @@ const RequestPage = () => {
           <div>고객님의 신청번호는 {formId}입니다.</div>
           <div>신청번호를 통해 조회하실 수 있습니다.</div>
           <Button>
-            <Link href={"/request/check"}>신청확인</Link>
+            <Link onClick={onRouterLoading} href={"/request/check"}>
+              신청확인
+            </Link>
           </Button>
         </div>
       )}

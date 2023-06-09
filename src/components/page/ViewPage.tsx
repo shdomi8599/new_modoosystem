@@ -7,10 +7,12 @@ import styled from "styled-components";
 import HeadTitle from "../common/HeadTitle";
 import { AiFillFileText } from "react-icons/ai";
 import { SetStateAction, useState } from "react";
+import useRouterLoading from "@/hooks/useRouterLoading";
 
 const { Panel } = Collapse;
 
 const ViewPage = <T,>(endPoint: string) => {
+  const { onRouterLoading, offRouterLoading } = useRouterLoading();
   const router = useRouter();
   const { id } = router.query;
   const { data, isLoading, isError } = useQuery<T>({
@@ -32,12 +34,16 @@ const ViewPage = <T,>(endPoint: string) => {
   };
 
   const deleteEvent = () => {
+    onRouterLoading();
     deleteBoard(Number(id), input)
       .then(() => {
         alert("성공적으로 삭제되었습니다.");
         router.back();
       })
-      .catch(() => alert("비밀번호를 확인해주세요."));
+      .catch(() => {
+        offRouterLoading();
+        alert("비밀번호를 확인해주세요.");
+      });
   };
 
   if (isError) return <div>잠시 후에 다시 시도해주세요.</div>;

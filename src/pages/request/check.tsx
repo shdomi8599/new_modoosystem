@@ -4,6 +4,7 @@ import { Button, Form, Input, Descriptions } from "antd";
 import { postCheckRequest } from "@/util/api";
 import { useState } from "react";
 import { FORM_ITEMS } from "@/datas/constants/constants";
+import useRouterLoading from "@/hooks/useRouterLoading";
 
 const layout = {
   labelCol: {
@@ -15,14 +16,18 @@ const layout = {
 };
 
 const CheckPage = () => {
+  const { onRouterLoading, offRouterLoading } = useRouterLoading();
   const [data, setData] = useState<CheckForm>();
   //폼 데이터 관리
   const [form] = Form.useForm();
   const onFinish = (values: { requestId: string }) => {
+    onRouterLoading();
     postCheckRequest(values).then((res) => {
       if (res) {
+        offRouterLoading();
         setData(res);
       } else {
+        offRouterLoading();
         return alert("신청번호를 확인해주세요.");
       }
     });
