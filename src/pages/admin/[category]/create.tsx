@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 
 const AdminCreatePage = () => {
   const router = useRouter();
-  const { endPoint } = router.query;
-  return <CreatePage endPoint={endPoint as string} />;
+  const { category } = router.query;
+  return <CreatePage endPoint={category as string} />;
 };
 
 export default AdminCreatePage;

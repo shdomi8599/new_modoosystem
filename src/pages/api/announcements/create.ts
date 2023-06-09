@@ -1,5 +1,5 @@
 import { articleCreateHandler } from "@/handler";
-const endPoint = "boards";
+const endPoint = "announcements";
 
 const handler = articleCreateHandler(endPoint);
 

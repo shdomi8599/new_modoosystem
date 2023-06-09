@@ -129,10 +129,11 @@ export const requestCheckHandler =
     res.status(200).json(findData);
   };
 
-export const boardsCreateHandler =
-  () => async (req: NextApiRequest, res: NextApiResponse) => {
-    const endPoint = "boards";
-    const apiData = await getDbAllData<Board>(endPoint);
+export const articleCreateHandler =
+  (endPoint: string) => async (req: NextApiRequest, res: NextApiResponse) => {
+    const apiData = await getDbAllData<Board | Announcement | Reference>(
+      endPoint
+    );
     const sortData = apiData.sort((x, y) => y.id - x.id);
     const id = sortData[0].id + 1;
     const createAt = formatDate(String(new Date()));
@@ -142,7 +143,9 @@ export const boardsCreateHandler =
       id,
       createAt,
     };
-    addDbData(endPoint, postData).then(() => res.status(200).json("success"));
+    addDbData(endPoint, postData)
+      .then(() => res.status(200).json("success"))
+      .catch(() => res.status(404).json("failed"));
   };
 
 export const boardsDeleteHandler =
