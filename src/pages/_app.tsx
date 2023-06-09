@@ -1,5 +1,6 @@
 import "@/styles/App.css";
 import type { AppProps } from "next/app";
+import { SessionProvider } from "next-auth/react";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
@@ -32,21 +33,26 @@ const options = {
     },
   },
 };
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   const [queryClient] = useState(() => new QueryClient(options));
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <RecoilRoot>
-          <Header />
-          <Box>
-            <Component {...pageProps} />
-          </Box>
-          <Footer />
-        </RecoilRoot>
-      </Hydrate>
-    </QueryClientProvider>
+    <SessionProvider session={session}>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <RecoilRoot>
+            <Header />
+            <Box>
+              <Component {...pageProps} />
+            </Box>
+            <Footer />
+          </RecoilRoot>
+        </Hydrate>
+      </QueryClientProvider>
+    </SessionProvider>
   );
 }
 
