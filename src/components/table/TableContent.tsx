@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import useRouterLoading from "@/hooks/useRouterLoading";
 import { SELECT_SEARCH_ITEMS } from "@/datas/constants/constants";
+import { useRecoilState } from "recoil";
+import { searchState } from "@/recoil/recoil";
 
 const layout = {
   labelCol: {
@@ -31,6 +33,7 @@ const TableContent = <T extends object>({
   columns,
   totalElements,
 }: Props<T>) => {
+  const [, setSearch] = useRecoilState(searchState);
   const router = useRouter();
   const { asPath } = router;
   const isBtn = asPath === "/service/boards";
@@ -38,12 +41,9 @@ const TableContent = <T extends object>({
     router.push(`${asPath}/create`);
   };
 
-  const { onRouterLoading, offRouterLoading } = useRouterLoading();
-
   const [form] = Form.useForm();
-  const onFinish = (values: { requestId: string }) => {
-    // onRouterLoading();
-    console.log(values);
+  const onFinish = (values: { category: string; searchVal: string }) => {
+    setSearch(values);
   };
   return (
     <Box>
@@ -71,7 +71,7 @@ const TableContent = <T extends object>({
             <Select className="select" options={SELECT_SEARCH_ITEMS} />
           </Form.Item>
           <Form.Item
-            name="search"
+            name="searchVal"
             rules={[
               {
                 required: true,

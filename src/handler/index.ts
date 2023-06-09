@@ -7,7 +7,12 @@ import {
 } from "@/util/firebase";
 import { v4 as uuidv4 } from "uuid";
 import { CheckForm } from "@/types";
-import { Board } from "@/types/pageData";
+import {
+  Announcement,
+  Board,
+  InstallStatus,
+  Reference,
+} from "@/types/pageData";
 import { formatDate } from "@/util/date";
 
 export interface paginationHandlerResponse<T> {
@@ -16,7 +21,44 @@ export interface paginationHandlerResponse<T> {
 }
 
 export const paginationHandler =
-  <T extends { id: number }>(endPoint: string) =>
+  <T extends Board | Announcement | Reference>(endPoint: string) =>
+  async (
+    req: NextApiRequest,
+    res: NextApiResponse<paginationHandlerResponse<T>>
+  ) => {
+    const apiData = await getDbAllData<T>(endPoint);
+    const { page, size, category, searchVal } = req.query;
+    const startIndex = (Number(page) - 1) * Number(size);
+    const endIndex = startIndex + Number(size);
+    const searchData =
+      category === "undefined"
+        ? apiData
+        : apiData.filter((data) => {
+            if (category === "title") {
+              return data.title.includes(searchVal as string);
+            }
+            if (category === "content") {
+              return data.content.includes(searchVal as string);
+            }
+            if (category === "author") {
+              return data.author.includes(searchVal as string);
+            }
+          });
+    const data = searchData
+      .slice(startIndex, endIndex)
+      .map((data, idx) => {
+        return {
+          ...data,
+          key: idx,
+        };
+      })
+      .sort((x, y) => y.id - x.id);
+    const totalElements = searchData.length;
+    res.status(200).json({ data, totalElements });
+  };
+
+export const infiniteHandler =
+  <T extends InstallStatus>(endPoint: string) =>
   async (
     req: NextApiRequest,
     res: NextApiResponse<paginationHandlerResponse<T>>
@@ -39,7 +81,7 @@ export const paginationHandler =
   };
 
 export const singleViewHandler =
-  <T extends { id: number }>(endPoint: string) =>
+  <T extends Board | Announcement | Reference>(endPoint: string) =>
   async (req: NextApiRequest, res: NextApiResponse<T>) => {
     const { id } = req.query;
     const apiData = await getDbAllData<T>(endPoint);

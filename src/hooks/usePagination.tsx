@@ -1,6 +1,8 @@
+import { searchState } from "@/recoil/recoil";
 import { getPageData } from "@/util/api";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
+import { useRecoilState } from "recoil";
 
 interface Props {
   endPoint: string;
@@ -9,6 +11,11 @@ interface Props {
 const usePagination = <T,>({ endPoint }: Props) => {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
+  const [search] = useRecoilState(searchState);
+  const { searchVal, category } = search;
+  const queryKey = searchVal
+    ? [endPoint, page, category, searchVal]
+    : [endPoint, page];
 
   useEffect(() => {
     window.scrollTo({
@@ -26,8 +33,8 @@ const usePagination = <T,>({ endPoint }: Props) => {
     data: T[];
     totalElements: number;
   }>({
-    queryKey: [endPoint, page],
-    queryFn: () => getPageData<T>(endPoint, page, size),
+    queryKey,
+    queryFn: () => getPageData<T>(endPoint, page, size, category, searchVal),
   });
 
   return {
