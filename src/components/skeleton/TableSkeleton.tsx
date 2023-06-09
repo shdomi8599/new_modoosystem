@@ -11,7 +11,8 @@ const TableSkeleton = ({ size }: { size: number }) => {
         ))}
       </div>
       <div className="sub">
-        <Skeleton width={"50%"} height={"32px"} />
+        <Skeleton width={"30%"} height={"56px"} />
+        <Skeleton width={"60%"} height={"56px"} />
       </div>
     </Box>
   );
@@ -31,6 +32,6 @@ const Box = styled.div`
   }
   .sub {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 `;
