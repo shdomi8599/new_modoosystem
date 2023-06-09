@@ -66,5 +66,5 @@ export const getCheckMaster = async (data: {
   id: string;
   password: string;
 }) => {
-  return await api.post(`api/admin`, data).then((res) => res.data);
+  return await api.post(`api/auth/admin`, data).then((res) => res.data);
 };
