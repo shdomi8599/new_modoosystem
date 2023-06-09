@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuidv4 } from "uuid";
 import { CheckForm } from "@/types";
 import { formatDate } from "@/util/date";
+import jwt from "jsonwebtoken";
 import {
   addDbData,
   deleteDbData,
@@ -167,7 +168,8 @@ export const masterCheckHandler =
       "admin"
     );
     if (id === apiData.id && password === apiData.password) {
-      return res.status(200).json(apiData);
+      const token = jwt.sign({ id }, "secret-key"); // 토큰 발급
+      return res.status(200).json({ token });
     }
     res.status(404).json("failed");
   };

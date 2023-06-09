@@ -16,7 +16,7 @@ const TableTitleItem = <T extends { id: number }>({ text, data }: Props<T>) => {
   const { id } = data;
   const { answers, secret } = data as T extends Board ? T : never;
   const { onRouterLoading } = useRouterLoading();
-  const [adminEndPoint, setAdminEndPoint] = useRecoilState(adminEndPointState);
+  const [adminEndPoint] = useRecoilState(adminEndPointState);
   const moveView = () => {
     onRouterLoading();
     if (asPath.includes("admin")) {
