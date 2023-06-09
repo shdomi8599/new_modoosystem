@@ -1,14 +1,15 @@
 import { Announcement, Board, Reference } from "@/types/pageData";
-import { deleteBoard, getData, postCheckSecretBoard } from "@/util/api";
+import { deleteBoard, getCheckSecretBoard, getData } from "@/util/api";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
-import { Button, Collapse, Input, Spin, Result } from "antd";
+import { Button, Collapse, Input, Spin } from "antd";
 import styled from "styled-components";
 import HeadTitle from "../common/HeadTitle";
 import { AiFillFileText } from "react-icons/ai";
 import React, { ChangeEvent, useState } from "react";
 import useRouterLoading from "@/hooks/useRouterLoading";
 import AnswerBox from "../answer/AnswerBox";
+import WarningForm from "../warning/WarningForm";
 
 const { Panel } = Collapse;
 
@@ -37,7 +38,7 @@ const ViewPage = <T,>(endPoint: string) => {
 
   const checkSecretEvent = () => {
     onRouterLoading();
-    postCheckSecretBoard(Number(id), password)
+    getCheckSecretBoard(Number(id), password)
       .then(() => {
         offRouterLoading();
         setIsSecret(false);
@@ -78,22 +79,10 @@ const ViewPage = <T,>(endPoint: string) => {
         {isLoading ? (
           <Spin />
         ) : isSecret ? (
-          <Result
-            status="warning"
-            title="비밀번호를 입력해주세요."
-            extra={
-              <div className="result-item">
-                <Input
-                  type="password"
-                  onKeyDown={handleKeyPress}
-                  onChange={passwordHandler}
-                  placeholder="비밀번호 입력"
-                />
-                <Button onClick={checkSecretEvent} type="primary" key="console">
-                  확인
-                </Button>
-              </div>
-            }
+          <WarningForm
+            handleKeyPress={handleKeyPress}
+            passwordHandler={passwordHandler}
+            checkSecretEvent={checkSecretEvent}
           />
         ) : (
           <>
@@ -152,24 +141,6 @@ const Box = styled.div`
   margin-bottom: 32px;
   gap: 40px;
   position: relative;
-
-  .ant-result {
-    min-height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    .result-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      width: 100%;
-      input {
-        min-width: 180px;
-        width: 30%;
-      }
-    }
-  }
 
   .btn-box {
     position: absolute;

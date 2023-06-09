@@ -7,6 +7,7 @@ import {
   deleteDbData,
   getDbAllData,
   getDbAllDataAndId,
+  getDbDataByDocName,
 } from "@/util/firebase";
 import {
   Announcement,
@@ -156,4 +157,17 @@ export const boardsDeleteHandler =
     deleteDbData(endPoint, targetId as string)
       .then(() => res.status(200).json("success"))
       .catch(() => res.status(404).json("failed"));
+  };
+
+export const masterCheckHandler =
+  () => async (req: NextApiRequest, res: NextApiResponse) => {
+    const { id, password } = req.body;
+    const apiData = await getDbDataByDocName<{ id: string; password: string }>(
+      "admin",
+      "admin"
+    );
+    if (id === apiData.id && password === apiData.password) {
+      return res.status(200).json(apiData);
+    }
+    res.status(404).json("failed");
   };

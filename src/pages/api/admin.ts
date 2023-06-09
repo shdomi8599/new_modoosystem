@@ -1,5 +1,5 @@
-import { requestCheckHandler } from "@/handler";
+import { masterCheckHandler } from "@/handler";
 
-const handler = requestCheckHandler();
+const handler = masterCheckHandler();
 
 export default handler;

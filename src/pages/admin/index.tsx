@@ -1,9 +1,13 @@
 import HeadTitle from "@/components/common/HeadTitle";
-import { Button, Input, Result } from "antd";
+import WarningForm from "@/components/warning/WarningForm";
+import useRouterLoading from "@/hooks/useRouterLoading";
+import { getCheckMaster } from "@/util/api";
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 
 const AdminPage = () => {
+  const { onRouterLoading, offRouterLoading } = useRouterLoading();
+  const [isMaster, setIsMaster] = useState(false);
   const [id, setId] = useState("");
   const idHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
@@ -12,59 +16,41 @@ const AdminPage = () => {
   const passwordHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
+  const checkSecretEvent = () => {
+    const data = { id, password };
+    onRouterLoading();
+    getCheckMaster(data)
+      .then(() => {
+        offRouterLoading();
+        setIsMaster(true);
+      })
+      .catch(() => {
+        offRouterLoading();
+        alert("비밀번호를 확인해주세요.");
+      });
+  };
   const handleKeyPress = (e: { key: string }) => {
     if (e.key === "Enter") {
+      checkSecretEvent();
     }
   };
   return (
     <>
       <HeadTitle name="모두시스템 - 관리자" />
-      <Box>
-        <Result
-          status="warning"
-          title="아이디와 비밀번호를 입력해주세요."
-          extra={
-            <div className="result-item">
-              <Input
-                type="id"
-                onKeyDown={handleKeyPress}
-                onChange={passwordHandler}
-                placeholder="아이디 입력"
-              />
-              <Input
-                type="password"
-                onKeyDown={handleKeyPress}
-                onChange={passwordHandler}
-                placeholder="비밀번호 입력"
-              />
-              <Button onClick={() => {}} type="primary" key="console">
-                확인
-              </Button>
-            </div>
-          }
+      {isMaster ? (
+        <Box>관리자입니다.</Box>
+      ) : (
+        <WarningForm
+          idHandler={idHandler}
+          onIdInput={true}
+          passwordHandler={passwordHandler}
+          handleKeyPress={handleKeyPress}
+          checkSecretEvent={checkSecretEvent}
         />
-      </Box>
+      )}
     </>
   );
 };
 export default AdminPage;
 
-const Box = styled.div`
-  .ant-result {
-    min-height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    .result-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      width: 100%;
-      input {
-        min-width: 180px;
-        width: 30%;
-      }
-    }
-  }
-`;
+const Box = styled.div``;
