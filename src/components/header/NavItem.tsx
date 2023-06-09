@@ -8,10 +8,10 @@ import styled from "styled-components";
 
 const NavItem = ({ name, content }: HeaderItem) => {
   const router = useRouter();
-  const { setSearch } = useSearch();
+  const { resetSearch } = useSearch();
   const { offRouterLoading, onRouterLoading } = useRouterLoading();
   useEffect(() => {
-    setSearch({ category: "", searchVal: "" });
+    resetSearch();
     offRouterLoading();
   }, [router]);
   const [hover, setHover] = useState(false);

@@ -38,7 +38,6 @@ const TableContent = <T extends object>({
   const moveCreate = () => {
     router.push(`${asPath}/create`);
   };
-
   const [form] = Form.useForm();
   const onFinish = (values: { category: string; searchVal: string }) => {
     setSearch(values);
@@ -59,6 +58,9 @@ const TableContent = <T extends object>({
       />
       <div className="bottom">
         <Form
+          initialValues={{
+            ["category"]: "title",
+          }}
           form={form}
           {...layout}
           name="control-hooks"
