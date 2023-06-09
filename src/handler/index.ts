@@ -76,7 +76,6 @@ export const infiniteHandler =
           key: idx,
         };
       })
-      .sort((x, y) => y.id - x.id)
       .slice(startIndex, endIndex);
     const totalElements = apiData.length;
     res.status(200).json({ data, totalElements });
@@ -172,7 +171,8 @@ export const adminLoginHandler =
     );
     if (id === apiData.id && password === apiData.password) {
       const secretKey = process.env.SECRET_KEY;
-      const token = jwt.sign({ id }, secretKey as string);
+      const exp = Math.floor(Date.now() / 1000) + 60 * 60;
+      const token = jwt.sign({ id, exp }, secretKey as string);
       return res.status(200).json({ token });
     }
     res.status(404).json("failed");
