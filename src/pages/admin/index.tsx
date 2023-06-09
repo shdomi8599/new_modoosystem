@@ -47,10 +47,16 @@ const AdminPage = () => {
   };
 
   const adminLogout = () => {
-    alert("로그아웃 되었습니다.");
-    localStorage.removeItem("token");
-    setIsAdminLogined(false);
-    router.push("/");
+    if (confirm("정말 로그아웃 하시겠습니까?")) {
+      alert("정상적으로 로그아웃 되었습니다.");
+      localStorage.removeItem("token");
+      setIsAdminLogined(false);
+      router.push("/");
+    }
+  };
+
+  const moveCreate = () => {
+    router.push(`/admin/${adminEndPoint}/create`);
   };
 
   return (
@@ -65,6 +71,7 @@ const AdminPage = () => {
               onChange={onChange}
             />
             <div className="btn-box">
+              <Button onClick={moveCreate}>글쓰기</Button>
               <Button onClick={adminLogout}>로그아웃</Button>
             </div>
           </Box>
@@ -95,5 +102,7 @@ const Box = styled.div`
     position: absolute;
     right: 0px;
     top: 0px;
+    display: flex;
+    gap: 16px;
   }
 `;
