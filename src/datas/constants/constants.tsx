@@ -27,9 +27,7 @@ export const HEADER_ITEMS: HeaderItem[] = [
   },
   {
     name: "주요설치현황",
-    content: [
-      { name: "설치현황", href: "/status/installStatuses" },
-    ],
+    content: [{ name: "설치현황", href: "/status/installStatuses" }],
   },
   {
     name: "고객서비스",
@@ -122,4 +120,10 @@ export const DEPARTMENTS = [
       { name: "연구개발팀", content: "ee" },
     ],
   },
+];
+
+export const SELECT_SEARCH_ITEMS = [
+  { value: "title", label: "제목" },
+  { value: "content", label: "내용" },
+  { value: "author", label: "작성자" },
 ];

@@ -1,7 +1,18 @@
-import { Pagination, Table, Button } from "antd";
+import { Pagination, Table, Button, Input, Select, Form } from "antd";
 import { TableColumn } from "@/types";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import useRouterLoading from "@/hooks/useRouterLoading";
+import { SELECT_SEARCH_ITEMS } from "@/datas/constants/constants";
+
+const layout = {
+  labelCol: {
+    span: 4,
+  },
+  wrapperCol: {
+    span: 14,
+  },
+};
 
 type Props<T> = {
   dataSource: T[];
@@ -26,6 +37,14 @@ const TableContent = <T extends object>({
   const moveCreate = () => {
     router.push(`${asPath}/create`);
   };
+
+  const { onRouterLoading, offRouterLoading } = useRouterLoading();
+
+  const [form] = Form.useForm();
+  const onFinish = (values: { requestId: string }) => {
+    // onRouterLoading();
+    console.log(values);
+  };
   return (
     <Box>
       {isBtn && (
@@ -40,13 +59,42 @@ const TableContent = <T extends object>({
         columns={columns}
         pagination={false}
       />
-      <Pagination
-        className="pagination"
-        current={page}
-        pageSize={size}
-        onChange={handlePageChange}
-        total={totalElements}
-      />
+      <div className="bottom">
+        <Form
+          form={form}
+          {...layout}
+          name="control-hooks"
+          className="search-box"
+          onFinish={onFinish}
+        >
+          <Form.Item name="category">
+            <Select className="select" options={SELECT_SEARCH_ITEMS} />
+          </Form.Item>
+          <Form.Item
+            name="search"
+            rules={[
+              {
+                required: true,
+                message: "검색어를 입력해주세요.",
+              },
+            ]}
+          >
+            <Input className="input" placeholder="검색어" />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              확인
+            </Button>
+          </Form.Item>
+        </Form>
+        <Pagination
+          className="pagination"
+          current={page}
+          pageSize={size}
+          onChange={handlePageChange}
+          total={totalElements}
+        />
+      </div>
     </Box>
   );
 };
@@ -56,6 +104,34 @@ const Box = styled.div`
   padding: 40px 0px;
   width: 90%;
   position: relative;
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: 640px) {
+      flex-direction: column;
+      gap: 16px;
+    }
+    .search-box {
+      display: flex;
+      gap: 8px;
+      @media (max-width: 480px) {
+        flex-direction: column;
+        align-items: center;
+        .ant-form-item {
+          margin-bottom: 4px;
+        }
+      }
+      .select {
+        min-width: 100px;
+      }
+      .input {
+        min-width: 184px;
+      }
+      .ant-form-item-explain-error {
+        min-width: 184px;
+      }
+    }
+  }
 
   .btn-box {
     position: absolute;
