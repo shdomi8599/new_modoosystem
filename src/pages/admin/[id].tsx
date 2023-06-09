@@ -4,6 +4,7 @@ import ViewPage from "@/components/page/ViewPage";
 import { generateViewProps } from "@/util/ssr";
 import { adminEndPointState } from "@/recoil/recoil";
 import { useRecoilState } from "recoil";
+import useCheckAdmin from "@/hooks/useCheckAdmin";
 
 /**
  * react-query dehydratedState를 사용하다보니 최초 데이터 없이
@@ -13,6 +14,7 @@ import { useRecoilState } from "recoil";
  */
 
 const AdminViewPage = () => {
+  useCheckAdmin();
   const [adminEndPoint] = useRecoilState(adminEndPointState);
   return ViewPage<Board | Announcement | Reference>({
     endPoint: adminEndPoint,

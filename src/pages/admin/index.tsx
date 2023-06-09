@@ -10,8 +10,10 @@ import { Tabs } from "antd";
 import { TAB_ITEMS } from "@/datas/constants/constants";
 import { useRecoilState } from "recoil";
 import { adminEndPointState, isAdminLoginedState } from "@/recoil/recoil";
+import useCheckAdmin from "@/hooks/useCheckAdmin";
 
 const AdminPage = () => {
+  useCheckAdmin();
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
   const { id, password, idHandler, passwordHandler } = useCustomForm();
   const [isAdminLogined, setIsAdminLogined] =

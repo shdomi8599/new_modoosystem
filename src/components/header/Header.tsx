@@ -19,7 +19,7 @@ import NavItem from "./NavItem";
 import ModalNavItem from "./ModalNavItem";
 import { Spin } from "antd";
 import useRouterLoading from "@/hooks/useRouterLoading";
-import { api, getAdminCheck } from "@/util/api";
+import { getAdminCheck } from "@/util/api";
 
 const Header = () => {
   const router = useRouter();
