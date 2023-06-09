@@ -20,7 +20,7 @@ const AdminPage = () => {
     const data = { id, password };
     onRouterLoading();
     getCheckMaster(data)
-      .then(() => {
+      .then((res: { token: string }) => {
         offRouterLoading();
         setIsMaster(true);
       })
