@@ -13,7 +13,7 @@ const TableTitleItem = <T extends { id: number }>({ text, data }: Props<T>) => {
   const router = useRouter();
   const { asPath } = router;
   const { id } = data;
-  const { answers } = data as T extends Board ? T : never;
+  const { answers, secret } = data as T extends Board ? T : never;
   const [, setRouterLoading] = useRecoilState(routerLoadingState);
   const moveView = () => {
     setRouterLoading(true);
@@ -23,6 +23,7 @@ const TableTitleItem = <T extends { id: number }>({ text, data }: Props<T>) => {
     <Box onClick={moveView}>
       <span>{text}</span>
       {answers && <span className="tag">답변완료</span>}
+      {secret && <span className="tag red">비밀글</span>}
     </Box>
   );
 };
@@ -39,5 +40,8 @@ const Box = styled.span`
     padding: 2px;
     color: #25bb25;
     border-radius: 5px;
+  }
+  .red {
+    color: red;
   }
 `;
