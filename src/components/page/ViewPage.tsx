@@ -6,10 +6,11 @@ import { Button, Collapse, Input, Spin } from "antd";
 import styled from "styled-components";
 import HeadTitle from "../common/HeadTitle";
 import { AiFillFileText } from "react-icons/ai";
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import useRouterLoading from "@/hooks/useRouterLoading";
 import AnswerBox from "../answer/AnswerBox";
 import WarningForm from "../warning/WarningForm";
+import useCustomForm from "@/hooks/useCustomForm";
 
 const { Panel } = Collapse;
 
@@ -31,11 +32,8 @@ const ViewPage = <T,>(endPoint: string) => {
   const { answers, secret } = data as T extends Board ? T : never;
 
   const [isSecret, setIsSecret] = useState(secret);
-  const [password, setPassword] = useState("");
-  const passwordHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
 
+  const { passwordHandler, password } = useCustomForm();
   const checkSecretEvent = () => {
     onRouterLoading();
     getCheckSecretBoard(Number(id), password)

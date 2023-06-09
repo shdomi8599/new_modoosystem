@@ -1,21 +1,15 @@
 import HeadTitle from "@/components/common/HeadTitle";
 import WarningForm from "@/components/warning/WarningForm";
+import useCustomForm from "@/hooks/useCustomForm";
 import useRouterLoading from "@/hooks/useRouterLoading";
 import { getCheckMaster } from "@/util/api";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const AdminPage = () => {
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
   const [isMaster, setIsMaster] = useState(false);
-  const [id, setId] = useState("");
-  const idHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setId(e.target.value);
-  };
-  const [password, setPassword] = useState("");
-  const passwordHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
+  const { id, password, idHandler, passwordHandler } = useCustomForm();
   const checkSecretEvent = () => {
     const data = { id, password };
     onRouterLoading();
