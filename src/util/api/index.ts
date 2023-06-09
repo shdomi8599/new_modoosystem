@@ -62,9 +62,21 @@ export const postCheckSecretBoard = async (
     .then((res) => res.data);
 };
 
-export const getCheckMaster = async (data: {
+export const postAdminLogin = async (data: {
   id: string;
   password: string;
 }) => {
-  return await api.post(`api/auth/admin`, data).then((res) => res.data);
+  return await api.post(`api/auth/admin/login`, data).then((res) => res.data);
+};
+
+export const getAdminCheck = async () => {
+  const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  return await api
+    .get("api/auth/admin/check", {
+      headers,
+    })
+    .then((res) => res.data);
 };

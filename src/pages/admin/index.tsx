@@ -4,25 +4,26 @@ import WarningForm from "@/components/warning/WarningForm";
 import useCustomForm from "@/hooks/useCustomForm";
 import useRouterLoading from "@/hooks/useRouterLoading";
 import { Announcement, Board, Reference } from "@/types/pageData";
-import { getCheckMaster } from "@/util/api";
-import { useState } from "react";
+import { postAdminLogin } from "@/util/api";
 import styled from "styled-components";
 import { Tabs } from "antd";
 import { TAB_ITEMS } from "@/datas/constants/constants";
 import { useRecoilState } from "recoil";
-import { adminEndPointState } from "@/recoil/recoil";
+import { adminEndPointState, isAdminLoginedState } from "@/recoil/recoil";
 
 const AdminPage = () => {
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
   const { id, password, idHandler, passwordHandler } = useCustomForm();
-  const [isMaster, setIsMaster] = useState(false);
+  const [isAdminLogined, setIsAdminLogined] =
+    useRecoilState(isAdminLoginedState);
   const checkSecretEvent = () => {
     const data = { id, password };
     onRouterLoading();
-    getCheckMaster(data)
+    postAdminLogin(data)
       .then((res: { token: string }) => {
         offRouterLoading();
-        setIsMaster(true);
+        localStorage.setItem("token", res.token);
+        setIsAdminLogined(true);
       })
       .catch(() => {
         offRouterLoading();
@@ -46,7 +47,7 @@ const AdminPage = () => {
   return (
     <>
       <HeadTitle name="모두시스템 - 관리자" />
-      {isMaster ? (
+      {isAdminLogined ? (
         <>
           <Box>
             <Tabs

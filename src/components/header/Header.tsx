@@ -2,7 +2,11 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { currentPageNameState, headerNavState } from "@/recoil/recoil";
+import {
+  currentPageNameState,
+  headerNavState,
+  isAdminLoginedState,
+} from "@/recoil/recoil";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
 import whiteLogo from "../../../public/logo/white_logo.png";
@@ -15,6 +19,7 @@ import NavItem from "./NavItem";
 import ModalNavItem from "./ModalNavItem";
 import { Spin } from "antd";
 import useRouterLoading from "@/hooks/useRouterLoading";
+import { api, getAdminCheck } from "@/util/api";
 
 const Header = () => {
   const router = useRouter();
@@ -34,9 +39,21 @@ const Header = () => {
     setHeaderNav(!headerNav);
   };
 
+  const [, setIsAdminLogined] = useRecoilState(isAdminLoginedState);
+
   useEffect(() => {
     setHeaderNav(false);
-  }, [router, setHeaderNav]);
+    const token = localStorage.getItem("token");
+    if (token) {
+      getAdminCheck()
+        .then(() => {
+          setIsAdminLogined(true);
+        })
+        .catch(() => {
+          localStorage.removeItem("token");
+        });
+    }
+  }, [router]);
 
   const { routerLoading } = useRouterLoading();
   return (

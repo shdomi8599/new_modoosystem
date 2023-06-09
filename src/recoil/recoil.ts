@@ -25,3 +25,8 @@ export const adminEndPointState = atom({
   key: "adminEndPointState",
   default: "references",
 });
+
+export const isAdminLoginedState = atom({
+  key: "isAdminLoginedState",
+  default: false,
+});

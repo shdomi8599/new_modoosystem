@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import { CheckForm } from "@/types";
 import { formatDate } from "@/util/date";
@@ -159,7 +160,7 @@ export const boardsDeleteHandler =
       .catch(() => res.status(404).json("failed"));
   };
 
-export const masterCheckHandler =
+export const adminLoginHandler =
   () => async (req: NextApiRequest, res: NextApiResponse) => {
     const { id, password } = req.body;
     const apiData = await getDbDataByDocName<{ id: string; password: string }>(
@@ -167,7 +168,27 @@ export const masterCheckHandler =
       "admin"
     );
     if (id === apiData.id && password === apiData.password) {
-      return res.status(200).json("success");
+      const secretKey = process.env.SECRET_KEY;
+      const token = jwt.sign({ id }, secretKey as string);
+      return res.status(200).json({ token });
+    }
+    res.status(404).json("failed");
+  };
+
+export const adminCheckHandler =
+  () => async (req: NextApiRequest, res: NextApiResponse) => {
+    const token = req.headers.authorization?.replace("Bearer ", "");
+    if (token) {
+      try {
+        const secretKey = process.env.SECRET_KEY;
+        const decoded = jwt.verify(token, secretKey as string);
+        if (decoded) {
+          return res.status(200).json("success");
+        }
+      } catch (error) {
+        res.status(401).json("failed"); // 토큰이 유효하지 않은 경우
+        return;
+      }
     }
     res.status(404).json("failed");
   };
