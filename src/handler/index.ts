@@ -47,14 +47,14 @@ export const paginationHandler =
             }
           });
     const data = searchData
-      .slice(startIndex, endIndex)
       .map((data, idx) => {
         return {
           ...data,
           key: idx,
         };
       })
-      .sort((x, y) => y.id - x.id);
+      .sort((x, y) => y.id - x.id)
+      .slice(startIndex, endIndex);
     const totalElements = searchData.length;
     res.status(200).json({ data, totalElements });
   };
@@ -70,14 +70,14 @@ export const infiniteHandler =
     const startIndex = (Number(page) - 1) * Number(size);
     const endIndex = startIndex + Number(size);
     const data = apiData
-      .slice(startIndex, endIndex)
       .map((data, idx) => {
         return {
           ...data,
           key: idx,
         };
       })
-      .sort((x, y) => y.id - x.id);
+      .sort((x, y) => y.id - x.id)
+      .slice(startIndex, endIndex);
     const totalElements = apiData.length;
     res.status(200).json({ data, totalElements });
   };
