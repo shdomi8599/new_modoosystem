@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuidv4 } from "uuid";
 import { CheckForm } from "@/types";
 import { formatDate } from "@/util/date";
-import jwt from "jsonwebtoken";
 import {
   addDbData,
   deleteDbData,
@@ -168,9 +167,7 @@ export const masterCheckHandler =
       "admin"
     );
     if (id === apiData.id && password === apiData.password) {
-      const secretKey = process.env.SECRET_KEY;
-      const token = jwt.sign({ id }, secretKey as string);
-      return res.status(200).json({ token });
+      return res.status(200).json("success");
     }
     res.status(404).json("failed");
   };
