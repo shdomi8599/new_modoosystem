@@ -1,6 +1,7 @@
 import TableTitleItem from "@/components/table/TableTitleItem";
 import { HeaderItem } from "@/types";
 import { Announcement } from "@/types/pageData";
+import { TabsProps } from "antd";
 
 export const HEADER_ITEMS: HeaderItem[] = [
   {
@@ -126,4 +127,23 @@ export const SELECT_SEARCH_ITEMS = [
   { value: "title", label: "제목" },
   { value: "content", label: "내용" },
   { value: "author", label: "작성자" },
+];
+
+export const TAB_ITEMS: TabsProps["items"] = [
+  {
+    key: "references",
+    label: `자료실`,
+  },
+  {
+    key: "announcements",
+    label: `공지사항`,
+  },
+  {
+    key: "boards",
+    label: `게시판`,
+  },
+  {
+    key: "requestForm",
+    label: `견적의뢰`,
+  },
 ];

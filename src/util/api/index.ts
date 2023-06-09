@@ -31,7 +31,7 @@ export const getData = async <T>(endPoint: string, id: string): Promise<T> => {
 };
 
 export const postRequest = async (data: RequestForm): Promise<string> => {
-  return await api.post(`api/request`, data).then((res) => res.data);
+  return await api.post(`api/request/create`, data).then((res) => res.data);
 };
 
 export const postCheckRequest = async (data: {

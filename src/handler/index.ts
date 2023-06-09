@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuidv4 } from "uuid";
-import { CheckForm } from "@/types";
+import { CheckForm, RequestForm } from "@/types";
 import { formatDate } from "@/util/date";
 import {
   addDbData,
@@ -22,7 +22,9 @@ export interface paginationHandlerResponse<T> {
 }
 
 export const paginationHandler =
-  <T extends Board | Announcement | Reference>(endPoint: string) =>
+  <T extends Board | Announcement | Reference | RequestForm>(
+    endPoint: string
+  ) =>
   async (
     req: NextApiRequest,
     res: NextApiResponse<paginationHandlerResponse<T>>

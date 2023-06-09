@@ -7,6 +7,8 @@ import { Announcement, Board, Reference } from "@/types/pageData";
 import { getCheckMaster } from "@/util/api";
 import { useState } from "react";
 import styled from "styled-components";
+import { Tabs } from "antd";
+import { TAB_ITEMS } from "@/datas/constants/constants";
 
 const AdminPage = () => {
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
@@ -30,13 +32,23 @@ const AdminPage = () => {
       checkSecretEvent();
     }
   };
+
+  const [endPoint, setEndPoint] = useState("boards");
+
+  const onChange = (key: string) => {
+    setEndPoint(key);
+  };
+
   return (
     <>
       <HeadTitle name="모두시스템 - 관리자" />
       {isMaster ? (
         <>
+          <Box>
+            <Tabs defaultActiveKey="1" items={TAB_ITEMS} onChange={onChange} />
+          </Box>
           <PaginationPage<Board | Announcement | Reference>
-            endPoint={"boards"}
+            endPoint={endPoint}
           />
         </>
       ) : (
@@ -54,5 +66,5 @@ const AdminPage = () => {
 export default AdminPage;
 
 const Box = styled.div`
-  width: 100%;
+  width: 90%;
 `;
