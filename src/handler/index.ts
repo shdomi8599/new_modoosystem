@@ -98,7 +98,7 @@ export const singleViewHandler =
 
 export const checkSecretHandler =
   () => async (req: NextApiRequest, res: NextApiResponse) => {
-    const { id, password } = req.query;
+    const { id, password } = req.body;
     const endPoint = "boards";
     const apiData = await getDbAllDataAndId<Board>(endPoint);
     const findData = apiData.find(

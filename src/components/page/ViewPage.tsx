@@ -1,5 +1,5 @@
 import { Announcement, Board, Reference } from "@/types/pageData";
-import { deleteBoard, getCheckSecretBoard, getData } from "@/util/api";
+import { deleteBoard, getData, postCheckSecretBoard } from "@/util/api";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { Button, Collapse, Input, Spin } from "antd";
@@ -35,8 +35,12 @@ const ViewPage = <T,>(endPoint: string) => {
 
   const { passwordHandler, password } = useCustomForm();
   const checkSecretEvent = () => {
+    const data = {
+      password,
+      id: String(id),
+    };
     onRouterLoading();
-    getCheckSecretBoard(Number(id), password)
+    postCheckSecretBoard(String(id), data)
       .then(() => {
         offRouterLoading();
         setIsSecret(false);

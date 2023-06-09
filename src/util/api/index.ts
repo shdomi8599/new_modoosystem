@@ -50,10 +50,16 @@ export const deleteBoard = async (id: number, password: string) => {
     .then((res) => res.data);
 };
 
-export const getCheckSecretBoard = async (id: number, password: string) => {
-  return await api(`api/boards/${id}/secret?password=${password}`).then(
-    (res) => res.data
-  );
+export const postCheckSecretBoard = async (
+  id: string,
+  data: {
+    id: string;
+    password: string;
+  }
+) => {
+  return await api
+    .post(`api/boards/${id}/secret`, data)
+    .then((res) => res.data);
 };
 
 export const getCheckMaster = async (data: {
