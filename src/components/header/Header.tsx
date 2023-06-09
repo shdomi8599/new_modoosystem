@@ -2,11 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import {
-  currentPageNameState,
-  headerNavState,
-  routerLoadingState,
-} from "@/recoil/recoil";
+import { currentPageNameState, headerNavState } from "@/recoil/recoil";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
 import whiteLogo from "../../../public/logo/white_logo.png";
@@ -18,6 +14,7 @@ import HeadTitle from "../common/HeadTitle";
 import NavItem from "./NavItem";
 import ModalNavItem from "./ModalNavItem";
 import { Spin } from "antd";
+import useRouterLoading from "@/hooks/useRouterLoading";
 
 const Header = () => {
   const router = useRouter();
@@ -41,7 +38,7 @@ const Header = () => {
     setHeaderNav(false);
   }, [router, setHeaderNav]);
 
-  const [routerLoading] = useRecoilState(routerLoadingState);
+  const { routerLoading } = useRouterLoading();
   return (
     <>
       <HeadTitle name={`모두시스템 - ${currentPageName}`} />
