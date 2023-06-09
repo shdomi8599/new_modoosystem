@@ -6,8 +6,6 @@ import { postArticle } from "@/util/api";
 import { useRouter } from "next/router";
 import useRouterLoading from "@/hooks/useRouterLoading";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { routerLoadingState } from "@/recoil/recoil";
 
 const layout = {
   labelCol: {
@@ -26,14 +24,7 @@ const CreatePage = ({ endPoint }: { endPoint: string }) => {
   const isBoardPage = asPath.includes("boards");
   const isAdminPage = asPath.includes("admin");
   const isReferencePage = asPath.includes("references");
-  const [, setRouterLoading] = useRecoilState(routerLoadingState);
-  const onRouterLoading = () => {
-    setRouterLoading(true);
-  };
-
-  const offRouterLoading = () => {
-    setRouterLoading(false);
-  };
+  const { onRouterLoading, offRouterLoading } = useRouterLoading();
   //폼 데이터 관리
   const [form] = Form.useForm();
   const onFinish = (values: FormItem) => {
