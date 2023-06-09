@@ -63,7 +63,7 @@ const ViewPage = <T,>(endPoint: string) => {
                       onChange={inputHandler}
                       placeholder="비밀번호 입력"
                     />
-                    <Button onClick={deleteEvent}>삭제하기</Button>
+                    <Button onClick={deleteEvent}>삭제</Button>
                   </Panel>
                 </Collapse>
               </div>

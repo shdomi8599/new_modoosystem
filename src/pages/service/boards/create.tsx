@@ -1,9 +1,11 @@
 import styled from "styled-components";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Checkbox } from "antd";
+import type { CheckboxChangeEvent } from "antd/es/checkbox";
 import { FormItem } from "@/types";
 import { postBoard } from "@/util/api";
 import { useRouter } from "next/router";
 import useRouterLoading from "@/hooks/useRouterLoading";
+import { useState } from "react";
 
 const layout = {
   labelCol: {
@@ -23,7 +25,8 @@ const CreatePage = () => {
   const [form] = Form.useForm();
   const onFinish = (values: FormItem) => {
     onRouterLoading();
-    postBoard(values)
+    const data = { ...values, secret };
+    postBoard(data)
       .then(() => {
         alert("게시글이 등록되었습니다.");
         router.back();
@@ -33,9 +36,18 @@ const CreatePage = () => {
         alert("잠시 후에 다시 시도해주세요.");
       });
   };
+
+  const [secret, setSecret] = useState(false);
+  const onChange = (e: CheckboxChangeEvent) => {
+    setSecret(e.target.checked);
+  };
+
   return (
     <Box>
       <Form form={form} {...layout} name="control-hooks" onFinish={onFinish}>
+        <Form.Item label="옵션">
+          <Checkbox onChange={onChange}>나만보기</Checkbox>
+        </Form.Item>
         <Form.Item
           name="title"
           label="제목"
