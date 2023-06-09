@@ -21,6 +21,10 @@ const { TextArea } = Input;
 const CreatePage = ({ endPoint }: { endPoint: string }) => {
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
   const router = useRouter();
+  const { asPath } = router;
+  const isBoardPage = asPath.includes("boards");
+  const isAdminPage = asPath.includes("admin");
+  const isReferencePage = asPath.includes("references");
   //폼 데이터 관리
   const [form] = Form.useForm();
   const onFinish = (values: FormItem) => {
@@ -29,25 +33,38 @@ const CreatePage = ({ endPoint }: { endPoint: string }) => {
     postArticle(endPoint, data)
       .then(() => {
         alert("게시글이 등록되었습니다.");
-        router.back();
+        router.push("/admin").then(() => router.reload());
       })
       .catch(() => {
         offRouterLoading();
         alert("잠시 후에 다시 시도해주세요.");
       });
   };
-  console.log(endPoint);
   const [secret, setSecret] = useState(false);
   const onChange = (e: CheckboxChangeEvent) => {
     setSecret(e.target.checked);
   };
 
+  const initialValues = isAdminPage
+    ? {
+        ["author"]: "관리자",
+      }
+    : {};
+
   return (
     <Box>
-      <Form form={form} {...layout} name="control-hooks" onFinish={onFinish}>
-        <Form.Item label="옵션">
-          <Checkbox onChange={onChange}>비밀글</Checkbox>
-        </Form.Item>
+      <Form
+        initialValues={initialValues}
+        form={form}
+        {...layout}
+        name="control-hooks"
+        onFinish={onFinish}
+      >
+        {isBoardPage && (
+          <Form.Item label="옵션">
+            <Checkbox onChange={onChange}>비밀글</Checkbox>
+          </Form.Item>
+        )}
         <Form.Item
           name="title"
           label="제목"
@@ -70,20 +87,27 @@ const CreatePage = ({ endPoint }: { endPoint: string }) => {
             },
           ]}
         >
-          <Input maxLength={15} />
+          <Input disabled={isAdminPage ? true : false} maxLength={15} />
         </Form.Item>
-        <Form.Item
-          name="password"
-          label="비밀번호"
-          rules={[
-            {
-              required: true,
-              message: "비밀번호를 입력해주세요.",
-            },
-          ]}
-        >
-          <Input type="password" maxLength={15} />
-        </Form.Item>
+        {isBoardPage && (
+          <Form.Item
+            name="password"
+            label="비밀번호"
+            rules={[
+              {
+                required: true,
+                message: "비밀번호를 입력해주세요.",
+              },
+            ]}
+          >
+            <Input type="password" maxLength={15} />
+          </Form.Item>
+        )}
+        {isReferencePage && (
+          <Form.Item name="link" label="링크">
+            <Input />
+          </Form.Item>
+        )}
         <Form.Item
           name="content"
           label="내용"

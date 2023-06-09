@@ -2,12 +2,16 @@ import { getPageData } from "@/util/api";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import useSearch from "./useSearch";
+import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { adminEndPointState } from "@/recoil/recoil";
 
 interface Props {
   endPoint: string;
 }
 
 const usePagination = <T,>({ endPoint }: Props) => {
+  const [adminEndPoint] = useRecoilState(adminEndPointState);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
   const { search } = useSearch();
@@ -23,6 +27,10 @@ const usePagination = <T,>({ endPoint }: Props) => {
       behavior: "smooth",
     });
   }, [page, size]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [adminEndPoint]);
 
   const handlePageChange = (newPage: number, newSize: number) => {
     setPage(newPage);

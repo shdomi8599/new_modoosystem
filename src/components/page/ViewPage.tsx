@@ -94,7 +94,7 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
       deleteArticle(endPoint, Number(id))
         .then(() => {
           alert("성공적으로 삭제되었습니다.");
-          router.back();
+          router.push("/admin").then(() => router.reload());
         })
         .catch(() => {
           offRouterLoading();
