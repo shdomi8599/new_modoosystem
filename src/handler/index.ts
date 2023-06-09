@@ -32,7 +32,7 @@ export const paginationHandler =
     const startIndex = (Number(page) - 1) * Number(size);
     const endIndex = startIndex + Number(size);
     const searchData =
-      category === "undefined"
+      category === "undefined" || !category
         ? apiData
         : apiData.filter((data) => {
             if (category === "title") {

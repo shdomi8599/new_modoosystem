@@ -1,15 +1,17 @@
 import HeadTitle from "@/components/common/HeadTitle";
+import PaginationPage from "@/components/page/PaginationPage";
 import WarningForm from "@/components/warning/WarningForm";
 import useCustomForm from "@/hooks/useCustomForm";
 import useRouterLoading from "@/hooks/useRouterLoading";
+import { Announcement, Board, Reference } from "@/types/pageData";
 import { getCheckMaster } from "@/util/api";
 import { useState } from "react";
 import styled from "styled-components";
 
 const AdminPage = () => {
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
-  const [isMaster, setIsMaster] = useState(false);
   const { id, password, idHandler, passwordHandler } = useCustomForm();
+  const [isMaster, setIsMaster] = useState(false);
   const checkSecretEvent = () => {
     const data = { id, password };
     onRouterLoading();
@@ -32,7 +34,11 @@ const AdminPage = () => {
     <>
       <HeadTitle name="모두시스템 - 관리자" />
       {isMaster ? (
-        <Box>관리자입니다.</Box>
+        <>
+          <PaginationPage<Board | Announcement | Reference>
+            endPoint={"boards"}
+          />
+        </>
       ) : (
         <WarningForm
           idHandler={idHandler}
@@ -47,4 +53,6 @@ const AdminPage = () => {
 };
 export default AdminPage;
 
-const Box = styled.div``;
+const Box = styled.div`
+  width: 100%;
+`;

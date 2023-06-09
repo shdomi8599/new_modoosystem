@@ -3,7 +3,11 @@ import TableContent from "@/components/table/TableContent";
 import TableSkeleton from "@/components/skeleton/TableSkeleton";
 import { COLUMNS_DATA } from "@/datas/constants/constants";
 
-const PaginationPage = <T extends object>(endPoint: string) => {
+const PaginationPage = <T extends object>({
+  endPoint,
+}: {
+  endPoint: string;
+}) => {
   const {
     page,
     size,

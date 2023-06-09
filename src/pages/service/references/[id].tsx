@@ -4,7 +4,7 @@ import ViewPage from "@/components/page/ViewPage";
 import { generateViewProps } from "@/util/ssr";
 const endPoint = "references";
 
-const ReferenceViewPage = () => ViewPage<Reference>(endPoint);
+const ReferenceViewPage = () => ViewPage<Reference>({ endPoint });
 
 export default ReferenceViewPage;
 

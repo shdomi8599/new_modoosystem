@@ -14,7 +14,7 @@ import useCustomForm from "@/hooks/useCustomForm";
 
 const { Panel } = Collapse;
 
-const ViewPage = <T,>(endPoint: string) => {
+const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
   const router = useRouter();
   const { id } = router.query;

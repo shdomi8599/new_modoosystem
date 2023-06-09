@@ -4,7 +4,7 @@ import ViewPage from "@/components/page/ViewPage";
 import { generateViewProps } from "@/util/ssr";
 const endPoint = "announcements";
 
-const AnnouncementViewPage = () => ViewPage<Announcement>(endPoint);
+const AnnouncementViewPage = () => ViewPage<Announcement>({ endPoint });
 
 export default AnnouncementViewPage;
 
