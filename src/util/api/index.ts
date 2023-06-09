@@ -46,6 +46,12 @@ export const postBoard = async (data: FormItem) => {
 
 export const deleteBoard = async (id: number, password: string) => {
   return await api
-    .delete(`api/boards/delete/${id}?password=${password}`)
+    .delete(`api/boards/${id}/delete?password=${password}`)
+    .then((res) => res.data);
+};
+
+export const postCheckSecretBoard = async (id: number, password: string) => {
+  return await api
+    .post(`api/boards/${id}/secret?password=${password}`)
     .then((res) => res.data);
 };

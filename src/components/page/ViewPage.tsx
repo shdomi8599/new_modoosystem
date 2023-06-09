@@ -1,5 +1,5 @@
 import { Announcement, Board, Reference } from "@/types/pageData";
-import { deleteBoard, getData } from "@/util/api";
+import { deleteBoard, getData, postCheckSecretBoard } from "@/util/api";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { Button, Collapse, Input, Spin, Result } from "antd";
@@ -35,6 +35,28 @@ const ViewPage = <T,>(endPoint: string) => {
     setPassword(e.target.value);
   };
 
+  const checkSecretEvent = () => {
+    onRouterLoading();
+    postCheckSecretBoard(Number(id), password)
+      .then(() => {
+        offRouterLoading();
+        setIsSecret(false);
+      })
+      .catch(() => {
+        offRouterLoading();
+        alert("비밀번호를 확인해주세요.");
+      });
+  };
+
+  const handleKeyPress = (e: { key: string }) => {
+    if (e.key === "Enter" && isSecret) {
+      return checkSecretEvent();
+    }
+    if (e.key === "Enter") {
+      deleteEvent();
+    }
+  };
+
   const deleteEvent = () => {
     onRouterLoading();
     deleteBoard(Number(id), password)
@@ -61,8 +83,13 @@ const ViewPage = <T,>(endPoint: string) => {
             title="비밀번호를 입력해주세요."
             extra={
               <div className="result-item">
-                <Input onChange={passwordHandler} placeholder="비밀번호 입력" />
-                <Button type="primary" key="console">
+                <Input
+                  type="password"
+                  onKeyDown={handleKeyPress}
+                  onChange={passwordHandler}
+                  placeholder="비밀번호 입력"
+                />
+                <Button onClick={checkSecretEvent} type="primary" key="console">
                   확인
                 </Button>
               </div>
@@ -75,6 +102,8 @@ const ViewPage = <T,>(endPoint: string) => {
                 <Collapse defaultActiveKey={[]}>
                   <Panel className="panel" header="삭제하기" key="1">
                     <Input
+                      type="password"
+                      onKeyDown={handleKeyPress}
                       onChange={passwordHandler}
                       placeholder="비밀번호 입력"
                     />
