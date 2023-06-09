@@ -2,12 +2,13 @@ import { Announcement, Board, Reference } from "@/types/pageData";
 import { deleteBoard, getData } from "@/util/api";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
-import { Button, Collapse, Input, Spin } from "antd";
+import { Button, Collapse, Input, Spin, Result } from "antd";
 import styled from "styled-components";
 import HeadTitle from "../common/HeadTitle";
 import { AiFillFileText } from "react-icons/ai";
-import { SetStateAction, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import useRouterLoading from "@/hooks/useRouterLoading";
+import AnswerBox from "../answer/AnswerBox";
 
 const { Panel } = Collapse;
 
@@ -26,16 +27,17 @@ const ViewPage = <T,>(endPoint: string) => {
     ? T
     : never;
   const { link } = data as T extends Reference ? T : never;
-  const { answers } = data as T extends Board ? T : never;
+  const { answers, secret } = data as T extends Board ? T : never;
 
-  const [input, setInput] = useState("");
-  const inputHandler = (e: { target: { value: SetStateAction<string> } }) => {
-    setInput(e.target.value);
+  const [isSecret, setIsSecret] = useState(secret);
+  const [password, setPassword] = useState("");
+  const passwordHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
   };
 
   const deleteEvent = () => {
     onRouterLoading();
-    deleteBoard(Number(id), input)
+    deleteBoard(Number(id), password)
       .then(() => {
         alert("성공적으로 삭제되었습니다.");
         router.back();
@@ -53,6 +55,19 @@ const ViewPage = <T,>(endPoint: string) => {
       <Box>
         {isLoading ? (
           <Spin />
+        ) : isSecret ? (
+          <Result
+            status="warning"
+            title="비밀번호를 입력해주세요."
+            extra={
+              <div className="result-item">
+                <Input onChange={passwordHandler} placeholder="비밀번호 입력" />
+                <Button type="primary" key="console">
+                  확인
+                </Button>
+              </div>
+            }
+          />
         ) : (
           <>
             {isBoard && (
@@ -60,7 +75,7 @@ const ViewPage = <T,>(endPoint: string) => {
                 <Collapse defaultActiveKey={[]}>
                   <Panel className="panel" header="삭제하기" key="1">
                     <Input
-                      onChange={inputHandler}
+                      onChange={passwordHandler}
                       placeholder="비밀번호 입력"
                     />
                     <Button onClick={deleteEvent}>삭제</Button>
@@ -91,32 +106,8 @@ const ViewPage = <T,>(endPoint: string) => {
                 </a>
               </div>
             )}
+            {isBoard && answers && <AnswerBox answers={answers} />}
           </>
-        )}
-        {isBoard && (
-          <div className="answer-box">
-            <div className="title">답변</div>
-            <div className="content">
-              {answers ? (
-                answers.map((answer, idx) => (
-                  <div key={idx} className="answer">
-                    <div className="top">
-                      <div>
-                        <span>작성일</span> : {answer.createAt}
-                      </div>
-                      <div>
-                        <span>작성자</span> :{" "}
-                        <span className="master">관리자</span>
-                      </div>
-                    </div>
-                    <div className="bottom">{answer.content}</div>
-                  </div>
-                ))
-              ) : (
-                <div>확인 후, 빠른 시일 안에 답변드리겠습니다. 감사합니다.</div>
-              )}
-            </div>
-          </div>
         )}
       </Box>
     </>
@@ -132,6 +123,24 @@ const Box = styled.div`
   margin-bottom: 32px;
   gap: 40px;
   position: relative;
+
+  .ant-result {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .result-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      input {
+        min-width: 180px;
+        width: 30%;
+      }
+    }
+  }
 
   .btn-box {
     position: absolute;
@@ -174,40 +183,6 @@ const Box = styled.div`
         align-items: center;
         svg {
           color: black;
-        }
-      }
-    }
-  }
-
-  .answer-box {
-    border-top: 1px solid #dddcdc;
-    padding: 20px 0px;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    .title {
-      font-weight: 700;
-      font-size: 18px;
-    }
-    .content {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      .answer {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        .top {
-          display: flex;
-          gap: 20px;
-          opacity: 0.5;
-          font-size: 14px;
-          span {
-            font-weight: 700;
-          }
-        }
-        .bottom {
-          line-height: 24px;
         }
       }
     }

@@ -95,6 +95,22 @@ export const singleViewHandler =
     }
   };
 
+export const checkSecretHandler =
+  () => async (req: NextApiRequest, res: NextApiResponse) => {
+    const { id, password } = req.query;
+    const endPoint = "boards";
+    const apiData = await getDbAllDataAndId<Board>(endPoint);
+    const findData = apiData.find(
+      (data) =>
+        data.docData.id === Number(id) && data.docData.password === password
+    );
+    if (findData) {
+      res.status(200).json("success");
+    } else {
+      res.status(404).json("failed");
+    }
+  };
+
 export const requestHandler =
   () => async (req: NextApiRequest, res: NextApiResponse) => {
     const data = req.body;

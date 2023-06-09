@@ -46,7 +46,7 @@ const CreatePage = () => {
     <Box>
       <Form form={form} {...layout} name="control-hooks" onFinish={onFinish}>
         <Form.Item label="옵션">
-          <Checkbox onChange={onChange}>나만보기</Checkbox>
+          <Checkbox onChange={onChange}>비밀글</Checkbox>
         </Form.Item>
         <Form.Item
           name="title"

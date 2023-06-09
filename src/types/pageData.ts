@@ -25,7 +25,7 @@ export interface Board extends Announcement {
   secret?: boolean;
 }
 
-type Answer = {
+export interface Answer {
   content: string;
   createAt: string;
-};
+}
