@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Button, DatePicker, Form, Input, Space } from "antd";
+import { Button, DatePicker, Form, Input, Result, Space } from "antd";
 import { Dayjs } from "dayjs";
 import "dayjs/locale/ko";
 import DaumPostcodeEmbed from "react-daum-postcode";
@@ -151,16 +151,23 @@ const RequestPage = () => {
           </Form.Item>
         </Form>
       ) : (
-        <div className="success-message">
-          <div>신청해주셔서 감사합니다.</div>
-          <div>고객님의 신청번호는 {formId}입니다.</div>
-          <div>신청번호를 통해 조회하실 수 있습니다.</div>
-          <Button>
-            <Link onClick={onRouterLoading} href={"/request/check"}>
-              신청확인
-            </Link>
-          </Button>
-        </div>
+        <Result
+          status="success"
+          title="신청해주셔서 감사합니다."
+          subTitle={
+            <div>
+              고객님의 신청번호는{" "}
+              <span className="result-form-id">{formId}</span>입니다.
+            </div>
+          }
+          extra={[
+            <Button type="primary" key="console">
+              <Link onClick={onRouterLoading} href={"/request/check"}>
+                신청확인
+              </Link>
+            </Button>,
+          ]}
+        />
       )}
     </Box>
   );
@@ -174,12 +181,8 @@ const Box = styled.div`
   align-items: center;
   position: relative;
   padding: 20px 0px;
-  .success-message {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    justify-content: center;
-    align-items: center;
+  .result-form-id {
+    font-weight: bold;
   }
   .ant-row {
     display: flex;
