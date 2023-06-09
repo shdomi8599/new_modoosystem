@@ -2,10 +2,8 @@ import { Pagination, Table, Button, Input, Select, Form } from "antd";
 import { TableColumn } from "@/types";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import useRouterLoading from "@/hooks/useRouterLoading";
 import { SELECT_SEARCH_ITEMS } from "@/datas/constants/constants";
-import { useRecoilState } from "recoil";
-import { searchState } from "@/recoil/recoil";
+import useSearch from "@/hooks/useSearch";
 
 const layout = {
   labelCol: {
@@ -33,7 +31,7 @@ const TableContent = <T extends object>({
   columns,
   totalElements,
 }: Props<T>) => {
-  const [, setSearch] = useRecoilState(searchState);
+  const { setSearch } = useSearch();
   const router = useRouter();
   const { asPath } = router;
   const isBtn = asPath === "/service/boards";

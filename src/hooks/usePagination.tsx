@@ -1,8 +1,7 @@
-import { searchState } from "@/recoil/recoil";
 import { getPageData } from "@/util/api";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
-import { useRecoilState } from "recoil";
+import useSearch from "./useSearch";
 
 interface Props {
   endPoint: string;
@@ -11,7 +10,7 @@ interface Props {
 const usePagination = <T,>({ endPoint }: Props) => {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
-  const [search] = useRecoilState(searchState);
+  const { search } = useSearch();
   const { searchVal, category } = search;
   const queryKey = searchVal
     ? [endPoint, page, category, searchVal]
