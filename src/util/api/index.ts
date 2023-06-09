@@ -66,7 +66,7 @@ export const postAdminLogin = async (data: {
   id: string;
   password: string;
 }) => {
-  return await api.post(`api/auth/admin/login`, data).then((res) => res.data);
+  return await api.post(`api/admin/login`, data).then((res) => res.data);
 };
 
 export const getAdminCheck = async () => {
@@ -74,9 +74,13 @@ export const getAdminCheck = async () => {
   const headers = {
     Authorization: `Bearer ${token}`,
   };
+  return await api("api/admin/check", {
+    headers,
+  }).then((res) => res.data);
+};
+
+export const deleteArticle = async (endPoint: string, id: number) => {
   return await api
-    .get("api/auth/admin/check", {
-      headers,
-    })
+    .delete(`api/admin/delete/${id}?endPoint=${endPoint}`)
     .then((res) => res.data);
 };

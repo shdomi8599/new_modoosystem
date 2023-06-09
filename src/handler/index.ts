@@ -192,3 +192,16 @@ export const adminCheckHandler =
     }
     res.status(404).json("failed");
   };
+
+export const adminArticleDeleteHandler =
+  () => async (req: NextApiRequest, res: NextApiResponse) => {
+    const { id, endPoint } = req.query;
+    const apiData = await getDbAllDataAndId<Board | Announcement | Reference>(
+      endPoint as string
+    );
+    const findData = apiData.find((data) => data.docData.id === Number(id));
+    const targetId = findData?.docId;
+    deleteDbData(endPoint as string, targetId as string)
+      .then(() => res.status(200).json("success"))
+      .catch(() => res.status(404).json("failed"));
+  };

@@ -60,7 +60,7 @@ const AdminPage = () => {
         <>
           <Box>
             <Tabs
-              defaultActiveKey="references"
+              defaultActiveKey={adminEndPoint}
               items={TAB_ITEMS}
               onChange={onChange}
             />

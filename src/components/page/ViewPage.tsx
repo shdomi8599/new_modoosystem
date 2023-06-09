@@ -1,16 +1,23 @@
 import { Announcement, Board, Reference } from "@/types/pageData";
-import { deleteBoard, getData, postCheckSecretBoard } from "@/util/api";
+import {
+  deleteArticle,
+  deleteBoard,
+  getData,
+  postCheckSecretBoard,
+} from "@/util/api";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { Button, Collapse, Input, Spin } from "antd";
 import styled from "styled-components";
 import HeadTitle from "../common/HeadTitle";
 import { AiFillFileText } from "react-icons/ai";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useRouterLoading from "@/hooks/useRouterLoading";
 import AnswerBox from "../answer/AnswerBox";
 import WarningForm from "../warning/WarningForm";
 import useCustomForm from "@/hooks/useCustomForm";
+import { useRecoilState } from "recoil";
+import { isAdminLoginedState } from "@/recoil/recoil";
 
 const { Panel } = Collapse;
 
@@ -60,16 +67,40 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   };
 
   const deleteEvent = () => {
-    onRouterLoading();
-    deleteBoard(Number(id), password)
-      .then(() => {
-        alert("성공적으로 삭제되었습니다.");
-        router.back();
-      })
-      .catch(() => {
-        offRouterLoading();
-        alert("비밀번호를 확인해주세요.");
-      });
+    if (confirm("정말 삭제하시겠습니까?")) {
+      onRouterLoading();
+      deleteBoard(Number(id), password)
+        .then(() => {
+          alert("성공적으로 삭제되었습니다.");
+          router.back();
+        })
+        .catch(() => {
+          offRouterLoading();
+          alert("비밀번호를 확인해주세요.");
+        });
+    }
+  };
+
+  const [isAdminLogined] = useRecoilState(isAdminLoginedState);
+  useEffect(() => {
+    if (isAdminLogined) {
+      setIsSecret(false);
+    }
+  }, []);
+
+  const adminDeleteEvent = () => {
+    if (confirm("정말 삭제하시겠습니까?")) {
+      onRouterLoading();
+      deleteArticle(endPoint, Number(id))
+        .then(() => {
+          alert("성공적으로 삭제되었습니다.");
+          router.back();
+        })
+        .catch(() => {
+          offRouterLoading();
+          alert("비밀번호를 확인해주세요.");
+        });
+    }
   };
 
   if (isError) return <div>잠시 후에 다시 시도해주세요.</div>;
@@ -87,19 +118,23 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
           />
         ) : (
           <>
-            {isBoard && (
+            {(isBoard || isAdminLogined) && (
               <div className="btn-box">
-                <Collapse defaultActiveKey={[]}>
-                  <Panel className="panel" header="삭제하기" key="1">
-                    <Input
-                      type="password"
-                      onKeyDown={handleKeyPress}
-                      onChange={passwordHandler}
-                      placeholder="비밀번호 입력"
-                    />
-                    <Button onClick={deleteEvent}>삭제</Button>
-                  </Panel>
-                </Collapse>
+                {isAdminLogined ? (
+                  <Button onClick={adminDeleteEvent}>삭제하기</Button>
+                ) : (
+                  <Collapse defaultActiveKey={[]}>
+                    <Panel className="panel" header="삭제하기" key="1">
+                      <Input
+                        type="password"
+                        onKeyDown={handleKeyPress}
+                        onChange={passwordHandler}
+                        placeholder="비밀번호 입력"
+                      />
+                      <Button onClick={deleteEvent}>삭제</Button>
+                    </Panel>
+                  </Collapse>
+                )}
               </div>
             )}
             <div className="title">{title}</div>
@@ -142,6 +177,15 @@ const Box = styled.div`
   margin-bottom: 32px;
   gap: 40px;
   position: relative;
+  .panel {
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    .ant-collapse-header {
+      width: 100%;
+    }
+  }
 
   .btn-box {
     position: absolute;

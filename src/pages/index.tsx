@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <>
       <HeadTitle name="모두시스템" />
-      <Box>dd</Box>
+      <Box>홈화면 구상 중</Box>
     </>
   );
 }
