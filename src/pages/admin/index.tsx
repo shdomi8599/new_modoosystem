@@ -9,6 +9,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Tabs } from "antd";
 import { TAB_ITEMS } from "@/datas/constants/constants";
+import { useRecoilState } from "recoil";
+import { adminEndPointState } from "@/recoil/recoil";
 
 const AdminPage = () => {
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
@@ -33,10 +35,12 @@ const AdminPage = () => {
     }
   };
 
-  const [endPoint, setEndPoint] = useState("boards");
-
+  const [adminEndPoint, setAdminEndPoint] = useRecoilState(adminEndPointState);
   const onChange = (key: string) => {
-    setEndPoint(key);
+    if (key === "requestForm") {
+      return;
+    }
+    setAdminEndPoint(key);
   };
 
   return (
@@ -45,10 +49,14 @@ const AdminPage = () => {
       {isMaster ? (
         <>
           <Box>
-            <Tabs defaultActiveKey="1" items={TAB_ITEMS} onChange={onChange} />
+            <Tabs
+              defaultActiveKey="references"
+              items={TAB_ITEMS}
+              onChange={onChange}
+            />
           </Box>
           <PaginationPage<Board | Announcement | Reference>
-            endPoint={endPoint}
+            endPoint={adminEndPoint}
           />
         </>
       ) : (
@@ -67,4 +75,5 @@ export default AdminPage;
 
 const Box = styled.div`
   width: 90%;
+  margin-top: 20px;
 `;

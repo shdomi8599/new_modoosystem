@@ -20,3 +20,8 @@ export const searchState = atom({
   key: "searchState",
   default: { category: "", searchVal: "" },
 });
+
+export const adminEndPointState = atom({
+  key: "adminEndPointState",
+  default: "references",
+});

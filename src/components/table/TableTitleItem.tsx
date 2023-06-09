@@ -1,4 +1,5 @@
-import { routerLoadingState } from "@/recoil/recoil";
+import useRouterLoading from "@/hooks/useRouterLoading";
+import { adminEndPointState } from "@/recoil/recoil";
 import { Board } from "@/types/pageData";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
@@ -14,9 +15,13 @@ const TableTitleItem = <T extends { id: number }>({ text, data }: Props<T>) => {
   const { asPath } = router;
   const { id } = data;
   const { answers, secret } = data as T extends Board ? T : never;
-  const [, setRouterLoading] = useRecoilState(routerLoadingState);
+  const { onRouterLoading } = useRouterLoading();
+  const [adminEndPoint, setAdminEndPoint] = useRecoilState(adminEndPointState);
   const moveView = () => {
-    setRouterLoading(true);
+    onRouterLoading();
+    if (asPath.includes("admin")) {
+      return router.push(`${asPath}/${id}?endPoint=${adminEndPoint}`);
+    }
     router.push(`${asPath}/${id}`);
   };
   return (

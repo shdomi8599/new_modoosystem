@@ -31,9 +31,8 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   const { link } = data as T extends Reference ? T : never;
   const { answers, secret } = data as T extends Board ? T : never;
 
-  const [isSecret, setIsSecret] = useState(secret);
-
   const { passwordHandler, password } = useCustomForm();
+  const [isSecret, setIsSecret] = useState(secret);
   const checkSecretEvent = () => {
     const data = {
       password,
