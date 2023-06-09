@@ -6,14 +6,14 @@ import useRouterLoading from "@/hooks/useRouterLoading";
 import { Announcement, Board, Reference } from "@/types/pageData";
 import { postAdminLogin } from "@/util/api";
 import styled from "styled-components";
-import { Tabs } from "antd";
+import { Button, Tabs } from "antd";
 import { TAB_ITEMS } from "@/datas/constants/constants";
 import { useRecoilState } from "recoil";
 import { adminEndPointState, isAdminLoginedState } from "@/recoil/recoil";
-import useCheckAdmin from "@/hooks/useCheckAdmin";
+import { useRouter } from "next/router";
 
 const AdminPage = () => {
-  useCheckAdmin();
+  const router = useRouter();
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
   const { id, password, idHandler, passwordHandler } = useCustomForm();
   const [isAdminLogined, setIsAdminLogined] =
@@ -46,6 +46,13 @@ const AdminPage = () => {
     setAdminEndPoint(key);
   };
 
+  const adminLogout = () => {
+    alert("로그아웃 되었습니다.");
+    localStorage.removeItem("token");
+    setIsAdminLogined(false);
+    router.push("/");
+  };
+
   return (
     <>
       <HeadTitle name="모두시스템 - 관리자" />
@@ -57,6 +64,9 @@ const AdminPage = () => {
               items={TAB_ITEMS}
               onChange={onChange}
             />
+            <div className="btn-box">
+              <Button onClick={adminLogout}>로그아웃</Button>
+            </div>
           </Box>
           <PaginationPage<Board | Announcement | Reference>
             endPoint={adminEndPoint}
@@ -77,6 +87,13 @@ const AdminPage = () => {
 export default AdminPage;
 
 const Box = styled.div`
+  position: relative;
   width: 90%;
   margin-top: 20px;
+
+  .btn-box {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
 `;
