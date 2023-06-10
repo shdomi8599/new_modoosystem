@@ -1,3 +1,4 @@
+import TableInstallButtonItem from "@/components/table/TableInstallButtonItem";
 import TableInstallTagItem from "@/components/table/TableInstallTagItem";
 import TableInstallTitleItem from "@/components/table/TableInstallTitleItem";
 import TableRequestStatusItem from "@/components/table/TableRequestStatusItem";
@@ -128,7 +129,7 @@ export const INSTALL_STATUSES_COLUMNS_DATA = [
     title: "제목",
     dataIndex: "title",
     key: "title",
-    render: (_: unknown, { id, title }: { id: number,title:string }) => (
+    render: (_: unknown, { id, title }: { id: number; title: string }) => (
       <TableInstallTitleItem id={id} title={title} />
     ),
   },
@@ -138,6 +139,14 @@ export const INSTALL_STATUSES_COLUMNS_DATA = [
     key: "categori",
     render: (_: unknown, { categori }: { categori: string[] }) => (
       <TableInstallTagItem items={categori} />
+    ),
+  },
+  {
+    title: "관리",
+    dataIndex: "button",
+    key: "button",
+    render: (_: unknown, { id }: { id: number }) => (
+      <TableInstallButtonItem id={id} />
     ),
   },
 ];
