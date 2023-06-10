@@ -13,11 +13,12 @@ import HeadTitle from "../common/HeadTitle";
 import { AiFillFileText } from "react-icons/ai";
 import React, { useEffect, useState } from "react";
 import useRouterLoading from "@/hooks/useRouterLoading";
-import AnswerBox from "../answer/AnswerBox";
+import AnswerViewBox from "../answer/AnswerViewBox";
 import WarningForm from "../warning/WarningForm";
 import useCustomForm from "@/hooks/useCustomForm";
 import { useRecoilState } from "recoil";
 import { isAdminLoginedState } from "@/recoil/recoil";
+import AnswerCreateBox from "../answer/AnswerCreateBox";
 
 const { Panel } = Collapse;
 
@@ -160,7 +161,10 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
                 </a>
               </div>
             )}
-            {isBoard && answers && <AnswerBox answers={answers} />}
+            {isAdminLogined && isBoard && <AnswerCreateBox />}
+            {(isAdminLogined || isBoard) && answers && (
+              <AnswerViewBox answers={answers} />
+            )}
           </>
         )}
       </Box>

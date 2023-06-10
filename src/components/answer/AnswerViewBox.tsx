@@ -1,9 +1,9 @@
 import { Answer } from "@/types/pageData";
 import styled from "styled-components";
 
-const AnswerBox = ({ answers }: { answers: Answer[] }) => {
+const AnswerViewBox = ({ answers }: { answers: Answer[] }) => {
   return (
-    <Box className="answer-box">
+    <Box>
       <div className="title">답변</div>
       <div className="content">
         {answers ? (
@@ -28,7 +28,7 @@ const AnswerBox = ({ answers }: { answers: Answer[] }) => {
   );
 };
 
-export default AnswerBox;
+export default AnswerViewBox;
 
 const Box = styled.div`
   border-top: 1px solid #dddcdc;

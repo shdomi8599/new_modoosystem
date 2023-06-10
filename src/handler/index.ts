@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
-import { v4 as uuidv4 } from "uuid";
 import { CheckForm, RequestForm } from "@/types";
 import { formatDate } from "@/util/date";
 import {

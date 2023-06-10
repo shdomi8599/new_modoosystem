@@ -10,11 +10,18 @@ const useCustomForm = () => {
     setPassword(e.target.value);
   };
 
+  const [content, setContent] = useState("");
+  const contentHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setContent(e.target.value);
+  };
+
   return {
     id,
     password,
+    content,
     idHandler,
     passwordHandler,
+    contentHandler,
   };
 };
 
