@@ -120,3 +120,15 @@ export const postAdminAnswer = async (data: {
     })
     .then((res) => res.data);
 };
+
+export const deleteAdminAnswer = async (id: number) => {
+  const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  return await api
+    .delete(`api/admin/answer/delete?id=${id}`, {
+      headers,
+    })
+    .then((res) => res.data);
+};

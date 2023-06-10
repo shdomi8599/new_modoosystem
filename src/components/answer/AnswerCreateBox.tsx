@@ -1,5 +1,4 @@
 import useRouterLoading from "@/hooks/useRouterLoading";
-import { FormItem } from "@/types";
 import { postAdminAnswer } from "@/util/api";
 import { Button, Form, Input } from "antd";
 import { useRouter } from "next/router";
