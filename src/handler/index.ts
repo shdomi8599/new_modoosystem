@@ -181,40 +181,38 @@ export const adminCheckHandler =
   () => async (req: NextApiRequest, res: NextApiResponse) => {
     const token = req.headers.authorization?.replace("Bearer ", "");
     if (token) {
-      try {
-        const secretKey = process.env.SECRET_KEY;
-        const decoded = jwt.verify(token, secretKey as string);
-        if (decoded) {
-          return res.status(200).json("success");
-        }
-      } catch (error) {
-        res.status(401).json("failed"); // 토큰이 유효하지 않은 경우
-        return;
+      const secretKey = process.env.SECRET_KEY;
+      const decoded = jwt.verify(token, secretKey as string);
+      if (decoded) {
+        return res.status(200).json("success");
+      } else {
+        res.status(401).json("failed"); //토큰이 유효하지 않는 경우
       }
+    } else {
+      res.status(404).json("failed");
     }
-    res.status(404).json("failed");
   };
 
 export const adminArticleDeleteHandler =
   () => async (req: NextApiRequest, res: NextApiResponse) => {
+    const { id, endPoint } = req.query;
     const token = req.headers.authorization?.replace("Bearer ", "");
     if (token) {
-      try {
-        const { id, endPoint } = req.query;
-        const apiData = await getDbAllDataAndId<
-          Board | Announcement | Reference
-        >(endPoint as string);
-        const findData = apiData.find((data) => data.docData.id === Number(id));
+      const apiData = await getDbAllDataAndId<Board | Announcement | Reference>(
+        endPoint as string
+      );
+      const findData = apiData.find((data) => data.docData.id === Number(id));
+      if (findData) {
         const targetId = findData?.docId;
         deleteDbData(endPoint as string, targetId as string)
           .then(() => res.status(200).json("success"))
           .catch(() => res.status(404).json("failed"));
-      } catch (error) {
-        res.status(401).json(error); // 토큰이 유효하지 않은 경우
-        return;
+      } else {
+        res.status(404).json("failed");
       }
+    } else {
+      res.status(401).json("failed"); //토큰이 유효하지 않는 경우
     }
-    res.status(404).json("failed");
   };
 
 export const adminRequestPaginationHandler =
@@ -244,22 +242,19 @@ export const adminRequestStatusHandler =
   () => async (req: NextApiRequest, res: NextApiResponse) => {
     const token = req.headers.authorization?.replace("Bearer ", "");
     if (token) {
-      try {
-        const { requestId, status } = req.body;
-        const apiData = await getDbAllData<CheckForm>("requestForm");
-        const findData = apiData.find((data) => data.id === requestId);
-        if (findData) {
-          const { id } = findData;
-          const newData = { ...findData, status };
-          updateDbData("requestForm", id, newData)
-            .then(() => res.status(200).json("success"))
-            .catch(() => res.status(404).json("failed"));
-        } else {
-          res.status(404).json("failed");
-        }
-      } catch (error) {
-        res.status(401).json(error); // 토큰이 유효하지 않은 경우
-        return;
+      const { requestId, status } = req.body;
+      const apiData = await getDbAllData<CheckForm>("requestForm");
+      const findData = apiData.find((data) => data.id === requestId);
+      if (findData) {
+        const { id } = findData;
+        const newData = { ...findData, status };
+        updateDbData("requestForm", id, newData)
+          .then(() => res.status(200).json("success"))
+          .catch(() => res.status(404).json("failed"));
+      } else {
+        res.status(404).json("failed");
       }
+    } else {
+      res.status(401).json("failed"); //토큰이 유효하지 않는 경우
     }
   };
