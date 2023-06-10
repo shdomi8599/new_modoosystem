@@ -4,7 +4,7 @@ import TableRequestTitleItem from "@/components/table/TableRequestTitleItem";
 import TableTitleItem from "@/components/table/TableTitleItem";
 import { HeaderItem, RequestForm } from "@/types";
 import { Announcement } from "@/types/pageData";
-import { Button, TabsProps } from "antd";
+import { TabsProps } from "antd";
 
 export const HEADER_ITEMS: HeaderItem[] = [
   {

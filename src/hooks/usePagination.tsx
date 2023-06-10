@@ -27,10 +27,6 @@ const usePagination = <T,>({ endPoint }: Props) => {
     });
   }, [page, size]);
 
-  useEffect(() => {
-    setPage(1);
-  }, [adminEndPoint]);
-
   const handlePageChange = (newPage: number, newSize: number) => {
     setPage(newPage);
     setSize(newSize);
@@ -42,6 +38,14 @@ const usePagination = <T,>({ endPoint }: Props) => {
     queryKey,
     queryFn: () => getPageData<T>(endPoint, page, size, category, searchVal),
   });
+
+  useEffect(() => {
+    setPage(1);
+  }, [adminEndPoint]);
+
+  useEffect(() => {
+    refetch();
+  }, [size, page]);
 
   return {
     page,
