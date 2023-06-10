@@ -42,7 +42,6 @@ const usePagination = <T,>({ endPoint }: Props) => {
     queryKey,
     queryFn: () => getPageData<T>(endPoint, page, size, category, searchVal),
   });
-  console.log(data)
 
   return {
     page,

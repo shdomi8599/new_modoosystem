@@ -1,7 +1,12 @@
 import { Tag } from "antd";
 import { useEffect, useState } from "react";
 
-const TableCategoryTagItem = ({ items }: { items: string[] }) => {
+interface Props {
+  items: string[];
+  id: number;
+}
+
+const TableCategoryTagItem = ({ items }: Props) => {
   const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {

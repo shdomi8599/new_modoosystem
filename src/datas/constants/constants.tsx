@@ -132,9 +132,10 @@ export const INSTALL_STATUSES_COLUMNS_DATA = [
     title: "카테고리",
     dataIndex: "categori",
     key: "categori",
-    render: (_: unknown, { categori }: { categori: string[] }) => (
-      <TableCategoryTagItem items={categori} />
-    ),
+    render: (
+      _: unknown,
+      { categori, id }: { categori: string[]; id: number }
+    ) => <TableCategoryTagItem items={categori} id={id} />,
   },
 ];
 
