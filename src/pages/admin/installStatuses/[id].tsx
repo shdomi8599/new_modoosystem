@@ -1,23 +1,34 @@
 import useCheckAdmin from "@/hooks/useCheckAdmin";
-import { MyQuery } from "@/types";
+import useRouterLoading from "@/hooks/useRouterLoading";
 import { InstallStatus } from "@/types/pageData";
 import { getData } from "@/util/api";
-import { generateViewProps } from "@/util/ssr";
-import { Spin, Tag } from "antd";
+import { Tag } from "antd";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 
 const AdminViewPage = () => {
   useCheckAdmin();
+  const { onRouterLoading, offRouterLoading } = useRouterLoading();
+  const [loading, setLoading] = useState(false);
+  const handleImageLoad = () => {
+    setLoading(true);
+  };
   const router = useRouter();
   const { id } = router.query;
-  const { data, isLoading, isError } = useQuery<InstallStatus>({
+  const { data, isError } = useQuery<InstallStatus>({
     queryKey: ["installStatuses", "view", id],
     queryFn: () => getData<InstallStatus>("installStatuses", id as string),
   });
 
-  if (isLoading) return <Spin />;
+  useEffect(() => {
+    onRouterLoading();
+    if (loading) {
+      offRouterLoading();
+    }
+  }, [loading]);
+
   if (isError) return <div>잠시 후에 다시 시도해주세요.</div>;
   return (
     <Box>
@@ -25,16 +36,25 @@ const AdminViewPage = () => {
       <div className="middle">
         <div className="category-box">
           {data?.categori.map((data) => (
-            <Tag>{data}</Tag>
+            <Tag key={data}>{data}</Tag>
           ))}
         </div>
       </div>
       <div className="bottom">
-        {data?.src.map((src) => (
-          <div className="img-box">
-            <img src={src} alt="img" />
-          </div>
-        ))}
+        {data?.src.map((src, idx) => {
+          if (idx === data.src.length - 1) {
+            return (
+              <div key={idx} className="img-box">
+                <img onLoad={handleImageLoad} src={src} alt="img" />
+              </div>
+            );
+          }
+          return (
+            <div key={idx} className="img-box">
+              <img src={src} alt="img" />
+            </div>
+          );
+        })}
       </div>
     </Box>
   );
@@ -46,13 +66,15 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  text-align: center;
   margin: 40px 0px;
   max-width: 360px;
   flex-wrap: wrap;
   .top {
     font-weight: 700;
     font-size: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   .category-box {
     display: flex;
@@ -75,8 +97,3 @@ const Box = styled.div`
     }
   }
 `;
-
-export async function getServerSideProps({ query }: { query: MyQuery }) {
-  const { id } = query;
-  return generateViewProps<InstallStatus>("installStatuses", id);
-}
