@@ -1,6 +1,8 @@
 import useCheckAdmin from "@/hooks/useCheckAdmin";
+import { MyQuery } from "@/types";
 import { InstallStatus } from "@/types/pageData";
 import { getData } from "@/util/api";
+import { generateViewProps } from "@/util/ssr";
 import { Spin, Tag } from "antd";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
@@ -73,3 +75,8 @@ const Box = styled.div`
     }
   }
 `;
+
+export async function getServerSideProps({ query }: { query: MyQuery }) {
+  const { id } = query;
+  return generateViewProps<InstallStatus>("installStatuses", id);
+}
