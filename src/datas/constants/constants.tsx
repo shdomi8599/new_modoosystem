@@ -222,3 +222,15 @@ export const TAB_ITEMS: TabsProps["items"] = [
     label: `견적의뢰`,
   },
 ];
+
+export const INSTALL_CATEGORY = [
+  "차량차단기",
+  "리모콘방식",
+  "RF카드방식",
+  "주차권발행방식",
+  "차량번호인식방식",
+  "요금계산기",
+  "주차부스",
+  "신호관제",
+  "기타제품",
+];

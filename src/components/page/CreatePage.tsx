@@ -151,7 +151,4 @@ const Box = styled.div`
     display: flex;
     justify-content: center;
   }
-  @media (max-width: 576px) {
-    width: 90%;
-  }
 `;
