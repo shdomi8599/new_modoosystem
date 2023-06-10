@@ -2,11 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import {
-  currentPageNameState,
-  headerNavState,
-  isAdminLoginedState,
-} from "@/recoil/recoil";
+import { headerNavState, isAdminLoginedState } from "@/recoil/recoil";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
 import whiteLogo from "../../../public/logo/white_logo.png";
@@ -25,13 +21,15 @@ const Header = () => {
   const router = useRouter();
   const { asPath } = router;
   const { product } = router.query;
-  const pageName = ROUTER.find((data) => asPath === data.href)?.name;
-  const subPageName = ROUTER.find((data) => asPath.includes(data.href))?.name;
-  const [currentPageName, setCurrentPageName] =
-    useRecoilState(currentPageNameState);
-  useEffect(() => {
-    pageName && setCurrentPageName(pageName);
-  }, [pageName, setCurrentPageName]);
+
+  function findCurrentPageName() {
+    const page =
+      ROUTER.find((data) => asPath === data.href) ||
+      ROUTER.find((data) => asPath.includes(data.href));
+    return page?.name || (product as string);
+  }
+  const currentPageName = findCurrentPageName();
+
   const [headerNav, setHeaderNav] = useRecoilState(headerNavState);
   useOffResize(960, "up", setHeaderNav);
 
@@ -58,7 +56,11 @@ const Header = () => {
   const { routerLoading } = useRouterLoading();
   return (
     <>
-      <HeadTitle name={`모두시스템 - ${currentPageName}`} />
+      <HeadTitle
+        name={
+          currentPageName ? `모두시스템 - ${currentPageName}` : "모두시스템"
+        }
+      />
       <Box headerNav={headerNav}>
         <div className="logo-box">
           <Image
@@ -99,7 +101,7 @@ const Header = () => {
           <Spin />
         </Loading>
       )}
-      <TopTitle name={product ? product : pageName || subPageName} />
+      <TopTitle name={currentPageName} />
     </>
   );
 };
