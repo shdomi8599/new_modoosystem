@@ -246,12 +246,12 @@ export const adminRequestStatusHandler =
     if (token) {
       try {
         const { requestId, status } = req.body;
-        const apiData = await getDbAllData<CheckForm>("requestForm");
-        const findData = apiData.find((data) => data.id === requestId);
+        const apiData = await getDbAllDataAndId<CheckForm>("requestForm");
+        const findData = apiData.find((data) => data.docData.id === requestId);
+        const targetId = findData?.docId;
         if (findData) {
-          const { id } = findData;
-          const newData = { ...findData, status };
-          updateDbData("requestForm", id, newData)
+          const newData = { ...findData.docData, status };
+          updateDbData("requestForm", targetId as string, newData)
             .then(() => res.status(200).json("success"))
             .catch(() => res.status(404).json("failed"));
         } else {
