@@ -1,7 +1,7 @@
 import { CheckForm } from "@/types";
 import styled from "styled-components";
 import { Button, Form, Input, Descriptions, Radio } from "antd";
-import { postCheckRequest } from "@/util/api";
+import { postCheckRequest, updateAdminRequest } from "@/util/api";
 import { useEffect, useState } from "react";
 import { FORM_ITEMS } from "@/datas/constants/constants";
 import useRouterLoading from "@/hooks/useRouterLoading";
@@ -49,7 +49,14 @@ const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
   }, [data]);
 
   const onChange = (e: RadioChangeEvent) => {
-    setValue(e.target.value);
+    if (adminRequestId) {
+      const data = { status: e.target.value, requestId: adminRequestId };
+      updateAdminRequest(data)
+        .then(() => {
+          setValue(e.target.value);
+        })
+        .catch(() => alert("잠시 후에 다시 시도해주세요."));
+    }
   };
   return (
     <>
