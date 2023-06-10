@@ -268,7 +268,7 @@ export const adminCreateAnswerHandler =
       try {
         const { id, content } = req.body;
         const apiData = await getDbAllDataAndId<Board>("boards");
-        const findData = apiData.find((data) => data.docData.id === id);
+        const findData = apiData.find((data) => data.docData.id === Number(id));
         const targetId = findData?.docId;
         if (findData) {
           const createAt = formatDate(String(new Date()));

@@ -26,7 +26,7 @@ const AnswerCreateBox = () => {
     postAdminAnswer({ ...values, id: id as string })
       .then(() => {
         alert("댓글이 작성되었습니다.");
-        router.push("/").then(() => {
+        router.push("/admin").then(() => {
           router.reload();
         });
       })
