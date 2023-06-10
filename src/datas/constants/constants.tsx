@@ -1,5 +1,6 @@
+import TableRequestTitleItem from "@/components/table/TableRequestTitleItem";
 import TableTitleItem from "@/components/table/TableTitleItem";
-import { HeaderItem } from "@/types";
+import { HeaderItem, RequestForm } from "@/types";
 import { Announcement } from "@/types/pageData";
 import { TabsProps } from "antd";
 
@@ -92,8 +93,8 @@ export const REQUEST_COLUMNS_DATA = [
     title: "의뢰번호",
     dataIndex: "id",
     key: "id",
-    render: <T extends Announcement>(text: string, data: T) => (
-      <TableTitleItem text={text} data={data} />
+    render: (text: string, data: RequestForm) => (
+      <TableRequestTitleItem text={text} data={data} />
     ),
   },
   {

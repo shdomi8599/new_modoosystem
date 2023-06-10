@@ -25,3 +25,8 @@ export const isAdminLoginedState = atom({
   key: "isAdminLoginedState",
   default: false,
 });
+
+export const adminRequestIdState = atom({
+  key: "adminRequestIdState",
+  default: "",
+});

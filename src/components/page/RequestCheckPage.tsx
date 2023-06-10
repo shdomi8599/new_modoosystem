@@ -2,9 +2,11 @@ import { CheckForm } from "@/types";
 import styled from "styled-components";
 import { Button, Form, Input, Descriptions } from "antd";
 import { postCheckRequest } from "@/util/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FORM_ITEMS } from "@/datas/constants/constants";
 import useRouterLoading from "@/hooks/useRouterLoading";
+import { useRecoilState } from "recoil";
+import { isAdminLoginedState } from "@/recoil/recoil";
 
 const layout = {
   labelCol: {
@@ -15,7 +17,8 @@ const layout = {
   },
 };
 
-const RequestCheckPage = (adminRequestId?: string) => {
+const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
+  const [isAdminLogined] = useRecoilState(isAdminLoginedState);
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
   const [data, setData] = useState<CheckForm>();
   //폼 데이터 관리
@@ -32,6 +35,10 @@ const RequestCheckPage = (adminRequestId?: string) => {
       }
     });
   };
+
+  useEffect(() => {
+    if (adminRequestId) onFinish({ requestId: adminRequestId });
+  }, [isAdminLogined]);
 
   return (
     <>
