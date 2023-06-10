@@ -7,6 +7,7 @@ import DaumPostcodeEmbed from "react-daum-postcode";
 import { KakaoAdress, FormItem, RequestForm } from "@/types";
 import { postRequest } from "@/util/api";
 import Link from "next/link";
+import { v4 as uuidv4 } from "uuid";
 import useRouterLoading from "@/hooks/useRouterLoading";
 
 const layout = {
@@ -54,10 +55,12 @@ const RequestPage = () => {
   const [form] = Form.useForm();
   const onFinish = (values: FormItem) => {
     onRouterLoading();
+    const id = uuidv4();
     const data: RequestForm = {
       ...address,
       ...values,
       date: date ? date : "",
+      id,
     };
     postRequest(data)
       .then((res: string) => {

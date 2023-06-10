@@ -114,10 +114,8 @@ export const checkSecretHandler =
 
 export const requestHandler =
   () => async (req: NextApiRequest, res: NextApiResponse) => {
-    const data = req.body;
-    const id = uuidv4();
-    const postData = { ...data, id };
-    addDbData("requestForm", postData).then(() => res.status(200).json(id));
+    const data: RequestForm = req.body;
+    addDbData("requestForm", data).then(() => res.status(200).json(data.id));
   };
 
 export const requestCheckHandler =

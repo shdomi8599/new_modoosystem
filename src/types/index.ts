@@ -31,7 +31,6 @@ export interface FormItem {
   detailAddress: string;
   name: string;
   phone: string;
-  id: string;
 }
 
 export interface RequestForm extends FormItem {
@@ -39,6 +38,8 @@ export interface RequestForm extends FormItem {
   date?: string;
   requirement?: string;
   zonecode?: string;
+  id: string;
+  status?: string;
 }
 
 export interface CheckForm extends RequestForm {
