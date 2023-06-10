@@ -28,4 +28,5 @@ export interface Board extends Announcement {
 export interface Answer {
   content: string;
   createAt: string;
+  id: number;
 }

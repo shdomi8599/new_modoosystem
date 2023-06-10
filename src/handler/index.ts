@@ -256,8 +256,9 @@ export const adminRequestStatusHandler =
         }
       } catch (error) {
         res.status(401).json(error); // 토큰이 유효하지 않은 경우
-        return;
       }
+    } else {
+      res.status(404).json("failed");
     }
   };
 
@@ -276,8 +277,8 @@ export const adminCreateAnswerHandler =
           const newData = {
             ...findData.docData,
             answers: answers
-              ? [...answers, { content, createAt }]
-              : [{ content, createAt }],
+              ? [...answers, { content, createAt, id: answers.length + 1 }]
+              : [{ content, createAt, id: 1 }],
           };
           updateDbData("boards", targetId as string, newData)
             .then(() => res.status(200).json("success"))
@@ -287,7 +288,40 @@ export const adminCreateAnswerHandler =
         }
       } catch (error) {
         res.status(401).json(error); // 토큰이 유효하지 않은 경우
-        return;
       }
+    } else {
+      res.status(404).json("failed");
+    }
+  };
+
+export const adminDeleteAnswerHandler =
+  () => async (req: NextApiRequest, res: NextApiResponse) => {
+    const token = req.headers.authorization?.replace("Bearer ", "");
+    if (token) {
+      try {
+        const { id, answerId } = req.query;
+        const apiData = await getDbAllDataAndId<Board>("boards");
+        const findData = apiData.find((data) => data.docData.id === Number(id));
+        const targetId = findData?.docId;
+        if (findData) {
+          const { answers } = findData.docData;
+          const newAnswers = answers?.filter(
+            (answer) => answer.id !== Number(answerId)
+          );
+          const newData = {
+            ...findData.docData,
+            answers: newAnswers ? [...newAnswers] : answers,
+          };
+          updateDbData("boards", targetId as string, newData)
+            .then(() => res.status(200).json("success"))
+            .catch(() => res.status(404).json("failed"));
+        } else {
+          res.status(404).json("failed");
+        }
+      } catch (error) {
+        res.status(401).json(error); // 토큰이 유효하지 않은 경우
+      }
+    } else {
+      res.status(404).json("failed");
     }
   };

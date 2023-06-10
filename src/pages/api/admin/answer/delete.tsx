@@ -1,5 +1,5 @@
-import { adminCreateAnswerHandler } from "@/handler";
+import { adminDeleteAnswerHandler } from "@/handler";
 
-const handler = adminCreateAnswerHandler();
+const handler = adminDeleteAnswerHandler();
 
 export default handler;

@@ -121,13 +121,13 @@ export const postAdminAnswer = async (data: {
     .then((res) => res.data);
 };
 
-export const deleteAdminAnswer = async (id: number) => {
+export const deleteAdminAnswer = async (id: string, answerId: number) => {
   const token = localStorage.getItem("token");
   const headers = {
     Authorization: `Bearer ${token}`,
   };
   return await api
-    .delete(`api/admin/answer/delete?id=${id}`, {
+    .delete(`api/admin/answer/delete?id=${id}&answerId=${answerId}`, {
       headers,
     })
     .then((res) => res.data);

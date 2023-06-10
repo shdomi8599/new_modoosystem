@@ -24,7 +24,7 @@ const AnswerCreateBox = () => {
     onRouterLoading();
     postAdminAnswer({ ...values, id: id as string })
       .then(() => {
-        alert("댓글이 작성되었습니다.");
+        alert("답변이 작성되었습니다.");
         router.push("/admin").then(() => {
           router.reload();
         });
@@ -37,8 +37,8 @@ const AnswerCreateBox = () => {
   return (
     <Box>
       <Form form={form} {...layout} name="control-hooks" onFinish={onFinish}>
-        <Form.Item name="content" label="댓글작성">
-          <TextArea placeholder="댓글을 입력해주세요." rows={6} />
+        <Form.Item name="content" label="답변작성">
+          <TextArea placeholder="답변을 입력해주세요." rows={6} />
         </Form.Item>
         <Form.Item className="answer-btn-box">
           <Button type="primary" htmlType="submit">
