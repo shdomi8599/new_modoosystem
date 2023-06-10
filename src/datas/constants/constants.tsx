@@ -87,6 +87,27 @@ export const COLUMNS_DATA = [
   },
 ];
 
+export const REQUEST_COLUMNS_DATA = [
+  {
+    title: "의뢰번호",
+    dataIndex: "id",
+    key: "id",
+    render: <T extends Announcement>(text: string, data: T) => (
+      <TableTitleItem text={text} data={data} />
+    ),
+  },
+  {
+    title: "전화번호",
+    dataIndex: "phone",
+    key: "phone",
+  },
+  {
+    title: "신청자",
+    dataIndex: "name",
+    key: "name",
+  },
+];
+
 export const FORM_ITEMS = [
   { name: "회사명/성함", id: "name" },
   { name: "연락처", id: "phone" },

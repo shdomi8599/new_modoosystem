@@ -2,7 +2,6 @@ import { getPageData } from "@/util/api";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import useSearch from "./useSearch";
-import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { adminEndPointState } from "@/recoil/recoil";
 

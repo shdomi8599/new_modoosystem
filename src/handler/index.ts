@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
-import { CheckForm } from "@/types";
+import { CheckForm, RequestForm } from "@/types";
 import { formatDate } from "@/util/date";
 import {
   addDbData,
@@ -207,4 +207,27 @@ export const adminArticleDeleteHandler =
     deleteDbData(endPoint as string, targetId as string)
       .then(() => res.status(200).json("success"))
       .catch(() => res.status(404).json("failed"));
+  };
+
+export const adminRequestPaginationHandler =
+  () =>
+  async (
+    req: NextApiRequest,
+    res: NextApiResponse<paginationHandlerResponse<RequestForm>>
+  ) => {
+    const endPoint = "requestForm";
+    const apiData = await getDbAllData<RequestForm>(endPoint);
+    const { page, size } = req.query;
+    const startIndex = (Number(page) - 1) * Number(size);
+    const endIndex = startIndex + Number(size);
+    const data = apiData
+      .map((data, idx) => {
+        return {
+          ...data,
+          key: idx,
+        };
+      })
+      .slice(startIndex, endIndex);
+    const totalElements = apiData.length;
+    res.status(200).json({ data, totalElements });
   };
