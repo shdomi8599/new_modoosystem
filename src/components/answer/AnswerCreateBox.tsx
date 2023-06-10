@@ -1,6 +1,8 @@
 import useRouterLoading from "@/hooks/useRouterLoading";
 import { FormItem } from "@/types";
+import { postAdminAnswer } from "@/util/api";
 import { Button, Form, Input } from "antd";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 const layout = {
   labelCol: {
@@ -14,11 +16,24 @@ const layout = {
 const { TextArea } = Input;
 
 const AnswerCreateBox = () => {
-  const { onRouterLoading } = useRouterLoading();
+  const router = useRouter();
+  const { id } = router.query;
+  const { onRouterLoading, offRouterLoading } = useRouterLoading();
   //폼 데이터 관리
   const [form] = Form.useForm();
-  const onFinish = (values: FormItem) => {
-    // onRouterLoading();
+  const onFinish = (values: { content: string }) => {
+    onRouterLoading();
+    postAdminAnswer({ ...values, id: id as string })
+      .then(() => {
+        alert("댓글이 작성되었습니다.");
+        router.push("/").then(() => {
+          router.reload();
+        });
+      })
+      .catch(() => {
+        offRouterLoading();
+        alert("잠시 후에 다시 시도해주세요.");
+      });
   };
   return (
     <Box>

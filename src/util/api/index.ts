@@ -105,3 +105,18 @@ export const updateAdminRequest = async (data: {
     })
     .then((res) => res.data);
 };
+
+export const postAdminAnswer = async (data: {
+  id: string;
+  content: string;
+}) => {
+  const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  return await api
+    .put(`api/admin/answer/create`, data, {
+      headers,
+    })
+    .then((res) => res.data);
+};

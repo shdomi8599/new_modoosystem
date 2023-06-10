@@ -260,3 +260,34 @@ export const adminRequestStatusHandler =
       }
     }
   };
+
+export const adminCreateAnswerHandler =
+  () => async (req: NextApiRequest, res: NextApiResponse) => {
+    const token = req.headers.authorization?.replace("Bearer ", "");
+    if (token) {
+      try {
+        const { id, content } = req.body;
+        const apiData = await getDbAllDataAndId<Board>("boards");
+        const findData = apiData.find((data) => data.docData.id === id);
+        const targetId = findData?.docId;
+        if (findData) {
+          const createAt = formatDate(String(new Date()));
+          const { answers } = findData.docData;
+          const newData = {
+            ...findData.docData,
+            answers: answers
+              ? [...answers, { content, createAt }]
+              : [{ content, createAt }],
+          };
+          updateDbData("boards", targetId as string, newData)
+            .then(() => res.status(200).json("success"))
+            .catch(() => res.status(404).json("failed"));
+        } else {
+          res.status(404).json("failed");
+        }
+      } catch (error) {
+        res.status(401).json(error); // 토큰이 유효하지 않은 경우
+        return;
+      }
+    }
+  };
