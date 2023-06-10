@@ -1,4 +1,4 @@
-import { STATUS_ITEM_COLORS } from "@/datas/constants/constants";
+import { STATUS_ITEMS } from "@/datas/constants/constants";
 import styled from "styled-components";
 
 interface Props {
@@ -6,8 +6,7 @@ interface Props {
 }
 
 const TableRequestStatusItem = ({ text }: Props) => {
-  const color = STATUS_ITEM_COLORS.find((data) => data.name === text)?.color;
-  console.log(color);
+  const color = STATUS_ITEMS.find((data) => data.name === text)?.color;
   return (
     <Box color={color}>
       <div className="dot-style"></div>

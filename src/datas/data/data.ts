@@ -1,5 +1,5 @@
 import { FooterItem } from "@/types";
-import { HEADER_ITEMS } from "../constants/constants";
+import { HEADER_ITEMS, STATUS_ITEMS } from "../constants/constants";
 
 const HEADER_ROUTER = HEADER_ITEMS.flatMap((item) => item.content);
 
@@ -29,3 +29,5 @@ export const FOOTER_ITEMS: FooterItem[] = [
   },
   ...footerItems,
 ];
+
+export const REQUEST_STATUS = STATUS_ITEMS.map((item) => item.name);

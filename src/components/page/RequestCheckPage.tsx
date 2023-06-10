@@ -1,12 +1,14 @@
 import { CheckForm } from "@/types";
 import styled from "styled-components";
-import { Button, Form, Input, Descriptions } from "antd";
+import { Button, Form, Input, Descriptions, Radio } from "antd";
 import { postCheckRequest } from "@/util/api";
 import { useEffect, useState } from "react";
 import { FORM_ITEMS } from "@/datas/constants/constants";
 import useRouterLoading from "@/hooks/useRouterLoading";
 import { useRecoilState } from "recoil";
 import { isAdminLoginedState } from "@/recoil/recoil";
+import type { RadioChangeEvent } from "antd";
+import { REQUEST_STATUS } from "@/datas/data/data";
 
 const layout = {
   labelCol: {
@@ -40,18 +42,40 @@ const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
     if (adminRequestId) onFinish({ requestId: adminRequestId });
   }, [isAdminLogined]);
 
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setValue(data?.status as string);
+  }, [data]);
+
+  const onChange = (e: RadioChangeEvent) => {
+    setValue(e.target.value);
+  };
   return (
     <>
       {data ? (
-        <CheckBox>
-          <Descriptions bordered title="견적신청조회">
-            {FORM_ITEMS.map((item) => (
-              <Descriptions.Item key={item.name} label={item.name}>
-                {data[item.id] ? data[item.id] : "정보없음"}
-              </Descriptions.Item>
-            ))}
-          </Descriptions>
-        </CheckBox>
+        <>
+          {isAdminLogined && (
+            <AdminBox>
+              <Radio.Group onChange={onChange} value={value}>
+                {REQUEST_STATUS.map((data) => (
+                  <Radio key={data} value={data}>
+                    {data}
+                  </Radio>
+                ))}
+              </Radio.Group>
+            </AdminBox>
+          )}
+          <CheckBox>
+            <Descriptions bordered title="견적신청조회">
+              {FORM_ITEMS.map((item) => (
+                <Descriptions.Item key={item.name} label={item.name}>
+                  {data[item.id] ? data[item.id] : "정보없음"}
+                </Descriptions.Item>
+              ))}
+            </Descriptions>
+          </CheckBox>
+        </>
       ) : (
         <Box>
           <Form
@@ -84,6 +108,8 @@ const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
   );
 };
 export default RequestCheckPage;
+
+const AdminBox = styled.div``;
 
 const CheckBox = styled.div`
   width: 80%;

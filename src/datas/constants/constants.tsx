@@ -116,7 +116,7 @@ export const REQUEST_COLUMNS_DATA = [
   },
 ];
 
-export const STATUS_ITEM_COLORS = [
+export const STATUS_ITEMS = [
   { name: "처리 전", color: "red" },
   { name: "처리 중", color: "#e3ee44" },
   { name: "처리완료", color: "#00ff00" },
@@ -129,6 +129,7 @@ export const FORM_ITEMS = [
   { name: "상세주소", id: "detailAddress" },
   { name: "방문 희망일", id: "date" },
   { name: "요구사항", id: "requirement" },
+  { name: "처리상태", id: "status" },
 ];
 
 export const DEPARTMENTS = [

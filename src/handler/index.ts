@@ -196,15 +196,23 @@ export const adminCheckHandler =
 
 export const adminArticleDeleteHandler =
   () => async (req: NextApiRequest, res: NextApiResponse) => {
-    const { id, endPoint } = req.query;
-    const apiData = await getDbAllDataAndId<Board | Announcement | Reference>(
-      endPoint as string
-    );
-    const findData = apiData.find((data) => data.docData.id === Number(id));
-    const targetId = findData?.docId;
-    deleteDbData(endPoint as string, targetId as string)
-      .then(() => res.status(200).json("success"))
-      .catch(() => res.status(404).json("failed"));
+    const token = req.headers.authorization?.replace("Bearer ", "");
+    if (token) {
+      try {
+        const { id, endPoint } = req.query;
+        const apiData = await getDbAllDataAndId<
+          Board | Announcement | Reference
+        >(endPoint as string);
+        const findData = apiData.find((data) => data.docData.id === Number(id));
+        const targetId = findData?.docId;
+        deleteDbData(endPoint as string, targetId as string)
+          .then(() => res.status(200).json("success"))
+          .catch(() => res.status(404).json("failed"));
+      } catch (error) {
+        res.status(401).json(error); // 토큰이 유효하지 않은 경우
+        return;
+      }
+    }
   };
 
 export const adminRequestPaginationHandler =

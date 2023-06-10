@@ -69,7 +69,9 @@ const AdminPage = () => {
               onChange={onChange}
             />
             <div className="btn-box">
-              <Button onClick={moveCreate}>글쓰기</Button>
+              {adminEndPoint !== "requestForm" && (
+                <Button onClick={moveCreate}>글쓰기</Button>
+              )}
               <Button onClick={adminLogout}>로그아웃</Button>
             </div>
           </Box>
