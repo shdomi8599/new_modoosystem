@@ -91,13 +91,16 @@ export const deleteAdminArticle = async (endPoint: string, id: number) => {
     .then((res) => res.data);
 };
 
-export const updateAdminRequest = async (endPoint: string, id: number) => {
+export const updateAdminRequest = async (data: {
+  requestId: string;
+  status: string;
+}) => {
   const token = localStorage.getItem("token");
   const headers = {
     Authorization: `Bearer ${token}`,
   };
   return await api
-    .put(`api/admin/check/status`, {
+    .put(`api/admin/check/status`, data, {
       headers,
     })
     .then((res) => res.data);
