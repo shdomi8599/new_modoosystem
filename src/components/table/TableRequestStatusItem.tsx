@@ -7,10 +7,11 @@ interface Props {
 
 const TableRequestStatusItem = ({ text }: Props) => {
   const color = STATUS_ITEMS.find((data) => data.name === text)?.color;
+
   return (
     <Box color={color}>
       <div className="dot-style"></div>
-      <span>{text ? text : "처리 전"}</span>
+      <span>{text}</span>
     </Box>
   );
 };
