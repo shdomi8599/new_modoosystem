@@ -35,7 +35,7 @@ const usePagination = <T,>({ endPoint }: Props) => {
     setPage(newPage);
     setSize(newSize);
   };
-  const { data, isLoading, isError } = useQuery<{
+  const { data, isLoading, isError, refetch } = useQuery<{
     data: T[];
     totalElements: number;
   }>({
@@ -51,6 +51,7 @@ const usePagination = <T,>({ endPoint }: Props) => {
     totalElements: data?.totalElements,
     isLoading,
     isError,
+    refetch,
   };
 };
 

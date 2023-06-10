@@ -9,6 +9,7 @@ import { useRecoilState } from "recoil";
 import { isAdminLoginedState } from "@/recoil/recoil";
 import type { RadioChangeEvent } from "antd";
 import { REQUEST_STATUS } from "@/datas/data/data";
+import { useRouter } from "next/router";
 
 const layout = {
   labelCol: {
@@ -20,6 +21,7 @@ const layout = {
 };
 
 const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
+  const router = useRouter();
   const [isAdminLogined] = useRecoilState(isAdminLoginedState);
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
   const [data, setData] = useState<CheckForm>();
@@ -53,7 +55,8 @@ const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
       const data = { status: e.target.value, requestId: adminRequestId };
       updateAdminRequest(data)
         .then(() => {
-          setValue(e.target.value);
+          alert("성공적으로 변경되었습니다.");
+          router.push("/admin").then(() => router.reload());
         })
         .catch(() => alert("잠시 후에 다시 시도해주세요."));
     }
