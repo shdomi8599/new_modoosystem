@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 
 interface Props {
   items: string[];
-  id: number;
 }
 
-const TableCategoryTagItem = ({ items }: Props) => {
+const TableInstallTagItem = ({ items }: Props) => {
   const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
@@ -22,4 +21,4 @@ const TableCategoryTagItem = ({ items }: Props) => {
   );
 };
 
-export default TableCategoryTagItem;
+export default TableInstallTagItem;

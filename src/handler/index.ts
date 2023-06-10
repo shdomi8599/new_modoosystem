@@ -83,7 +83,9 @@ export const infiniteHandler =
   };
 
 export const singleViewHandler =
-  <T extends Board | Announcement | Reference>(endPoint: string) =>
+  <T extends Board | Announcement | Reference | InstallStatus>(
+    endPoint: string
+  ) =>
   async (req: NextApiRequest, res: NextApiResponse<T>) => {
     const { id } = req.query;
     const apiData = await getDbAllData<T>(endPoint);

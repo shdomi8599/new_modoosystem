@@ -1,4 +1,5 @@
-import TableCategoryTagItem from "@/components/table/TableCategoryTagItem";
+import TableInstallTagItem from "@/components/table/TableInstallTagItem";
+import TableInstallTitleItem from "@/components/table/TableInstallTitleItem";
 import TableRequestStatusItem from "@/components/table/TableRequestStatusItem";
 import TableRequestTitleItem from "@/components/table/TableRequestTitleItem";
 import TableTitleItem from "@/components/table/TableTitleItem";
@@ -127,15 +128,17 @@ export const INSTALL_STATUSES_COLUMNS_DATA = [
     title: "제목",
     dataIndex: "title",
     key: "title",
+    render: (_: unknown, { id, title }: { id: number,title:string }) => (
+      <TableInstallTitleItem id={id} title={title} />
+    ),
   },
   {
     title: "카테고리",
     dataIndex: "categori",
     key: "categori",
-    render: (
-      _: unknown,
-      { categori, id }: { categori: string[]; id: number }
-    ) => <TableCategoryTagItem items={categori} id={id} />,
+    render: (_: unknown, { categori }: { categori: string[] }) => (
+      <TableInstallTagItem items={categori} />
+    ),
   },
 ];
 
