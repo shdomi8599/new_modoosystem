@@ -1,5 +1,5 @@
-import { adminCheckHandler } from "@/handler";
+import { adminRequestStatusHandler } from "@/handler";
 
-const handler = adminCheckHandler();
+const handler = adminRequestStatusHandler();
 
 export default handler;

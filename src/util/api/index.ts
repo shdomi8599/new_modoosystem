@@ -79,13 +79,25 @@ export const getAdminCheck = async () => {
   }).then((res) => res.data);
 };
 
-export const deleteArticle = async (endPoint: string, id: number) => {
+export const deleteAdminArticle = async (endPoint: string, id: number) => {
   const token = localStorage.getItem("token");
   const headers = {
     Authorization: `Bearer ${token}`,
   };
   return await api
     .delete(`api/admin/delete/${id}?endPoint=${endPoint}`, {
+      headers,
+    })
+    .then((res) => res.data);
+};
+
+export const updateAdminRequest = async (endPoint: string, id: number) => {
+  const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  return await api
+    .put(`api/admin/check/status`, {
       headers,
     })
     .then((res) => res.data);

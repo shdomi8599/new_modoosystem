@@ -1,6 +1,6 @@
 import { Announcement, Board, Reference } from "@/types/pageData";
 import {
-  deleteArticle,
+  deleteAdminArticle,
   deleteBoard,
   getData,
   postCheckSecretBoard,
@@ -91,7 +91,7 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   const adminDeleteEvent = () => {
     if (confirm("정말 삭제하시겠습니까?")) {
       onRouterLoading();
-      deleteArticle(endPoint, Number(id))
+      deleteAdminArticle(endPoint, Number(id))
         .then(() => {
           alert("성공적으로 삭제되었습니다.");
           router.push("/admin").then(() => router.reload());

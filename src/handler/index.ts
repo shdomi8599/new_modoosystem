@@ -9,6 +9,7 @@ import {
   getDbAllData,
   getDbAllDataAndId,
   getDbDataByDocName,
+  updateDbData,
 } from "@/util/firebase";
 import {
   Announcement,
@@ -236,4 +237,20 @@ export const adminRequestPaginationHandler =
       .slice(startIndex, endIndex);
     const totalElements = apiData.length;
     res.status(200).json({ data, totalElements });
+  };
+
+export const adminRequestStatusHandler =
+  () => async (req: NextApiRequest, res: NextApiResponse) => {
+    const { requestId, status } = req.body;
+    const apiData = await getDbAllData<CheckForm>("requestForm");
+    const findData = apiData.find((data) => data.id === requestId);
+    if (findData) {
+      const { id } = findData;
+      const newData = { ...findData, status };
+      updateDbData("requestForm", id, newData)
+        .then(() => res.status(200).json("success"))
+        .catch(() => res.status(404).json("failed"));
+    } else {
+      res.status(404).json("failed");
+    }
   };
