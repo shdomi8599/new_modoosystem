@@ -61,6 +61,7 @@ const RequestPage = () => {
       ...values,
       date: date ? date : "",
       id,
+      status: "처리 전",
     };
     postRequest(data)
       .then((res: string) => {

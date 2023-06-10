@@ -1,3 +1,4 @@
+import TableRequestStatusItem from "@/components/table/TableRequestStatusItem";
 import TableRequestTitleItem from "@/components/table/TableRequestTitleItem";
 import TableTitleItem from "@/components/table/TableTitleItem";
 import { HeaderItem, RequestForm } from "@/types";
@@ -98,6 +99,12 @@ export const REQUEST_COLUMNS_DATA = [
     ),
   },
   {
+    title: "처리상태",
+    dataIndex: "status",
+    key: "status",
+    render: (text: string) => <TableRequestStatusItem text={text} />,
+  },
+  {
     title: "전화번호",
     dataIndex: "phone",
     key: "phone",
@@ -107,6 +114,12 @@ export const REQUEST_COLUMNS_DATA = [
     dataIndex: "name",
     key: "name",
   },
+];
+
+export const STATUS_ITEM_COLORS = [
+  { name: "처리 전", color: "red" },
+  { name: "처리 중", color: "#e3ee44" },
+  { name: "처리완료", color: "#00ff00" },
 ];
 
 export const FORM_ITEMS = [
