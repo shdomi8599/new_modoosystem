@@ -11,7 +11,7 @@ import { TAB_ITEMS } from "@/datas/constants/constants";
 import { useRecoilState } from "recoil";
 import { adminEndPointState, isAdminLoginedState } from "@/recoil/recoil";
 import { useRouter } from "next/router";
-import AdminRequestPaginationPage from "@/components/page/AdminRequestPaginationPage";
+import AdminPaginationPage from "@/components/page/AdminPaginationPage";
 
 const AdminPage = () => {
   const router = useRouter();
@@ -69,14 +69,15 @@ const AdminPage = () => {
               onChange={onChange}
             />
             <div className="btn-box">
-              {adminEndPoint !== "requestForm" && (
+              {adminEndPoint !== "request" && (
                 <Button onClick={moveCreate}>글쓰기</Button>
               )}
               <Button onClick={adminLogout}>로그아웃</Button>
             </div>
           </Box>
-          {adminEndPoint === "requestForm" ? (
-            <AdminRequestPaginationPage />
+          {adminEndPoint === "request" ||
+          adminEndPoint === "installStatuses" ? (
+            <AdminPaginationPage endPoint={adminEndPoint} />
           ) : (
             <PaginationPage<Board | Announcement | Reference>
               endPoint={adminEndPoint}

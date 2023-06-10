@@ -18,7 +18,7 @@ export const searchState = atom({
 
 export const adminEndPointState = atom({
   key: "adminEndPointState",
-  default: "references",
+  default: "installStatuses",
 });
 
 export const isAdminLoginedState = atom({

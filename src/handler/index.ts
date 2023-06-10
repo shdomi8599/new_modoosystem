@@ -76,6 +76,7 @@ export const infiniteHandler =
           key: idx,
         };
       })
+      .sort((x, y) => x.id - y.id)
       .slice(startIndex, endIndex);
     const totalElements = apiData.length;
     res.status(200).json({ data, totalElements });

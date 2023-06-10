@@ -1,9 +1,10 @@
+import TableCategoryTagItem from "@/components/table/TableCategoryTagItem";
 import TableRequestStatusItem from "@/components/table/TableRequestStatusItem";
 import TableRequestTitleItem from "@/components/table/TableRequestTitleItem";
 import TableTitleItem from "@/components/table/TableTitleItem";
 import { HeaderItem, RequestForm } from "@/types";
 import { Announcement } from "@/types/pageData";
-import { TabsProps } from "antd";
+import { Button, TabsProps } from "antd";
 
 export const HEADER_ITEMS: HeaderItem[] = [
   {
@@ -116,6 +117,27 @@ export const REQUEST_COLUMNS_DATA = [
   },
 ];
 
+export const INSTALL_STATUSES_COLUMNS_DATA = [
+  {
+    title: "번호",
+    dataIndex: "id",
+    key: "id",
+  },
+  {
+    title: "제목",
+    dataIndex: "title",
+    key: "title",
+  },
+  {
+    title: "카테고리",
+    dataIndex: "categori",
+    key: "categori",
+    render: (_: unknown, { categori }: { categori: string[] }) => (
+      <TableCategoryTagItem items={categori} />
+    ),
+  },
+];
+
 export const STATUS_ITEMS = [
   { name: "처리 전", color: "red" },
   { name: "처리 중", color: "#e3ee44" },
@@ -167,6 +189,10 @@ export const SELECT_SEARCH_ITEMS = [
 
 export const TAB_ITEMS: TabsProps["items"] = [
   {
+    key: "installStatuses",
+    label: `설치현황`,
+  },
+  {
     key: "references",
     label: `자료실`,
   },
@@ -179,7 +205,7 @@ export const TAB_ITEMS: TabsProps["items"] = [
     label: `게시판`,
   },
   {
-    key: "requestForm",
+    key: "request",
     label: `견적의뢰`,
   },
 ];
