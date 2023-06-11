@@ -8,6 +8,7 @@ import { isAdminLoginedState } from "@/recoil/recoil";
 import type { RadioChangeEvent } from "antd";
 import { REQUEST_STATUS } from "@/datas/data/data";
 import useRequestMutate from "@/hooks/react-query/request/useRequestMutate";
+import { useRouter } from "next/router";
 
 const layout = {
   labelCol: {
@@ -19,7 +20,9 @@ const layout = {
 };
 
 const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
+  const router = useRouter();
   const [isAdminLogined] = useRecoilState(isAdminLoginedState);
+  const isAdminPage = router.asPath.includes("admin");
   const [requestData, setRequestData] = useState<CheckForm>();
   const { postCheckRequestMutate, updateAdminRequestMutate, onRouterLoading } =
     useRequestMutate({ setRequestData });
@@ -53,7 +56,7 @@ const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
     <>
       {requestData ? (
         <>
-          {isAdminLogined && (
+          {isAdminPage && (
             <AdminBox>
               <Radio.Group onChange={onChange} value={value}>
                 {REQUEST_STATUS.map((data) => (

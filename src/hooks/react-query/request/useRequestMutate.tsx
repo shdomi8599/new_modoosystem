@@ -39,7 +39,7 @@ const useRequestMutate = ({ setSuccess, setFormId, setRequestData }: Props) => {
         offRouterLoading();
       },
       onError: () => {
-        errorAlert("잠시 후에 다시 시도해주세요.", "견적조회");
+        errorAlert("신청번호를 확인해주세요.", "견적조회");
         offRouterLoading();
       },
     }
@@ -50,7 +50,7 @@ const useRequestMutate = ({ setSuccess, setFormId, setRequestData }: Props) => {
     {
       onSuccess: () => {
         successAlert("성공적으로 변경되었습니다.", "처리상태가");
-        router.push("/admin").then(() => router.reload());
+        router.back();
       },
       onError: () => {
         errorAlert("잠시 후에 다시 시도해주세요.", "처리상태");
