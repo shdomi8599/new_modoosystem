@@ -94,7 +94,13 @@ export const getAdminCheck = async () => {
   }).then((res) => res.data);
 };
 
-export const deleteAdminArticle = async (endPoint: string, id: number) => {
+export const deleteAdminArticle = async ({
+  endPoint,
+  id,
+}: {
+  endPoint: string;
+  id: string;
+}) => {
   const token = localStorage.getItem("token");
   const headers = {
     Authorization: `Bearer ${token}`,

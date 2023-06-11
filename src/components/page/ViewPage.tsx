@@ -1,5 +1,5 @@
 import { Announcement, Board, Reference } from "@/types/pageData";
-import { deleteAdminArticle, getData } from "@/util/api";
+import { getData } from "@/util/api";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { Button, Collapse, Input, Spin } from "antd";
@@ -14,6 +14,7 @@ import { useRecoilState } from "recoil";
 import { isAdminLoginedState } from "@/recoil/recoil";
 import AnswerCreateBox from "../answer/AnswerCreateBox";
 import useBoardsMutate from "@/hooks/react-query/boards/useBoardsMutate";
+import useArticleMutate from "@/hooks/react-query/article/useArticleMutate";
 
 const { Panel } = Collapse;
 
@@ -33,10 +34,10 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   const { link } = data as T extends Reference ? T : never;
   const { answers, secret } = data as T extends Board ? T : never;
 
+  const [isSecret, setIsSecret] = useState(secret);
   const { passwordHandler, password } = useCustomForm();
 
-  const [isSecret, setIsSecret] = useState(secret);
-
+  const { deleteAdminArticleMutate } = useArticleMutate();
   const { postCheckSecretBoardMutate, deleteBoardMutate, onRouterLoading } =
     useBoardsMutate({
       setIsSecret,
@@ -77,15 +78,7 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   const adminDeleteEvent = () => {
     if (confirm("정말 삭제하시겠습니까?")) {
       onRouterLoading();
-      deleteAdminArticle(endPoint, Number(id))
-        .then(() => {
-          alert("성공적으로 삭제되었습니다.");
-          router.push("/admin").then(() => router.reload());
-        })
-        .catch(() => {
-          offRouterLoading();
-          alert("비밀번호를 확인해주세요.");
-        });
+      deleteAdminArticleMutate.mutate({ endPoint, id: id as string });
     }
   };
 
