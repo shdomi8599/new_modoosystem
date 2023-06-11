@@ -5,10 +5,9 @@ import { Dayjs } from "dayjs";
 import "dayjs/locale/ko";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { KakaoAdress, FormItem, RequestForm } from "@/types";
-import { postRequest } from "@/util/api";
 import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
-import useRouterLoading from "@/hooks/useRouterLoading";
+import useRequestMutate from "@/hooks/react-query/request/useRequestMutate";
 
 const layout = {
   labelCol: {
@@ -22,7 +21,6 @@ const layout = {
 const { TextArea } = Input;
 
 const RequestPage = () => {
-  const { onRouterLoading, offRouterLoading } = useRouterLoading();
   //날짜 추출
   const [date, setDate] = useState<string | null>(null);
   const handleChange = (value: Dayjs | null) => {
@@ -51,6 +49,11 @@ const RequestPage = () => {
   //폼 신청 후, 신청 아이디
   const [formId, setFormId] = useState("");
 
+  const { onRouterLoading, postRequestMutate } = useRequestMutate({
+    setSuccess,
+    setFormId,
+  });
+
   //폼 데이터 관리
   const [form] = Form.useForm();
   const onFinish = (values: FormItem) => {
@@ -63,16 +66,7 @@ const RequestPage = () => {
       id,
       status: "처리 전",
     };
-    postRequest(data)
-      .then((res: string) => {
-        setSuccess(true);
-        setFormId(res);
-        offRouterLoading();
-      })
-      .catch(() => {
-        offRouterLoading();
-        alert("잠시 후에 다시 시도해주세요.");
-      });
+    postRequestMutate.mutate(data);
   };
   return (
     <Box>
