@@ -6,6 +6,7 @@ import { Button } from "antd";
 import { Answer } from "@/types/pageData";
 import { isAdminLoginedState } from "@/recoil/recoil";
 import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
+import { confirmAlert } from "../alert/Alert";
 
 const AnswerViewBox = ({ answers }: { answers: Answer[] }) => {
   const router = useRouter();
@@ -17,7 +18,7 @@ const AnswerViewBox = ({ answers }: { answers: Answer[] }) => {
   const { id } = router.query;
 
   const adminDeleteEvent = (answerId: number) => {
-    if (confirm("정말 답변을 삭제하시겠습니까?")) {
+    confirmAlert("정말 삭제하시겠습니까?", "답변 삭제를").then(() => {
       onRouterLoading();
 
       const data = {
@@ -26,7 +27,7 @@ const AnswerViewBox = ({ answers }: { answers: Answer[] }) => {
       };
 
       deleteAdminAnswerMutate.mutate(data);
-    }
+    });
   };
 
   return (
