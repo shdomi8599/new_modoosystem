@@ -1,15 +1,13 @@
 import { CheckForm } from "@/types";
 import styled from "styled-components";
 import { Button, Form, Input, Descriptions, Radio } from "antd";
-import { postCheckRequest, updateAdminRequest } from "@/util/api";
 import { useEffect, useState } from "react";
 import { FORM_ITEMS } from "@/datas/constants/constants";
-import useRouterLoading from "@/hooks/useRouterLoading";
 import { useRecoilState } from "recoil";
 import { isAdminLoginedState } from "@/recoil/recoil";
 import type { RadioChangeEvent } from "antd";
 import { REQUEST_STATUS } from "@/datas/data/data";
-import { useRouter } from "next/router";
+import useRequestMutate from "@/hooks/react-query/request/useRequestMutate";
 
 const layout = {
   labelCol: {
@@ -21,23 +19,15 @@ const layout = {
 };
 
 const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
-  const router = useRouter();
   const [isAdminLogined] = useRecoilState(isAdminLoginedState);
-  const { onRouterLoading, offRouterLoading } = useRouterLoading();
-  const [data, setData] = useState<CheckForm>();
+  const [requestData, setRequestData] = useState<CheckForm>();
+  const { postCheckRequestMutate, updateAdminRequestMutate, onRouterLoading } =
+    useRequestMutate({ setRequestData });
   //폼 데이터 관리
   const [form] = Form.useForm();
   const onFinish = (values: { requestId: string }) => {
     onRouterLoading();
-    postCheckRequest(values).then((res) => {
-      if (res) {
-        offRouterLoading();
-        setData(res);
-      } else {
-        offRouterLoading();
-        return alert("신청번호를 확인해주세요.");
-      }
-    });
+    postCheckRequestMutate.mutate(values);
   };
 
   useEffect(() => {
@@ -47,23 +37,21 @@ const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
   const [value, setValue] = useState("");
 
   useEffect(() => {
-    setValue(data?.status as string);
-  }, [data]);
+    setValue(requestData?.status as string);
+  }, [requestData]);
 
   const onChange = (e: RadioChangeEvent) => {
     if (adminRequestId) {
-      const data = { status: e.target.value, requestId: adminRequestId };
-      updateAdminRequest(data)
-        .then(() => {
-          alert("성공적으로 변경되었습니다.");
-          router.push("/admin").then(() => router.reload());
-        })
-        .catch(() => alert("잠시 후에 다시 시도해주세요."));
+      const data = {
+        status: e.target.value as string,
+        requestId: adminRequestId,
+      };
+      updateAdminRequestMutate.mutate(data);
     }
   };
   return (
     <>
-      {data ? (
+      {requestData ? (
         <>
           {isAdminLogined && (
             <AdminBox>
@@ -80,7 +68,7 @@ const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
             <Descriptions bordered title="견적신청조회">
               {FORM_ITEMS.map((item) => (
                 <Descriptions.Item key={item.name} label={item.name}>
-                  {data[item.id] ? data[item.id] : "정보없음"}
+                  {requestData[item.id] ? requestData[item.id] : "정보없음"}
                 </Descriptions.Item>
               ))}
             </Descriptions>

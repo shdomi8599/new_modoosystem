@@ -126,7 +126,11 @@ export const requestCheckHandler =
     const { requestId } = req.body;
     const apiData = await getDbAllData<CheckForm>("requestForm");
     const findData = apiData.find((data) => data.id === requestId);
-    res.status(200).json(findData);
+    if (findData) {
+      res.status(200).json(findData);
+    } else {
+      res.status(404).json("failed");
+    }
   };
 
 export const articleCreateHandler =
