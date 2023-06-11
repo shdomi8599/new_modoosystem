@@ -3,6 +3,7 @@ import { FormItem } from "@/types";
 import { Button, Form, Input, Select, Space } from "antd";
 import useRouterLoading from "@/hooks/useRouterLoading";
 import { INSTALL_CATEGORY } from "@/datas/constants/constants";
+import useCheckAdmin from "@/hooks/useCheckAdmin";
 const endPoint = "installStatuses";
 
 const layout = {
@@ -17,6 +18,7 @@ const layout = {
 const { Option } = Select;
 
 const AdminCreatePage = () => {
+  useCheckAdmin();
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
   //폼 데이터 관리
   const [form] = Form.useForm();

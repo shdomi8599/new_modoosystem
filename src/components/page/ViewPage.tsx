@@ -15,6 +15,7 @@ import { isAdminLoginedState } from "@/recoil/recoil";
 import AnswerCreateBox from "../answer/AnswerCreateBox";
 import useBoardsMutate from "@/hooks/react-query/boards/useBoardsMutate";
 import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
+import { confirmAlert } from "../alert/Alert";
 
 const { Panel } = Collapse;
 
@@ -44,11 +45,11 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
     });
 
   const checkSecretEvent = () => {
+    onRouterLoading();
     const data = {
       password,
       id: id as string,
     };
-    onRouterLoading();
     postCheckSecretBoardMutate.mutate({ id: id as string, data });
   };
 
@@ -62,10 +63,10 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   };
 
   const deleteEvent = () => {
-    if (confirm("정말 삭제하시겠습니까?")) {
+    confirmAlert("정말 삭제하시겠습니까?", "게시글을").then(() => {
       onRouterLoading();
       deleteBoardMutate.mutate({ id: id as string, password });
-    }
+    });
   };
 
   const [isAdminLogined] = useRecoilState(isAdminLoginedState);
@@ -76,10 +77,10 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   }, []);
 
   const adminDeleteEvent = () => {
-    if (confirm("정말 삭제하시겠습니까?")) {
+    confirmAlert("정말 삭제하시겠습니까?", "게시글을").then(() => {
       onRouterLoading();
       deleteAdminArticleMutate.mutate({ endPoint, id: id as string });
-    }
+    });
   };
 
   if (isError) return <div>잠시 후에 다시 시도해주세요.</div>;

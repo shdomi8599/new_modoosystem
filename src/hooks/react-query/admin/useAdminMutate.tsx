@@ -21,9 +21,10 @@ const useAdminMutate = () => {
     (data: { id: string; password: string }) => postAdminLogin(data),
     {
       onSuccess: (res: { token: string }) => {
-        offRouterLoading();
+        successAlert("로그인되었습니다.", "관리자");
         localStorage.setItem("token", res.token);
         setIsAdminLogined(true);
+        offRouterLoading();
       },
       onError: () => {
         errorAlert("비밀번호를 확인해주세요.", "관리자 로그인");

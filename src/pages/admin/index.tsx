@@ -11,7 +11,7 @@ import { adminEndPointState, isAdminLoginedState } from "@/recoil/recoil";
 import { useRouter } from "next/router";
 import AdminPaginationPage from "@/components/page/AdminPaginationPage";
 import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
-import { successAlert } from "@/components/alert/Alert";
+import { confirmAlert } from "@/components/alert/Alert";
 
 const AdminPage = () => {
   const router = useRouter();
@@ -38,16 +38,17 @@ const AdminPage = () => {
   };
 
   const adminLogout = () => {
-    if (confirm("정말 로그아웃 하시겠습니까?")) {
-      successAlert("로그아웃 되었습니다.", "관리자");
+    confirmAlert("정말 로그아웃 하시겠습니까?", "로그아웃이").then(() => {
       localStorage.removeItem("token");
       setIsAdminLogined(false);
       router.push("/");
-    }
+    });
   };
 
   const moveCreate = () => {
-    router.push(`/admin/${adminEndPoint}/create`);
+    confirmAlert("이동하시겠습니까?", "글쓰기가").then(() =>
+      router.push(`/admin/${adminEndPoint}/create`)
+    );
   };
 
   return (
