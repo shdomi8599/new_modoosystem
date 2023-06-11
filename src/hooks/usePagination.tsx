@@ -13,21 +13,16 @@ interface Props {
 
 const usePagination = <T,>({ endPoint }: Props) => {
   const [adminEndPoint] = useRecoilState(adminEndPointState);
+
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
+
   const { search } = useSearch();
   const { searchVal, category } = search;
+
   const queryKey = searchVal
     ? [endPoint, page, category, searchVal]
     : [endPoint, page];
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-  }, [page, size]);
 
   const handlePageChange = (newPage: number, newSize: number) => {
     setPage(newPage);
@@ -47,6 +42,11 @@ const usePagination = <T,>({ endPoint }: Props) => {
 
   useEffect(() => {
     refetch();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   }, [size, page]);
 
   return {

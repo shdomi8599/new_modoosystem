@@ -17,15 +17,24 @@ const { TextArea } = Input;
 
 const AnswerCreateBox = () => {
   const router = useRouter();
-  const { id } = router.query;
+  
   const { postAdminAnswerMutate, onRouterLoading } = useAdminMutate();
-  //폼 데이터 관리
+  
   const [form] = Form.useForm();
+  
+  const { id } = router.query;
+
   const onFinish = (values: { content: string }) => {
     onRouterLoading();
-    const data = { ...values, id: id as string };
+
+    const data = {
+      ...values,
+      id: id as string,
+    };
+
     postAdminAnswerMutate.mutate(data);
   };
+
   return (
     <Box>
       <Form form={form} {...layout} name="control-hooks" onFinish={onFinish}>

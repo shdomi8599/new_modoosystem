@@ -13,18 +13,27 @@ interface Props<T> {
 
 const TableTitleItem = <T extends { id: number }>({ text, data }: Props<T>) => {
   const router = useRouter();
+
   const { asPath } = router;
+
+  const isAdminPage = asPath.includes("admin");
   const { id } = data;
   const { answers, secret } = data as T extends Board ? T : never;
+
   const { onRouterLoading } = useRouterLoading();
+
   const [adminEndPoint] = useRecoilState(adminEndPointState);
+
   const moveView = () => {
     onRouterLoading();
-    if (asPath.includes("admin")) {
+
+    if (isAdminPage) {
       return router.push(`${asPath}/${adminEndPoint}/${id}`);
     }
+
     router.push(`${asPath}/${id}`);
   };
+
   return (
     <Box onClick={moveView}>
       <span>{text}</span>

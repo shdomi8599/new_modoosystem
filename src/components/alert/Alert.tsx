@@ -19,6 +19,7 @@ export const errorAlert = (text: string, title: string) => {
     confirmButtonColor: "#F27474",
   });
 };
+
 export const confirmAlert = (text: string, title: string) => {
   return new Promise<void>((resolve, reject) => {
     Swal.fire({
@@ -72,15 +73,13 @@ export const successToast = (text: string, callback?: () => void) => {
 };
 
 export const errorToast = (text: string) => {
-  if (text) {
-    Swal.fire({
-      icon: "error",
-      title: text,
-      toast: true,
-      position: "center",
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
-    });
-  }
+  Swal.fire({
+    icon: "error",
+    title: text,
+    toast: true,
+    position: "center",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+  });
 };

@@ -9,16 +9,26 @@ import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
 
 const AnswerViewBox = ({ answers }: { answers: Answer[] }) => {
   const router = useRouter();
-  const { id } = router.query;
+
   const isAdminLogined = useRecoilValue(isAdminLoginedState);
+
   const { deleteAdminAnswerMutate, onRouterLoading } = useAdminMutate();
+
+  const { id } = router.query;
+
   const adminDeleteEvent = (answerId: number) => {
     if (confirm("정말 답변을 삭제하시겠습니까?")) {
       onRouterLoading();
-      const data = { id: id as string, answerId };
+
+      const data = {
+        id: id as string,
+        answerId,
+      };
+
       deleteAdminAnswerMutate.mutate(data);
     }
   };
+
   return (
     <Box>
       <div className="title">답변</div>

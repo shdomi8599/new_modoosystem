@@ -14,8 +14,11 @@ const InstallationPage = () => {
   const { isLoading, error, data, fetchNextPage, hasNextPage, isFetching } =
     useInfinite<InstallStatus>(endPoint, page_limit);
 
+  const flatData = data?.pages.flatMap((page) => page.data);
+
   //무한 스크롤 effect
   const target = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (target.current && !hasNextPage) {
       return;
@@ -39,8 +42,6 @@ const InstallationPage = () => {
       }
     };
   }, [data?.pageParams, fetchNextPage, hasNextPage]);
-
-  const flatData = data?.pages.flatMap((page) => page.data);
 
   if (error) return <div>잠시 후에 다시 시도해주세요.</div>;
   if (isLoading) return <Spin />;

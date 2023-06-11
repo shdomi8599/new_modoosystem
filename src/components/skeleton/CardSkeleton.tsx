@@ -4,6 +4,7 @@ import Skeleton from "./Skeleton";
 
 const CardSkeleton = ({ size }: { size: number }) => {
   const skeletonLength = Array(size).fill(1);
+
   return (
     <>
       {skeletonLength.map((_: 1, idx) => (

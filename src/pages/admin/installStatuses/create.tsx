@@ -21,9 +21,11 @@ const { Option } = Select;
 
 const AdminCreatePage = () => {
   useCheckAdmin();
-  const { onRouterLoading, offRouterLoading } = useRouterLoading();
-  //폼 데이터 관리
+
+  const { onRouterLoading } = useRouterLoading();
+
   const [form] = Form.useForm();
+
   const onFinish = (values: FormItem) => {
     onRouterLoading();
     console.log(values);

@@ -8,9 +8,11 @@ interface Props {
 
 const TableInstallTitleItem = ({ title, id }: Props) => {
   const router = useRouter();
+
   const moveViewInstall = () => {
     router.push(`/admin/installStatuses/${id}`);
   };
+  
   return <Box onClick={moveViewInstall}>{title}</Box>;
 };
 

@@ -8,11 +8,11 @@ import { FOOTER_ITEMS } from "@/datas/data/data";
 
 const Footer = () => {
   const router = useRouter();
+
   const onClickLink = (e: { preventDefault: () => void }, href: string) => {
-    if (!href) {
-      e.preventDefault();
-    }
+    !href && e.preventDefault();
   };
+  
   return (
     <Box>
       <div className="logo-box">

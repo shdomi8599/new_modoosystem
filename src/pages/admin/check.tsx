@@ -6,7 +6,9 @@ import { adminRequestIdState } from "@/recoil/recoil";
 
 const CheckPage = () => {
   useCheckAdmin();
+
   const adminRequestId = useRecoilValue(adminRequestIdState);
+  
   return <RequestCheckPage adminRequestId={adminRequestId} />;
 };
 

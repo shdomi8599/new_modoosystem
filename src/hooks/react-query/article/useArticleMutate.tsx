@@ -9,6 +9,7 @@ import useRouterLoading from "../../useRouterLoading";
 
 const useArticleMutate = () => {
   const router = useRouter();
+
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
 
   const postArticleMutate = useMutation(
@@ -16,10 +17,12 @@ const useArticleMutate = () => {
     {
       onSuccess: () => {
         successAlert("등록되었습니다.", "게시글");
+
         router.back();
       },
       onError: () => {
         errorAlert("잠시 후에 다시 시도해주세요.", "견적의뢰");
+
         offRouterLoading();
       },
     }

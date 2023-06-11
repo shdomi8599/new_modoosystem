@@ -7,25 +7,32 @@ const { Meta } = Card;
 
 const InstallStatusesCard = ({ data }: { data: InstallStatus }) => {
   const [category, setCategory] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+
+  const [currentImg, setCurrentImg] = useState(0);
+
   const categoryOver = () => {
     setCategory(true);
   };
+
   const categoryOut = () => {
     setCategory(false);
   };
 
-  const [loading, setLoading] = useState(false);
-  const [currentImg, setCurrentImg] = useState(0);
   const currentImgHandler = (idx: number) => {
     if (idx === currentImg) {
       return;
     }
+
     setLoading(true);
     setCurrentImg(idx);
   };
+
   const handleImageLoad = () => {
     setLoading(false);
   };
+
   return (
     <Card
       className="card"

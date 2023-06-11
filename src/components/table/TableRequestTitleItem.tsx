@@ -13,14 +13,19 @@ interface Props {
 
 const TableRequestTitleItem = ({ text, data }: Props) => {
   const router = useRouter();
+
   const { asPath } = router;
+
   const { onRouterLoading } = useRouterLoading();
+
   const [, setAdminRequestId] = useRecoilState(adminRequestIdState);
+
   const moveView = () => {
     onRouterLoading();
     setAdminRequestId(data.id);
     router.push(`${asPath}/check`);
   };
+
   return (
     <Box onClick={moveView}>
       <span>{text}</span>

@@ -16,7 +16,9 @@ import useRouterLoading from "../../useRouterLoading";
 
 const useAdminMutate = () => {
   const router = useRouter();
+
   const setIsAdminLogined = useSetRecoilState(isAdminLoginedState);
+
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
 
   const postAdminLoginMutate = useMutation(
@@ -24,12 +26,16 @@ const useAdminMutate = () => {
     {
       onSuccess: (res: { token: string }) => {
         successAlert("로그인되었습니다.", "관리자");
+
         localStorage.setItem("token", res.token);
+
         setIsAdminLogined(true);
+
         offRouterLoading();
       },
       onError: () => {
         errorAlert("비밀번호를 확인해주세요.", "관리자 로그인");
+
         offRouterLoading();
       },
     }
@@ -40,10 +46,12 @@ const useAdminMutate = () => {
     {
       onSuccess: () => {
         successAlert("성공적으로 변경되었습니다.", "처리상태가");
+
         router.back();
       },
       onError: () => {
         errorAlert("잠시 후에 다시 시도해주세요.", "처리상태");
+
         offRouterLoading();
       },
     }
@@ -54,10 +62,12 @@ const useAdminMutate = () => {
     {
       onSuccess: () => {
         successAlert("삭제되었습니다.", "게시글");
+
         router.back();
       },
       onError: () => {
         errorAlert("잠시 후에 다시 시도해주세요.", "게시글 삭제");
+
         offRouterLoading();
       },
     }
@@ -68,10 +78,12 @@ const useAdminMutate = () => {
     {
       onSuccess: () => {
         successAlert("작성되었습니다.", "답변");
+
         router.back();
       },
       onError: () => {
         errorAlert("잠시 후에 다시 시도해주세요.", "답변 작성");
+
         offRouterLoading();
       },
     }
@@ -82,10 +94,12 @@ const useAdminMutate = () => {
     {
       onSuccess: () => {
         successAlert("삭제되었습니다.", "답변");
+
         router.back();
       },
       onError: () => {
         errorAlert("잠시 후에 다시 시도해주세요.", "답변 삭제");
+        
         offRouterLoading();
       },
     }

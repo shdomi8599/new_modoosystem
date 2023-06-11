@@ -23,29 +23,25 @@ const layout = {
 
 const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
   const router = useRouter();
-  const [isAdminLogined] = useRecoilState(isAdminLoginedState);
-  const isAdminPage = router.asPath.includes("admin");
+
+  const [value, setValue] = useState("");
   const [requestData, setRequestData] = useState<CheckForm>();
+  const [isAdminLogined] = useRecoilState(isAdminLoginedState);
+
+  const isAdminPage = router.asPath.includes("admin");
+
   const { updateAdminRequestMutate } = useAdminMutate();
+
   const { postCheckRequestMutate, onRouterLoading } = useRequestMutate({
     setRequestData,
   });
-  //폼 데이터 관리
+
   const [form] = Form.useForm();
+
   const onFinish = (values: { requestId: string }) => {
     onRouterLoading();
     postCheckRequestMutate.mutate(values);
   };
-
-  useEffect(() => {
-    if (adminRequestId) onFinish({ requestId: adminRequestId });
-  }, [isAdminLogined]);
-
-  const [value, setValue] = useState("");
-
-  useEffect(() => {
-    setValue(requestData?.status as string);
-  }, [requestData]);
 
   const onChange = (e: RadioChangeEvent) => {
     if (adminRequestId) {
@@ -56,6 +52,15 @@ const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
       updateAdminRequestMutate.mutate(data);
     }
   };
+
+  useEffect(() => {
+    if (adminRequestId) onFinish({ requestId: adminRequestId });
+  }, [isAdminLogined]);
+
+  useEffect(() => {
+    setValue(requestData?.status as string);
+  }, [requestData]);
+
   return (
     <>
       {requestData ? (

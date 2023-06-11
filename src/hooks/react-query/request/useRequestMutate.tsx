@@ -21,11 +21,14 @@ const useRequestMutate = ({ setSuccess, setFormId, setRequestData }: Props) => {
     {
       onSuccess: (id: string) => {
         setFormId && setFormId(id);
+
         setSuccess && setSuccess(true);
+
         offRouterLoading();
       },
       onError: () => {
         errorAlert("잠시 후에 다시 시도해주세요.", "견적의뢰");
+
         offRouterLoading();
       },
     }
@@ -36,10 +39,12 @@ const useRequestMutate = ({ setSuccess, setFormId, setRequestData }: Props) => {
     {
       onSuccess: (data) => {
         setRequestData && setRequestData(data);
+
         offRouterLoading();
       },
       onError: () => {
         errorAlert("신청번호를 확인해주세요.", "견적조회");
+        
         offRouterLoading();
       },
     }

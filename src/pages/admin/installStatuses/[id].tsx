@@ -11,17 +11,22 @@ import { getData } from "@/util/api";
 
 const AdminViewPage = () => {
   useCheckAdmin();
-  const { onRouterLoading, offRouterLoading } = useRouterLoading();
-  const [loading, setLoading] = useState(false);
-  const handleImageLoad = () => {
-    setLoading(true);
-  };
+
   const router = useRouter();
   const { id } = router.query;
+
+  const [loading, setLoading] = useState(false);
+
+  const { onRouterLoading, offRouterLoading } = useRouterLoading();
+
   const { data, isError } = useQuery<InstallStatus>({
     queryKey: ["installStatuses", "view", id],
     queryFn: () => getData<InstallStatus>("installStatuses", id as string),
   });
+
+  const handleImageLoad = () => {
+    setLoading(true);
+  };
 
   useEffect(() => {
     onRouterLoading();

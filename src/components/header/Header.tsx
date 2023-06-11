@@ -21,25 +21,31 @@ import ModalNavItem from "./ModalNavItem";
 
 const Header = () => {
   const router = useRouter();
+
   const { asPath } = router;
+
   const { product } = router.query;
 
-  function findCurrentPageName() {
+  const findCurrentPageName = () => {
     const page =
       ROUTER.find((data) => asPath === data.href) ||
       ROUTER.find((data) => asPath.includes(data.href));
     return page?.name || (product as string);
-  }
+  };
+
   const currentPageName = findCurrentPageName();
 
+  const { routerLoading } = useRouterLoading();
+
   const [headerNav, setHeaderNav] = useRecoilState(headerNavState);
+
+  const [, setIsAdminLogined] = useRecoilState(isAdminLoginedState);
+
   useOffResize(960, "up", setHeaderNav);
 
   const navHandler = () => {
     setHeaderNav(!headerNav);
   };
-
-  const [, setIsAdminLogined] = useRecoilState(isAdminLoginedState);
 
   useEffect(() => {
     setHeaderNav(false);
@@ -55,7 +61,6 @@ const Header = () => {
     }
   }, [router]);
 
-  const { routerLoading } = useRouterLoading();
   return (
     <>
       <HeadTitle

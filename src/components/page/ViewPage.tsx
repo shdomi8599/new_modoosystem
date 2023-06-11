@@ -22,14 +22,19 @@ const { Panel } = Collapse;
 
 const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   const router = useRouter();
+
+  const [isAdminLogined] = useRecoilState(isAdminLoginedState);
+
   const { id } = router.query;
+
+  const isReference = router.asPath.includes("references");
+  const isBoard = router.asPath.includes("boards");
+
   const { data, isLoading, isError } = useQuery<T>({
     queryKey: [endPoint, "view", id],
     queryFn: () => getData<T>(endPoint, id as string),
   });
 
-  const isReference = router.asPath.includes("references");
-  const isBoard = router.asPath.includes("boards");
   const { title, content, createAt, author } = data as T extends Announcement
     ? T
     : never;
@@ -37,9 +42,11 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   const { answers, secret } = data as T extends Board ? T : never;
 
   const [isSecret, setIsSecret] = useState(secret);
+
   const { passwordHandler, password } = useCustomForm();
 
   const { deleteAdminArticleMutate } = useAdminMutate();
+
   const { postCheckSecretBoardMutate, deleteBoardMutate, onRouterLoading } =
     useBoardsMutate({
       setIsSecret,
@@ -47,10 +54,12 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
 
   const checkSecretEvent = () => {
     onRouterLoading();
+
     const data = {
       password,
       id: id as string,
     };
+
     postCheckSecretBoardMutate.mutate({ id: id as string, data });
   };
 
@@ -58,6 +67,7 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
     if (e.key === "Enter" && isSecret) {
       return checkSecretEvent();
     }
+
     if (e.key === "Enter") {
       deleteEvent();
     }
@@ -70,19 +80,18 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
     });
   };
 
-  const [isAdminLogined] = useRecoilState(isAdminLoginedState);
-  useEffect(() => {
-    if (isAdminLogined) {
-      setIsSecret(false);
-    }
-  }, []);
-
   const adminDeleteEvent = () => {
     confirmAlert("정말 삭제하시겠습니까?", "게시글 삭제가").then(() => {
       onRouterLoading();
       deleteAdminArticleMutate.mutate({ endPoint, id: id as string });
     });
   };
+
+  useEffect(() => {
+    if (isAdminLogined) {
+      setIsSecret(false);
+    }
+  }, []);
 
   if (isError) return <div>잠시 후에 다시 시도해주세요.</div>;
   return (

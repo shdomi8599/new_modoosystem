@@ -8,7 +8,9 @@ import { HeaderItem } from "@/types";
 
 const ModalNavItem = ({ name, content }: HeaderItem) => {
   const router = useRouter();
+
   const [nav, setNav] = useState(false);
+
   const navHandler = () => {
     setNav(!nav);
   };
@@ -16,6 +18,7 @@ const ModalNavItem = ({ name, content }: HeaderItem) => {
   useEffect(() => {
     setNav(false);
   }, [router]);
+
   return (
     <Box nav={nav}>
       <div onClick={navHandler} className="title">

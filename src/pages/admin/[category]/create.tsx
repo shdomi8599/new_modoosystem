@@ -5,8 +5,11 @@ import useCheckAdmin from "@/hooks/useCheckAdmin";
 
 const AdminCreatePage = () => {
   useCheckAdmin();
+
   const router = useRouter();
+
   const { category } = router.query;
+
   return <CreatePage endPoint={category as string} />;
 };
 

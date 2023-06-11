@@ -20,28 +20,36 @@ const { TextArea } = Input;
 
 const CreatePage = ({ endPoint }: { endPoint: string }) => {
   const router = useRouter();
+
   const { asPath } = router;
+
   const isBoardPage = asPath.includes("boards");
   const isAdminPage = asPath.includes("admin");
   const isReferencePage = asPath.includes("references");
-  const { postArticleMutate, onRouterLoading } = useArticleMutate();
-  //폼 데이터 관리
-  const [form] = Form.useForm();
-  const onFinish = (values: FormItem) => {
-    onRouterLoading();
-    const data = { ...values, secret };
-    postArticleMutate.mutate({ endPoint, data });
-  };
-  const [secret, setSecret] = useState(false);
-  const onChange = (e: CheckboxChangeEvent) => {
-    setSecret(e.target.checked);
-  };
 
   const initialValues = isAdminPage
     ? {
         ["author"]: "관리자",
       }
     : {};
+
+  const { postArticleMutate, onRouterLoading } = useArticleMutate();
+
+  const [form] = Form.useForm();
+
+  const [secret, setSecret] = useState(false);
+
+  const onChange = (e: CheckboxChangeEvent) => {
+    setSecret(e.target.checked);
+  };
+
+  const onFinish = (values: FormItem) => {
+    onRouterLoading();
+
+    const data = { ...values, secret };
+
+    postArticleMutate.mutate({ endPoint, data });
+  };
 
   return (
     <Box>

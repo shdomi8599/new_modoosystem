@@ -13,6 +13,7 @@ interface Props {
 
 const useBoardsMutate = ({ setIsSecret }: Props) => {
   const router = useRouter();
+
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
 
   const postCheckSecretBoardMutate = useMutation(
@@ -26,10 +27,12 @@ const useBoardsMutate = ({ setIsSecret }: Props) => {
     {
       onSuccess: () => {
         setIsSecret(false);
+
         offRouterLoading();
       },
       onError: () => {
         errorAlert("비밀번호를 확인해주세요.", "게시글");
+
         offRouterLoading();
       },
     }
@@ -40,10 +43,12 @@ const useBoardsMutate = ({ setIsSecret }: Props) => {
     {
       onSuccess: () => {
         successAlert("성공적으로 삭제되었습니다.", "게시글이");
+
         router.back();
       },
       onError: () => {
         errorAlert("비밀번호를 확인해주세요.", "게시글");
+        
         offRouterLoading();
       },
     }

@@ -13,14 +13,16 @@ const DirectionsPage = () => {
   //load를 상태로 관리하여 카카오 맵이 랜더링될 수 있도록 수정함
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
-  useEffect(() => {
-    const handleMapLoad = () => {
-      setIsMapLoaded(true);
-    };
+  const handleMapLoad = () => {
+    setIsMapLoaded(true);
+  };
 
+  useEffect(() => {
     const script = document.createElement("script");
+
     script.src =
       "https://dapi.kakao.com/v2/maps/sdk.js?appkey=d9c8da4f69cb2eaf68d388c57d8b31af&autoload=false";
+
     script.onload = handleMapLoad;
 
     document.body.appendChild(script);

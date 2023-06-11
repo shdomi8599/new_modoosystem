@@ -32,17 +32,23 @@ const TableContent = <T extends object>({
   columns,
   totalElements,
 }: Props<T>) => {
-  const { setSearch } = useSearch();
   const router = useRouter();
+
   const { asPath } = router;
   const isBtn = asPath === "/service/boards";
+
+  const { setSearch } = useSearch();
+
+  const [form] = Form.useForm();
+
   const moveCreate = () => {
     router.push(`${asPath}/create`);
   };
-  const [form] = Form.useForm();
+
   const onFinish = (values: { category: string; searchVal: string }) => {
     setSearch(values);
   };
+  
   return (
     <Box>
       {isBtn && (

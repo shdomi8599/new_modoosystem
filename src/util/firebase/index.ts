@@ -23,6 +23,7 @@ export const updateDbData = async <T extends {}>(
   data: T
 ) => {
   const docRef = doc(db, collectionName, id);
+
   await setDoc(docRef, data);
 };
 
@@ -31,6 +32,7 @@ export const updateDbData = async <T extends {}>(
  */
 export const deleteDbData = async (collectionName: string, id: string) => {
   const docRef = doc(db, collectionName, id);
+
   await deleteDoc(docRef);
 };
 
@@ -53,7 +55,9 @@ export const getDbDataByDocName = async <T>(
   docName: string
 ): Promise<T> => {
   const docRef = doc(db, collectionName, docName);
+
   const docSnapshot = await getDoc(docRef);
+
   return docSnapshot.data() as T;
 };
 
@@ -62,7 +66,9 @@ export const getDbDataByDocName = async <T>(
  */
 export const getDbAllData = async <T>(collectionName: string): Promise<T[]> => {
   const querySnapshot = await getDocs(collection(db, collectionName));
+
   const dataArray = querySnapshot.docs.map((doc) => doc.data() as T);
+
   return dataArray;
 };
 
@@ -73,9 +79,11 @@ export const getDbAllDataAndId = async <T>(
   collectionName: string
 ): Promise<{ docId: string; docData: T }[]> => {
   const querySnapshot = await getDocs(collection(db, collectionName));
+
   const dataArray = querySnapshot.docs.map((doc) => {
     const data = { docId: doc.id, docData: doc.data() as T };
     return data;
   });
+
   return dataArray;
 };

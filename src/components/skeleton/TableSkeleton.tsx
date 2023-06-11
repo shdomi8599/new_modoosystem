@@ -4,6 +4,7 @@ import Skeleton from "./Skeleton";
 
 const TableSkeleton = ({ size }: { size: number }) => {
   const skeletonLength = Array(size + 1).fill(1);
+  
   return (
     <Box>
       <div className="main">

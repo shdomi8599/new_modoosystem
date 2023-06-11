@@ -9,19 +9,25 @@ import { HeaderItem } from "@/types";
 
 const NavItem = ({ name, content }: HeaderItem) => {
   const router = useRouter();
+
   const { resetSearch } = useSearch();
   const { offRouterLoading, onRouterLoading } = useRouterLoading();
+
+  const [hover, setHover] = useState(false);
+
+  const onHover = () => {
+    setHover(true);
+  };
+
+  const offHover = () => {
+    setHover(false);
+  };
+
   useEffect(() => {
     resetSearch();
     offRouterLoading();
   }, [router]);
-  const [hover, setHover] = useState(false);
-  const onHover = () => {
-    setHover(true);
-  };
-  const offHover = () => {
-    setHover(false);
-  };
+
   return (
     <Box className="flex-center" onMouseEnter={onHover} onMouseLeave={offHover}>
       <div>{name}</div>

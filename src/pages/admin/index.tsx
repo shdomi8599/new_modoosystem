@@ -16,9 +16,14 @@ import { confirmAlert } from "@/components/alert/Alert";
 
 const AdminPage = () => {
   const router = useRouter();
+
   const [isAdminLogined, setIsAdminLogined] =
     useRecoilState(isAdminLoginedState);
+
+  const [adminEndPoint, setAdminEndPoint] = useRecoilState(adminEndPointState);
+
   const { postAdminLoginMutate, onRouterLoading } = useAdminMutate();
+
   const { id, password, idHandler, passwordHandler } = useCustomForm();
 
   const checkSecretEvent = () => {
@@ -33,7 +38,6 @@ const AdminPage = () => {
     }
   };
 
-  const [adminEndPoint, setAdminEndPoint] = useRecoilState(adminEndPointState);
   const onChange = (key: string) => {
     setAdminEndPoint(key);
   };

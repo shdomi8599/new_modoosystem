@@ -22,18 +22,35 @@ const layout = {
 const { TextArea } = Input;
 
 const RequestPage = () => {
+  //폼 데이터 관리
+  const [form] = Form.useForm();
+
   //날짜 추출
   const [date, setDate] = useState<string | null>(null);
-  const handleChange = (value: Dayjs | null) => {
-    value && setDate(value.locale("ko").format("YYYY-MM-DD"));
-  };
 
   //주소 추출
   const [address, setAddress] = useState<KakaoAdress>({
     address: "",
     zonecode: "",
   });
+  //우편 번호
   const [openPostcode, setOpenPostcode] = useState<boolean>(false);
+
+  //폼 제출 확인
+  const [success, setSuccess] = useState(false);
+
+  //폼 신청 후, 신청 아이디
+  const [formId, setFormId] = useState("");
+
+  const handleChange = (value: Dayjs | null) => {
+    value && setDate(value.locale("ko").format("YYYY-MM-DD"));
+  };
+
+  const { onRouterLoading, postRequestMutate } = useRequestMutate({
+    setSuccess,
+    setFormId,
+  });
+
   const handle = {
     clickButton: () => {
       setOpenPostcode((current) => !current);
@@ -45,18 +62,6 @@ const RequestPage = () => {
     },
   };
 
-  //폼 제출 확인
-  const [success, setSuccess] = useState(false);
-  //폼 신청 후, 신청 아이디
-  const [formId, setFormId] = useState("");
-
-  const { onRouterLoading, postRequestMutate } = useRequestMutate({
-    setSuccess,
-    setFormId,
-  });
-
-  //폼 데이터 관리
-  const [form] = Form.useForm();
   const onFinish = (values: FormItem) => {
     onRouterLoading();
     const id = uuidv4();
@@ -69,6 +74,7 @@ const RequestPage = () => {
     };
     postRequestMutate.mutate(data);
   };
+  
   return (
     <Box>
       {!success ? (

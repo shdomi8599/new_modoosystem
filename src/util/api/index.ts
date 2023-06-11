@@ -29,17 +29,17 @@ export const getPageData = async <T>(
 export const getData = async <T>(endPoint: string, id: string): Promise<T> => {
   return await api(`api/${endPoint}/${id}`).then((res) => res.data);
 };
-//
+
 export const postRequest = async (data: RequestForm): Promise<string> => {
   return await api.post(`api/request/create`, data).then((res) => res.data);
 };
-//
+
 export const postCheckRequest = async (data: {
   requestId: string;
 }): Promise<CheckForm> => {
   return await api.post(`api/request/check`, data).then((res) => res.data);
 };
-//
+
 export const postArticle = async ({
   endPoint,
   data,
@@ -49,7 +49,7 @@ export const postArticle = async ({
 }) => {
   return await api.post(`api/${endPoint}/create`, data).then((res) => res.data);
 };
-//
+
 export const deleteBoard = async ({
   id,
   password,
@@ -61,7 +61,7 @@ export const deleteBoard = async ({
     .delete(`api/boards/${id}/delete?password=${password}`)
     .then((res) => res.data);
 };
-//
+
 export const postCheckSecretBoard = async ({
   id,
   data,
@@ -76,7 +76,7 @@ export const postCheckSecretBoard = async ({
     .post(`api/boards/${id}/secret`, data)
     .then((res) => res.data);
 };
-//
+
 export const postAdminLogin = async (data: {
   id: string;
   password: string;
@@ -86,14 +86,16 @@ export const postAdminLogin = async (data: {
 
 export const getAdminCheck = async () => {
   const token = localStorage.getItem("token");
+
   const headers = {
     Authorization: `Bearer ${token}`,
   };
+
   return await api("api/admin/check", {
     headers,
   }).then((res) => res.data);
 };
-//
+
 export const deleteAdminArticle = async ({
   endPoint,
   id,
@@ -102,24 +104,28 @@ export const deleteAdminArticle = async ({
   id: string;
 }) => {
   const token = localStorage.getItem("token");
+
   const headers = {
     Authorization: `Bearer ${token}`,
   };
+
   return await api
     .delete(`api/admin/delete/${id}?endPoint=${endPoint}`, {
       headers,
     })
     .then((res) => res.data);
 };
-//
+
 export const updateAdminRequest = async (data: {
   requestId: string;
   status: string;
 }) => {
   const token = localStorage.getItem("token");
+
   const headers = {
     Authorization: `Bearer ${token}`,
   };
+
   return await api
     .put(`api/admin/check/status`, data, {
       headers,
@@ -132,9 +138,11 @@ export const postAdminAnswer = async (data: {
   content: string;
 }) => {
   const token = localStorage.getItem("token");
+
   const headers = {
     Authorization: `Bearer ${token}`,
   };
+
   return await api
     .put(`api/admin/answer/create`, data, {
       headers,
@@ -150,9 +158,11 @@ export const deleteAdminAnswer = async ({
   answerId: number;
 }) => {
   const token = localStorage.getItem("token");
+
   const headers = {
     Authorization: `Bearer ${token}`,
   };
+
   return await api
     .delete(`api/admin/answer/delete?id=${id}&answerId=${answerId}`, {
       headers,
