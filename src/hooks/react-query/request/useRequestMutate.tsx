@@ -1,10 +1,9 @@
 import useRouterLoading from "../../useRouterLoading";
 import { useMutation } from "react-query";
-import { postCheckRequest, postRequest, updateAdminRequest } from "@/util/api";
+import { postCheckRequest, postRequest } from "@/util/api";
 import { CheckForm, RequestForm } from "@/types";
-import { errorAlert, successAlert } from "@/components/alert/Alert";
+import { errorAlert } from "@/components/alert/Alert";
 import { SetStateAction } from "react";
-import { useRouter } from "next/router";
 
 interface Props {
   setSuccess?: (value: SetStateAction<boolean>) => void;
@@ -13,7 +12,6 @@ interface Props {
 }
 
 const useRequestMutate = ({ setSuccess, setFormId, setRequestData }: Props) => {
-  const router = useRouter();
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
 
   const postRequestMutate = useMutation(
@@ -45,24 +43,9 @@ const useRequestMutate = ({ setSuccess, setFormId, setRequestData }: Props) => {
     }
   );
 
-  const updateAdminRequestMutate = useMutation(
-    (data: { status: string; requestId: string }) => updateAdminRequest(data),
-    {
-      onSuccess: () => {
-        successAlert("성공적으로 변경되었습니다.", "처리상태가");
-        router.back();
-      },
-      onError: () => {
-        errorAlert("잠시 후에 다시 시도해주세요.", "처리상태");
-        offRouterLoading();
-      },
-    }
-  );
-
   return {
     postRequestMutate,
     postCheckRequestMutate,
-    updateAdminRequestMutate,
     onRouterLoading,
   };
 };

@@ -14,7 +14,7 @@ import { useRecoilState } from "recoil";
 import { isAdminLoginedState } from "@/recoil/recoil";
 import AnswerCreateBox from "../answer/AnswerCreateBox";
 import useBoardsMutate from "@/hooks/react-query/boards/useBoardsMutate";
-import useArticleMutate from "@/hooks/react-query/article/useArticleMutate";
+import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
 
 const { Panel } = Collapse;
 
@@ -37,7 +37,7 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   const [isSecret, setIsSecret] = useState(secret);
   const { passwordHandler, password } = useCustomForm();
 
-  const { deleteAdminArticleMutate } = useArticleMutate();
+  const { deleteAdminArticleMutate } = useAdminMutate();
   const { postCheckSecretBoardMutate, deleteBoardMutate, onRouterLoading } =
     useBoardsMutate({
       setIsSecret,

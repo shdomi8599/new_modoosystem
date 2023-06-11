@@ -9,6 +9,7 @@ import type { RadioChangeEvent } from "antd";
 import { REQUEST_STATUS } from "@/datas/data/data";
 import useRequestMutate from "@/hooks/react-query/request/useRequestMutate";
 import { useRouter } from "next/router";
+import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
 
 const layout = {
   labelCol: {
@@ -24,8 +25,10 @@ const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
   const [isAdminLogined] = useRecoilState(isAdminLoginedState);
   const isAdminPage = router.asPath.includes("admin");
   const [requestData, setRequestData] = useState<CheckForm>();
-  const { postCheckRequestMutate, updateAdminRequestMutate, onRouterLoading } =
-    useRequestMutate({ setRequestData });
+  const { updateAdminRequestMutate } = useAdminMutate();
+  const { postCheckRequestMutate, onRouterLoading } = useRequestMutate({
+    setRequestData,
+  });
   //폼 데이터 관리
   const [form] = Form.useForm();
   const onFinish = (values: { requestId: string }) => {

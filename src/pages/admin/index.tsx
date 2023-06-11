@@ -2,9 +2,7 @@ import HeadTitle from "@/components/common/HeadTitle";
 import PaginationPage from "@/components/page/PaginationPage";
 import WarningForm from "@/components/warning/WarningForm";
 import useCustomForm from "@/hooks/useCustomForm";
-import useRouterLoading from "@/hooks/useRouterLoading";
 import { Announcement, Board, Reference } from "@/types/pageData";
-import { postAdminLogin } from "@/util/api";
 import styled from "styled-components";
 import { Button, Tabs } from "antd";
 import { TAB_ITEMS } from "@/datas/constants/constants";
@@ -12,27 +10,21 @@ import { useRecoilState } from "recoil";
 import { adminEndPointState, isAdminLoginedState } from "@/recoil/recoil";
 import { useRouter } from "next/router";
 import AdminPaginationPage from "@/components/page/AdminPaginationPage";
+import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
 
 const AdminPage = () => {
   const router = useRouter();
-  const { onRouterLoading, offRouterLoading } = useRouterLoading();
+  const { postAdminLoginMutate, onRouterLoading } = useAdminMutate();
   const { id, password, idHandler, passwordHandler } = useCustomForm();
   const [isAdminLogined, setIsAdminLogined] =
     useRecoilState(isAdminLoginedState);
+
   const checkSecretEvent = () => {
-    const data = { id, password };
     onRouterLoading();
-    postAdminLogin(data)
-      .then((res: { token: string }) => {
-        offRouterLoading();
-        localStorage.setItem("token", res.token);
-        setIsAdminLogined(true);
-      })
-      .catch(() => {
-        offRouterLoading();
-        alert("비밀번호를 확인해주세요.");
-      });
+    const data = { id, password };
+    postAdminLoginMutate.mutate(data);
   };
+
   const handleKeyPress = (e: { key: string }) => {
     if (e.key === "Enter") {
       checkSecretEvent();
