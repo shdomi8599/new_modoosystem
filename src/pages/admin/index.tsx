@@ -11,13 +11,14 @@ import { adminEndPointState, isAdminLoginedState } from "@/recoil/recoil";
 import { useRouter } from "next/router";
 import AdminPaginationPage from "@/components/page/AdminPaginationPage";
 import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
+import { successAlert } from "@/components/alert/Alert";
 
 const AdminPage = () => {
   const router = useRouter();
-  const { postAdminLoginMutate, onRouterLoading } = useAdminMutate();
-  const { id, password, idHandler, passwordHandler } = useCustomForm();
   const [isAdminLogined, setIsAdminLogined] =
     useRecoilState(isAdminLoginedState);
+  const { postAdminLoginMutate, onRouterLoading } = useAdminMutate();
+  const { id, password, idHandler, passwordHandler } = useCustomForm();
 
   const checkSecretEvent = () => {
     onRouterLoading();
@@ -38,7 +39,7 @@ const AdminPage = () => {
 
   const adminLogout = () => {
     if (confirm("정말 로그아웃 하시겠습니까?")) {
-      alert("정상적으로 로그아웃 되었습니다.");
+      successAlert("로그아웃 되었습니다.", "관리자");
       localStorage.removeItem("token");
       setIsAdminLogined(false);
       router.push("/");

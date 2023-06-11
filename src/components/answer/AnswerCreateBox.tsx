@@ -1,5 +1,4 @@
-import useRouterLoading from "@/hooks/useRouterLoading";
-import { postAdminAnswer } from "@/util/api";
+import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
 import { Button, Form, Input } from "antd";
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -17,22 +16,13 @@ const { TextArea } = Input;
 const AnswerCreateBox = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { onRouterLoading, offRouterLoading } = useRouterLoading();
+  const { postAdminAnswerMutate, onRouterLoading } = useAdminMutate();
   //폼 데이터 관리
   const [form] = Form.useForm();
   const onFinish = (values: { content: string }) => {
     onRouterLoading();
-    postAdminAnswer({ ...values, id: id as string })
-      .then(() => {
-        alert("답변이 작성되었습니다.");
-        router.push("/admin").then(() => {
-          router.reload();
-        });
-      })
-      .catch(() => {
-        offRouterLoading();
-        alert("잠시 후에 다시 시도해주세요.");
-      });
+    const data = { ...values, id: id as string };
+    postAdminAnswerMutate.mutate(data);
   };
   return (
     <Box>

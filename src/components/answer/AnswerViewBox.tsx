@@ -1,7 +1,6 @@
-import useRouterLoading from "@/hooks/useRouterLoading";
+import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
 import { isAdminLoginedState } from "@/recoil/recoil";
 import { Answer } from "@/types/pageData";
-import { deleteAdminAnswer } from "@/util/api";
 import { Button } from "antd";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
@@ -11,19 +10,12 @@ const AnswerViewBox = ({ answers }: { answers: Answer[] }) => {
   const router = useRouter();
   const { id } = router.query;
   const isAdminLogined = useRecoilValue(isAdminLoginedState);
-  const { onRouterLoading, offRouterLoading } = useRouterLoading();
+  const { deleteAdminAnswerMutate, onRouterLoading } = useAdminMutate();
   const adminDeleteEvent = (answerId: number) => {
     if (confirm("정말 답변을 삭제하시겠습니까?")) {
       onRouterLoading();
-      deleteAdminAnswer(id as string, answerId)
-        .then(() => {
-          alert("답변이 삭제되었습니다.");
-          router.push("/admin").then(() => router.reload());
-        })
-        .catch(() => {
-          alert("잠시 후에 다시 시도해주세요.");
-          offRouterLoading();
-        });
+      const data = { id: id as string, answerId };
+      deleteAdminAnswerMutate.mutate(data);
     }
   };
   return (

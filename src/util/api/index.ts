@@ -142,7 +142,13 @@ export const postAdminAnswer = async (data: {
     .then((res) => res.data);
 };
 
-export const deleteAdminAnswer = async (id: string, answerId: number) => {
+export const deleteAdminAnswer = async ({
+  id,
+  answerId,
+}: {
+  id: string;
+  answerId: number;
+}) => {
   const token = localStorage.getItem("token");
   const headers = {
     Authorization: `Bearer ${token}`,

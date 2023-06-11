@@ -1,7 +1,9 @@
 import useRouterLoading from "../../useRouterLoading";
 import { useMutation } from "react-query";
 import {
+  deleteAdminAnswer,
   deleteAdminArticle,
+  postAdminAnswer,
   postAdminLogin,
   updateAdminRequest,
 } from "@/util/api";
@@ -58,10 +60,40 @@ const useAdminMutate = () => {
     }
   );
 
+  const postAdminAnswerMutate = useMutation(
+    (params: { id: string; content: string }) => postAdminAnswer(params),
+    {
+      onSuccess: () => {
+        successAlert("작성되었습니다.", "답변");
+        router.back();
+      },
+      onError: () => {
+        errorAlert("잠시 후에 다시 시도해주세요.", "답변 작성");
+        offRouterLoading();
+      },
+    }
+  );
+
+  const deleteAdminAnswerMutate = useMutation(
+    (params: { id: string; answerId: number }) => deleteAdminAnswer(params),
+    {
+      onSuccess: () => {
+        successAlert("삭제되었습니다.", "답변");
+        router.back();
+      },
+      onError: () => {
+        errorAlert("잠시 후에 다시 시도해주세요.", "답변 삭제");
+        offRouterLoading();
+      },
+    }
+  );
+
   return {
     postAdminLoginMutate,
     updateAdminRequestMutate,
     deleteAdminArticleMutate,
+    postAdminAnswerMutate,
+    deleteAdminAnswerMutate,
     onRouterLoading,
   };
 };
