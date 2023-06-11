@@ -40,9 +40,10 @@ export const postCheckRequest = async (data: {
   return await api.post(`api/request/check`, data).then((res) => res.data);
 };
 
-export const postArticle = async (endPoint: string, data: FormItem) => {
+export const postArticle = async ({ endPoint, data }: { endPoint: string, data: FormItem }) => {
   return await api.post(`api/${endPoint}/create`, data).then((res) => res.data);
 };
+
 
 export const deleteBoard = async (id: number, password: string) => {
   return await api

@@ -2,10 +2,9 @@ import styled from "styled-components";
 import { Button, Form, Input, Checkbox } from "antd";
 import type { CheckboxChangeEvent } from "antd/es/checkbox";
 import { FormItem } from "@/types";
-import { postArticle } from "@/util/api";
 import { useRouter } from "next/router";
-import useRouterLoading from "@/hooks/useRouterLoading";
 import { useState } from "react";
+import useArticleMutate from "@/hooks/react-query/article/useArticleMutate";
 
 const layout = {
   labelCol: {
@@ -24,21 +23,13 @@ const CreatePage = ({ endPoint }: { endPoint: string }) => {
   const isBoardPage = asPath.includes("boards");
   const isAdminPage = asPath.includes("admin");
   const isReferencePage = asPath.includes("references");
-  const { onRouterLoading, offRouterLoading } = useRouterLoading();
+  const { postArticleMutate, onRouterLoading } = useArticleMutate();
   //폼 데이터 관리
   const [form] = Form.useForm();
   const onFinish = (values: FormItem) => {
     onRouterLoading();
     const data = { ...values, secret };
-    postArticle(endPoint, data)
-      .then(() => {
-        alert("게시글이 등록되었습니다.");
-        router.push("/admin").then(() => router.reload());
-      })
-      .catch(() => {
-        offRouterLoading();
-        alert("잠시 후에 다시 시도해주세요.");
-      });
+    postArticleMutate.mutate({ endPoint, data });
   };
   const [secret, setSecret] = useState(false);
   const onChange = (e: CheckboxChangeEvent) => {
