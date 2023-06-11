@@ -45,7 +45,7 @@ const useAdminMutate = () => {
     (data: { status: string; requestId: string }) => updateAdminRequest(data),
     {
       onSuccess: () => {
-        successAlert("성공적으로 변경되었습니다.", "처리상태가");
+        successAlert("성공적으로 변경되었습니다.", "처리상태");
 
         router.back();
       },
@@ -99,7 +99,7 @@ const useAdminMutate = () => {
       },
       onError: () => {
         errorAlert("잠시 후에 다시 시도해주세요.", "답변 삭제");
-        
+
         offRouterLoading();
       },
     }
