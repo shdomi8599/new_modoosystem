@@ -1,10 +1,5 @@
 import { Announcement, Board, Reference } from "@/types/pageData";
-import {
-  deleteAdminArticle,
-  deleteBoard,
-  getData,
-  postCheckSecretBoard,
-} from "@/util/api";
+import { deleteAdminArticle, getData } from "@/util/api";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { Button, Collapse, Input, Spin } from "antd";
@@ -12,18 +7,17 @@ import styled from "styled-components";
 import HeadTitle from "../common/HeadTitle";
 import { AiFillFileText } from "react-icons/ai";
 import React, { useEffect, useState } from "react";
-import useRouterLoading from "@/hooks/useRouterLoading";
 import AnswerViewBox from "../answer/AnswerViewBox";
 import WarningForm from "../warning/WarningForm";
 import useCustomForm from "@/hooks/useCustomForm";
 import { useRecoilState } from "recoil";
 import { isAdminLoginedState } from "@/recoil/recoil";
 import AnswerCreateBox from "../answer/AnswerCreateBox";
+import useBoardsMutate from "@/hooks/react-query/boards/useBoardsMutate";
 
 const { Panel } = Collapse;
 
 const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
-  const { onRouterLoading, offRouterLoading } = useRouterLoading();
   const router = useRouter();
   const { id } = router.query;
   const { data, isLoading, isError } = useQuery<T>({
@@ -40,22 +34,21 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   const { answers, secret } = data as T extends Board ? T : never;
 
   const { passwordHandler, password } = useCustomForm();
+
   const [isSecret, setIsSecret] = useState(secret);
+
+  const { postCheckSecretBoardMutate, deleteBoardMutate, onRouterLoading } =
+    useBoardsMutate({
+      setIsSecret,
+    });
+
   const checkSecretEvent = () => {
     const data = {
       password,
-      id: String(id),
+      id: id as string,
     };
     onRouterLoading();
-    postCheckSecretBoard(String(id), data)
-      .then(() => {
-        offRouterLoading();
-        setIsSecret(false);
-      })
-      .catch(() => {
-        offRouterLoading();
-        alert("비밀번호를 확인해주세요.");
-      });
+    postCheckSecretBoardMutate.mutate({ id: id as string, data });
   };
 
   const handleKeyPress = (e: { key: string }) => {
@@ -70,15 +63,7 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   const deleteEvent = () => {
     if (confirm("정말 삭제하시겠습니까?")) {
       onRouterLoading();
-      deleteBoard(Number(id), password)
-        .then(() => {
-          alert("성공적으로 삭제되었습니다.");
-          router.back();
-        })
-        .catch(() => {
-          offRouterLoading();
-          alert("비밀번호를 확인해주세요.");
-        });
+      deleteBoardMutate.mutate({ id: id as string, password });
     }
   };
 

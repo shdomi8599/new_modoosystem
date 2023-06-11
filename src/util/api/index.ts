@@ -40,24 +40,38 @@ export const postCheckRequest = async (data: {
   return await api.post(`api/request/check`, data).then((res) => res.data);
 };
 
-export const postArticle = async ({ endPoint, data }: { endPoint: string, data: FormItem }) => {
+export const postArticle = async ({
+  endPoint,
+  data,
+}: {
+  endPoint: string;
+  data: FormItem;
+}) => {
   return await api.post(`api/${endPoint}/create`, data).then((res) => res.data);
 };
 
-
-export const deleteBoard = async (id: number, password: string) => {
+export const deleteBoard = async ({
+  id,
+  password,
+}: {
+  id: string;
+  password: string;
+}) => {
   return await api
     .delete(`api/boards/${id}/delete?password=${password}`)
     .then((res) => res.data);
 };
 
-export const postCheckSecretBoard = async (
-  id: string,
+export const postCheckSecretBoard = async ({
+  id,
+  data,
+}: {
+  id: string;
   data: {
     id: string;
     password: string;
-  }
-) => {
+  };
+}) => {
   return await api
     .post(`api/boards/${id}/secret`, data)
     .then((res) => res.data);
