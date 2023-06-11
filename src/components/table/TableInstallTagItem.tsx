@@ -1,5 +1,6 @@
-import { Tag } from "antd";
 import { useEffect, useState } from "react";
+
+import { Tag } from "antd";
 
 interface Props {
   items: string[];

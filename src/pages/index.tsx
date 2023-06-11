@@ -1,5 +1,6 @@
-import HeadTitle from "@/components/common/HeadTitle";
 import styled from "styled-components";
+
+import HeadTitle from "@/components/common/HeadTitle";
 
 export default function HomePage() {
   return (

@@ -2,11 +2,12 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Button, DatePicker, Form, Input, Result, Space } from "antd";
 import { Dayjs } from "dayjs";
-import "dayjs/locale/ko";
 import DaumPostcodeEmbed from "react-daum-postcode";
-import { KakaoAdress, FormItem, RequestForm } from "@/types";
 import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
+import "dayjs/locale/ko";
+
+import { KakaoAdress, FormItem, RequestForm } from "@/types";
 import useRequestMutate from "@/hooks/react-query/request/useRequestMutate";
 
 const layout = {

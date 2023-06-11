@@ -5,10 +5,11 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
 import { RecoilRoot } from "recoil";
+import { useState } from "react";
 import styled from "styled-components";
+
 import Header from "@/components/header/Header";
 import Footer from "@/components/common/Footer";
-import { useState } from "react";
 
 const firebaseConfig = {
   apiKey: process.env.FIRE_BASE_API_KEY,

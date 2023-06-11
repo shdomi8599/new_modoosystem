@@ -1,9 +1,11 @@
-import useRouterLoading from "../../useRouterLoading";
 import { useMutation } from "react-query";
-import { postCheckRequest, postRequest } from "@/util/api";
-import { CheckForm, RequestForm } from "@/types";
-import { errorAlert } from "@/components/alert/Alert";
 import { SetStateAction } from "react";
+
+import { postCheckRequest, postRequest } from "@/util/api";
+import { errorAlert } from "@/components/alert/Alert";
+import { CheckForm, RequestForm } from "@/types";
+
+import useRouterLoading from "../../useRouterLoading";
 
 interface Props {
   setSuccess?: (value: SetStateAction<boolean>) => void;

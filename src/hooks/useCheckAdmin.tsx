@@ -1,6 +1,7 @@
-import { getAdminCheck } from "@/util/api";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+
+import { getAdminCheck } from "@/util/api";
 
 const useCheckAdmin = () => {
   const router = useRouter();

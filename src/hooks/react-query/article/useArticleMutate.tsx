@@ -1,9 +1,11 @@
-import useRouterLoading from "../../useRouterLoading";
 import { useMutation } from "react-query";
-import { postArticle } from "@/util/api";
-import { errorAlert, successAlert } from "@/components/alert/Alert";
 import { useRouter } from "next/router";
+
+import { errorAlert, successAlert } from "@/components/alert/Alert";
+import { postArticle } from "@/util/api";
 import { FormItem } from "@/types";
+
+import useRouterLoading from "../../useRouterLoading";
 
 const useArticleMutate = () => {
   const router = useRouter();

@@ -1,9 +1,11 @@
-import { getPageData } from "@/util/api";
-import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
-import useSearch from "./useSearch";
+import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
+
+import { getPageData } from "@/util/api";
 import { adminEndPointState } from "@/recoil/recoil";
+
+import useSearch from "./useSearch";
 
 interface Props {
   endPoint: string;

@@ -1,5 +1,6 @@
-import { routerLoadingState } from "@/recoil/recoil";
 import { useRecoilState } from "recoil";
+
+import { routerLoadingState } from "@/recoil/recoil";
 
 const useRouterLoading = () => {
   const [routerLoading, setRouterLoading] = useRecoilState(routerLoadingState);

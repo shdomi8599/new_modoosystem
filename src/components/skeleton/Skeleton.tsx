@@ -1,8 +1,6 @@
 import styled from "styled-components";
-export type SkeletonProos = {
-  width: number | string;
-  height: number | string;
-};
+
+import { SkeletonProos } from "@/types";
 
 const Skeleton = (props: SkeletonProos) => <SkeletonContainer {...props} />;
 

@@ -1,9 +1,10 @@
-import { Announcement, Board, Reference } from "@/types/pageData";
+import { useRecoilState } from "recoil";
+
 import { MyQuery } from "@/types";
-import ViewPage from "@/components/page/ViewPage";
+import { Announcement, Board, Reference } from "@/types/pageData";
 import { generateViewProps } from "@/util/ssr";
 import { adminEndPointState } from "@/recoil/recoil";
-import { useRecoilState } from "recoil";
+import ViewPage from "@/components/page/ViewPage";
 import useCheckAdmin from "@/hooks/useCheckAdmin";
 
 /**

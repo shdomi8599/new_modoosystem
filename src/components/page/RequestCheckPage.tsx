@@ -1,14 +1,15 @@
-import { CheckForm } from "@/types";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import { Button, Form, Input, Descriptions, Radio } from "antd";
-import { useEffect, useState } from "react";
+import type { RadioChangeEvent } from "antd";
+
+import { CheckForm } from "@/types";
 import { FORM_ITEMS } from "@/datas/constants/constants";
 import { useRecoilState } from "recoil";
 import { isAdminLoginedState } from "@/recoil/recoil";
-import type { RadioChangeEvent } from "antd";
 import { REQUEST_STATUS } from "@/datas/data/data";
 import useRequestMutate from "@/hooks/react-query/request/useRequestMutate";
-import { useRouter } from "next/router";
 import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
 
 const layout = {

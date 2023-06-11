@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import styled from "styled-components";
+import Link from "next/link";
+
 import useRouterLoading from "@/hooks/useRouterLoading";
 import useSearch from "@/hooks/useSearch";
 import { HeaderItem } from "@/types";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import styled from "styled-components";
 
 const NavItem = ({ name, content }: HeaderItem) => {
   const router = useRouter();

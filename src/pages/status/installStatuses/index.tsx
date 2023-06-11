@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import useInfinite from "@/hooks/useInfinite";
 import { Spin } from "antd";
+
+import useInfinite from "@/hooks/useInfinite";
 import { InstallStatus } from "@/types/pageData";
 import CardSkeleton from "@/components/skeleton/CardSkeleton";
 import InstallStatusesCard from "@/components/card/InstallStatusesCard";
+
 const endPoint = "installStatuses";
 const page_limit = 4;
 

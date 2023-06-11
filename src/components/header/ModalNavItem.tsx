@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { TbTriangleInvertedFilled } from "react-icons/tb";
 import styled from "styled-components";
+import { TbTriangleInvertedFilled } from "react-icons/tb";
+
 import { HeaderItem } from "@/types";
 
 const ModalNavItem = ({ name, content }: HeaderItem) => {

@@ -1,9 +1,10 @@
-import useRouterLoading from "@/hooks/useRouterLoading";
-import { adminEndPointState } from "@/recoil/recoil";
-import { Board } from "@/types/pageData";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+
+import useRouterLoading from "@/hooks/useRouterLoading";
+import { adminEndPointState } from "@/recoil/recoil";
+import { Board } from "@/types/pageData";
 
 interface Props<T> {
   text: string;

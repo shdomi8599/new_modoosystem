@@ -1,3 +1,5 @@
+import { RequestForm } from "@/types";
+import { InstallStatus } from "@/types/pageData";
 import usePagination from "@/hooks/usePagination";
 import TableContent from "@/components/table/TableContent";
 import TableSkeleton from "@/components/skeleton/TableSkeleton";
@@ -5,8 +7,6 @@ import {
   INSTALL_STATUSES_COLUMNS_DATA,
   REQUEST_COLUMNS_DATA,
 } from "@/datas/constants/constants";
-import { RequestForm } from "@/types";
-import { InstallStatus } from "@/types/pageData";
 
 const AdminPaginationPage = ({ endPoint }: { endPoint: string }) => {
   const {

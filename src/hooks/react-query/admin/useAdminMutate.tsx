@@ -1,5 +1,9 @@
-import useRouterLoading from "../../useRouterLoading";
 import { useMutation } from "react-query";
+import { useRouter } from "next/router";
+import { useSetRecoilState } from "recoil";
+
+import { isAdminLoginedState } from "@/recoil/recoil";
+import { errorAlert, successAlert } from "@/components/alert/Alert";
 import {
   deleteAdminAnswer,
   deleteAdminArticle,
@@ -7,10 +11,8 @@ import {
   postAdminLogin,
   updateAdminRequest,
 } from "@/util/api";
-import { errorAlert, successAlert } from "@/components/alert/Alert";
-import { useRouter } from "next/router";
-import { isAdminLoginedState } from "@/recoil/recoil";
-import { useSetRecoilState } from "recoil";
+
+import useRouterLoading from "../../useRouterLoading";
 
 const useAdminMutate = () => {
   const router = useRouter();

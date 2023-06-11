@@ -1,4 +1,5 @@
 import { QueryClient, dehydrate } from "react-query";
+
 import { getData, getPageData } from "../api";
 
 export const generatePaginationProps = async <T>(

@@ -1,12 +1,13 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import styled from "styled-components";
+import { Button, Collapse, Input, Spin } from "antd";
+import { AiFillFileText } from "react-icons/ai";
+
 import { Announcement, Board, Reference } from "@/types/pageData";
 import { getData } from "@/util/api";
-import { useRouter } from "next/router";
 import { useQuery } from "react-query";
-import { Button, Collapse, Input, Spin } from "antd";
-import styled from "styled-components";
 import HeadTitle from "../common/HeadTitle";
-import { AiFillFileText } from "react-icons/ai";
-import React, { useEffect, useState } from "react";
 import AnswerViewBox from "../answer/AnswerViewBox";
 import WarningForm from "../warning/WarningForm";
 import useCustomForm from "@/hooks/useCustomForm";
@@ -63,7 +64,7 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   };
 
   const deleteEvent = () => {
-    confirmAlert("정말 삭제하시겠습니까?", "게시글을").then(() => {
+    confirmAlert("정말 삭제하시겠습니까?", "게시글 삭제가").then(() => {
       onRouterLoading();
       deleteBoardMutate.mutate({ id: id as string, password });
     });
@@ -77,7 +78,7 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
   }, []);
 
   const adminDeleteEvent = () => {
-    confirmAlert("정말 삭제하시겠습니까?", "게시글을").then(() => {
+    confirmAlert("정말 삭제하시겠습니까?", "게시글 삭제가").then(() => {
       onRouterLoading();
       deleteAdminArticleMutate.mutate({ endPoint, id: id as string });
     });

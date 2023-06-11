@@ -1,6 +1,8 @@
-import { InstallStatus } from "@/types/pageData";
 import { Card, Spin, Tag } from "antd";
 import { useState } from "react";
+
+import { InstallStatus } from "@/types/pageData";
+
 const { Meta } = Card;
 
 const InstallStatusesCard = ({ data }: { data: InstallStatus }) => {

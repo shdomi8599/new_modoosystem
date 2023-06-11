@@ -1,5 +1,6 @@
-import { getPageData } from "@/util/api";
 import { useInfiniteQuery } from "react-query";
+
+import { getPageData } from "@/util/api";
 
 type PageProps<T> = { data: T[]; totalElements: number };
 

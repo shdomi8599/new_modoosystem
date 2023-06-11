@@ -1,5 +1,6 @@
-import { STATUS_ITEMS } from "@/datas/constants/constants";
 import styled from "styled-components";
+
+import { STATUS_ITEMS } from "@/datas/constants/constants";
 
 interface Props {
   text: string;

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Collapse } from "antd";
+
 import { DEPARTMENTS } from "@/datas/constants/constants";
 
 const { Panel } = Collapse;

@@ -1,9 +1,12 @@
-import useRouterLoading from "../../useRouterLoading";
 import { useMutation } from "react-query";
-import { deleteBoard, postCheckSecretBoard } from "@/util/api";
-import { errorAlert, successAlert } from "@/components/alert/Alert";
 import { useRouter } from "next/router";
 import { SetStateAction } from "react";
+
+import { errorAlert, successAlert } from "@/components/alert/Alert";
+import { deleteBoard, postCheckSecretBoard } from "@/util/api";
+
+import useRouterLoading from "../../useRouterLoading";
+
 interface Props {
   setIsSecret: (value: SetStateAction<boolean | undefined>) => void;
 }
@@ -45,7 +48,6 @@ const useBoardsMutate = ({ setIsSecret }: Props) => {
       },
     }
   );
-  
 
   return {
     postCheckSecretBoardMutate,
