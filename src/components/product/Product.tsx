@@ -6,8 +6,8 @@ import { Product } from "@/types";
 const Product = ({ category }: { category: Product[] }) => {
   return (
     <>
-      {category?.map((data) => (
-        <Box>
+      {category?.map((data, idx) => (
+        <Box key={idx}>
           <div className="top">
             <div className="img-box">
               <img src={data.src} alt="product" />
@@ -15,7 +15,7 @@ const Product = ({ category }: { category: Product[] }) => {
             <div className="content-box">
               <Descriptions column={8} title="사양" bordered>
                 {data.specification.map((spec) => (
-                  <Descriptions.Item span={8} label={spec.name}>
+                  <Descriptions.Item key={spec.name} span={8} label={spec.name}>
                     {spec.content}
                   </Descriptions.Item>
                 ))}
@@ -32,10 +32,10 @@ const Product = ({ category }: { category: Product[] }) => {
               </Descriptions.Item>
               {data.characteristic && (
                 <Descriptions.Item span={8} label="특징">
-                  {data.characteristic.map((text) => (
+                  {data.characteristic.map((text, idx) => (
                     <>
                       {text}
-                      <br />
+                      <br key={idx} />
                     </>
                   ))}
                 </Descriptions.Item>
