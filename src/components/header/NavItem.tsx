@@ -6,6 +6,8 @@ import Link from "next/link";
 import useRouterLoading from "@/hooks/useRouterLoading";
 import useSearch from "@/hooks/useSearch";
 import { HeaderItem } from "@/types";
+import { useRecoilValue } from "recoil";
+import { adminEndPointState } from "@/recoil/recoil";
 
 const NavItem = ({ name, content }: HeaderItem) => {
   const router = useRouter();
@@ -13,6 +15,7 @@ const NavItem = ({ name, content }: HeaderItem) => {
   const { resetSearch } = useSearch();
   const { offRouterLoading, onRouterLoading } = useRouterLoading();
 
+  const adminEndPoint = useRecoilValue(adminEndPointState);
   const [hover, setHover] = useState(false);
 
   const onHover = () => {
@@ -26,7 +29,7 @@ const NavItem = ({ name, content }: HeaderItem) => {
   useEffect(() => {
     resetSearch();
     offRouterLoading();
-  }, [router]);
+  }, [router, adminEndPoint]);
 
   return (
     <Box className="flex-center" onMouseEnter={onHover} onMouseLeave={offHover}>

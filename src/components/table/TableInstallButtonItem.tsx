@@ -8,7 +8,11 @@ const TableInstallButtonItem = ({ id }: { id: number }) => {
     );
   };
 
-  return <Button onClick={deleteEvent}>삭제</Button>;
+  return (
+    <Button disabled onClick={deleteEvent}>
+      삭제
+    </Button>
+  );
 };
 
 export default TableInstallButtonItem;
