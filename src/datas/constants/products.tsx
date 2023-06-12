@@ -32,7 +32,7 @@ export const PRODUCTS = [
           content: "굴절타입(접이식차단바), LED램프 적용 차단바 외",
         },
       ],
-      img: "http://localhost:3001/uploads/상품목록/차단기원형바.jpg",
+      src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2F%EC%B0%A8%EB%9F%89%EC%B0%A8%EB%8B%A8%EA%B8%B0.png?alt=media&token=d0d7664f-a3a5-4c66-ba0a-38f7c384c689&_gl=1*1wqbj5q*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU4NDM2Ni41MC4xLjE2ODY1ODUzNDIuMC4wLjA.",
     },
   ],
   [
@@ -60,7 +60,7 @@ export const PRODUCTS = [
           content: "입력 또는 HOST 명령 (콘트롤러 장착시 사용)",
         },
       ],
-      img: "http://localhost:3001/uploads/상품목록/리모콘송수신기.png",
+      src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2F%EB%A6%AC%EB%AA%A8%EC%BD%98%20%EC%8B%9C%EC%8A%A4%ED%85%9C.jfif?alt=media&token=8806a0ee-76ff-40b2-b230-83620d9a1093&_gl=1*1a4upax*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU4NDM2Ni41MC4xLjE2ODY1ODU0MzAuMC4wLjA.",
     },
   ],
   [
@@ -93,7 +93,7 @@ export const PRODUCTS = [
         { name: "크기", content: "250*250*50mm" },
         { name: "중량", content: "2.5kg" },
       ],
-      img: "http://localhost:3001/uploads/상품목록/LONGRANGERF.PNG",
+      src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2FLONG%20RANGE%20RF%20-%20READER.gif?alt=media&token=7f6a677f-7fe4-4043-934a-e199ed691d15&_gl=1*1km32ng*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU4NDM2Ni41MC4xLjE2ODY1ODU1MTIuMC4wLjA.",
     },
     {
       name: "SHORT RANGE RF - READER (MDS-902)",
@@ -129,12 +129,12 @@ export const PRODUCTS = [
         { name: "내장 컨트롤러", content: "접점 출력 기능, 이중 입출차 방지" },
         { name: "내장메모리", content: "Tag 데이터 약 11,000건 저장" },
       ],
-      img: "http://localhost:3001/uploads/상품목록/근접식RF.PNG",
+      src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2FSHORT%20RANGE%20RF%20-%20READER.PNG?alt=media&token=b140740e-4588-47c6-a6de-d826d73d72e2&_gl=1*f28d3y*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU4NDM2Ni41MC4xLjE2ODY1ODU2MjIuMC4wLjA.",
     },
   ],
   [
     {
-      name: "주차권 발행기 (MDS-201)",
+      name: "주차권 발행기 (MDS-202)",
       outline:
         "주차권 발행기는 차량 진입을 자동 감지하여 주차권을 발행하며, 주차권 용지에 입차시간과 해당 바코드를 프린트 하는 기기입니다. 차량입차시 발행기 전면에 매설된 LOOP COIL을 밟으면 음성안내 멘트가 나오며, 주차권을 뽑으면 자동으로 차량차단기가 OPEN됩니다.",
       characteristic: [
@@ -158,7 +158,7 @@ export const PRODUCTS = [
         { name: "커터 수명", content: "1,500,000회" },
         { name: "동작 방식", content: "자동 / 수동" },
       ],
-      img: "http://localhost:3001/uploads/상품목록/바코드발행기.PNG",
+      src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2F%EC%A3%BC%EC%B0%A8%EA%B6%8C%20%EB%B0%9C%ED%96%89%EA%B8%B0.jfif?alt=media&token=bf34551f-d748-4119-8a30-0050af7a5365&_gl=1*1hovyfb*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU4NDM2Ni41MC4xLjE2ODY1ODU3MTQuMC4wLjA.",
     },
   ],
   [
@@ -186,37 +186,15 @@ export const PRODUCTS = [
         { name: "외형 치수", content: "370(W) x 1490(H) x 430(D)" },
         { name: "외함 재질", content: "Steel 1.6T, 분체도장" },
       ],
-      img: "http://localhost:3001/uploads/상품목록/차량번호인식기.PNG",
+      src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2F%EC%B0%A8%EB%9F%89%20%EB%B2%88%ED%98%B8%20%EC%9D%B8%EC%8B%9D%EA%B8%B0.jfif?alt=media&token=cdebdb4d-6cbd-4509-bb6a-12b0efba583f&_gl=1*1czxj9w*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU4NDM2Ni41MC4xLjE2ODY1ODU4NjEuMC4wLjA.",
     },
   ],
 
   [
     {
-      name: "일반형 요금계산기 (MDS-501)",
+      name: "요금계산기 (MDS-502)",
       outline:
-        "일반형 요금계산기는 입차시 발급받은 주차권을 제시하면 차량번호 입력 또는 바코드 주차권을 스캐너로 코딩하면 자동으로 요금을 계산하는 기기입니다. 요금계산기 자체적으로 주차권을 발행 할 수 있는 기능을 보유하고 있으며, 차량차단기와 연동되어 요금 정산시 자동으로 차단기를 OPEN시킬 수 있습니다.",
-      characteristic: [
-        "누구나 편리하게 사용 할 수 있는 최적의 프로그램",
-        "바코드형 발행기와 연동하여 스캐너로 요금정산 가능",
-        "다양한 할인, 서비스 기능(무료, %할인, 금액할인등)",
-        "시간별/ 일별/ 월간 정산보고서 출력 가능",
-        "주차권 발행시 차량번호 입력 가능",
-        "요금 정산 후 자동으로 차단기 열림",
-      ],
-      specification: [
-        { name: "전원", content: "AC 220V, 50~60Hz" },
-        { name: "소비 전력", content: "20W ~ 55W(최대)" },
-        { name: "사용 환경", content: "온도 0 ~ 45℃, 습도 90%이하" },
-        { name: "프린터", content: "감열 프린터" },
-        { name: "용지", content: "57mm x 70mm" },
-        { name: "구성", content: "프린터, 본체(키보드), 돈통" },
-      ],
-      img: "http://localhost:3001/uploads/상품목록/일반형요금계산기.PNG",
-    },
-    {
-      name: "PC형 요금계산기 (MDS-502)",
-      outline:
-        "PC형 요금계산기는 입차시 발급받은 주차권을 제시하면 주차요금을 신속하게 자동으로 계산하는 기기입니다. 주차권 발행기/RF 시스템/차량차단기등 각종 주변기기와 연동이 자유로우며, 자체적으로 DATA BASE를 보유 할 수 있습니다.",
+        "요금계산기는 입차시 발급받은 주차권을 제시하면 주차요금을 신속하게 자동으로 계산하는 기기입니다. 주차권 발행기/RF 시스템/차량차단기등 각종 주변기기와 연동이 자유로우며, 자체적으로 DATA BASE를 보유 할 수 있습니다.",
       characteristic: [
         "시간할인 / 금액할인 / %할인등 현장별 할인기능 등록 가능",
         "정기권 차량의 등록 및 삭제, 입출차 내역 관리가능",
@@ -233,7 +211,7 @@ export const PRODUCTS = [
         { name: "정전 보상", content: "60일" },
         { name: "구성", content: "PC, 스캐너, 프린터, 주차권 리더기, 돈통" },
       ],
-      img: "http://localhost:3001/uploads/상품목록/PC형요금계산기.PNG",
+      src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2F%EC%9A%94%EA%B8%88%EA%B3%84%EC%82%B0%EA%B8%B0.jfif?alt=media&token=f10c14e7-0ffd-46bf-9f7f-002acd203203&_gl=1*ky6ocu*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU4NDM2Ni41MC4xLjE2ODY1ODYwODcuMC4wLjA.",
     },
   ],
   [
@@ -249,7 +227,7 @@ export const PRODUCTS = [
         { name: "외형 재질", content: "Stainless Steel 1.0T" },
         { name: "설치 유형", content: "천정형, 벽부형, 자립형 (별도 주문)" },
       ],
-      img: "http://localhost:3001/uploads/상품목록/입차경광등.PNG",
+      src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2F%EC%9E%85%EC%B0%A8%EA%B2%BD%EA%B4%91%EB%93%B1.jpg?alt=media&token=7304c521-190d-41eb-b826-0c4a8afa1cd0&_gl=1*1ox63u7*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU4NDM2Ni41MC4xLjE2ODY1ODYyNDcuMC4wLjA.",
     },
     {
       name: "출차주의등 (MDS-602)",
@@ -263,7 +241,7 @@ export const PRODUCTS = [
         { name: "외형 재질", content: "Stainless Steel 1.2T" },
         { name: "설치 유형", content: "자립형, 벽부형" },
       ],
-      img: "http://localhost:3001/uploads/상품목록/출차경광등.PNG",
+      src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2F%EC%B6%9C%EC%B0%A8%EC%A3%BC%EC%9D%98%EB%93%B1.jfif?alt=media&token=1c122057-37bb-43fd-a63e-eb1cd248636a&_gl=1*1kpc28l*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU4NDM2Ni41MC4xLjE2ODY1ODYyNzguMC4wLjA.",
     },
     {
       name: "차량검지기 (MDS-603)",
@@ -295,7 +273,7 @@ export const PRODUCTS = [
           content: "Loop Coil통과 후 2초뒤 신호를 보내는 기능",
         },
       ],
-      img: "http://localhost:3001/uploads/상품목록/차량검지기.PNG",
+      src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2F%EC%B0%A8%EB%9F%89%EA%B2%80%EC%A7%80%EA%B8%B0.jpg?alt=media&token=240f9996-c8cc-4053-ac7d-d507d6c556d0&_gl=1*10h602h*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU4NDM2Ni41MC4xLjE2ODY1ODYzMTIuMC4wLjA.",
     },
     {
       name: "차량유도등 (MDS-604)",
@@ -310,7 +288,7 @@ export const PRODUCTS = [
         { name: "설치 유형", content: "천정형" },
         { name: "설치 높이", content: "천정고 2~300mm이상" },
       ],
-      img: "http://localhost:3001/uploads/상품목록/차량유도등.PNG",
+      src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2F%EC%B0%A8%EB%9F%89%EC%9C%A0%EB%8F%84%EB%93%B1.PNG?alt=media&token=e210e2f7-7822-47cb-b20a-cf3a1c4ceecc&_gl=1*1yb3xg7*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU4NDM2Ni41MC4xLjE2ODY1ODY0MjkuMC4wLjA.",
     },
   ],
 ];
