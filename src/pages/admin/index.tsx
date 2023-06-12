@@ -51,9 +51,7 @@ const AdminPage = () => {
   };
 
   const moveCreate = () => {
-    confirmAlert("이동하시겠습니까?", "글쓰기가").then(() =>
-      router.push(`/admin/${adminEndPoint}/create`)
-    );
+    router.push(`/admin/${adminEndPoint}/create`);
   };
 
   return (

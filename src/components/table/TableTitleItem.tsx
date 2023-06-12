@@ -20,6 +20,8 @@ const TableTitleItem = <T extends { id: number }>({ text, data }: Props<T>) => {
   const { id } = data;
   const { answers, secret } = data as T extends Board ? T : never;
 
+  const isAnswer = answers?.length && answers?.length > 1;
+
   const { onRouterLoading } = useRouterLoading();
 
   const [adminEndPoint] = useRecoilState(adminEndPointState);
@@ -37,7 +39,7 @@ const TableTitleItem = <T extends { id: number }>({ text, data }: Props<T>) => {
   return (
     <Box onClick={moveView}>
       <span>{text}</span>
-      {answers && <span className="tag">답변완료</span>}
+      {isAnswer && <span className="tag">답변완료</span>}
       {secret && <span className="tag red">비밀글</span>}
     </Box>
   );

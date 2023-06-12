@@ -17,6 +17,8 @@ const AnswerViewBox = ({ answers }: { answers: Answer[] }) => {
 
   const { id } = router.query;
 
+  const isAnswer = answers?.length && answers?.length > 1;
+
   const adminDeleteEvent = (answerId: number) => {
     confirmAlert("정말 삭제하시겠습니까?", "답변 삭제를").then(() => {
       onRouterLoading();
@@ -34,7 +36,7 @@ const AnswerViewBox = ({ answers }: { answers: Answer[] }) => {
     <Box>
       <div className="title">답변</div>
       <div className="content">
-        {answers ? (
+        {isAnswer ? (
           answers.map((answer, idx) => (
             <div key={idx} className="answer">
               <div className="top">
