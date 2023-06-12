@@ -13,22 +13,14 @@ const endPoint = "installStatuses";
 const page_limit = 4;
 
 const InstallationPage = () => {
-  const [category, setCategory] = useState("전체");
+  const [category, setCategory] = useState("");
 
   const handleCategoryChange = (e: RadioChangeEvent) => {
     setCategory(e.target.value);
   };
 
-  const setEndPoint = () => {
-    if (category === "전체") {
-      return endPoint;
-    }
-    const newEndPoint = `${endPoint}?category=${category}`;
-    return newEndPoint;
-  };
-
   const { isLoading, error, data, fetchNextPage, hasNextPage, isFetching } =
-    useInfinitePagination<InstallStatus>(setEndPoint(), page_limit);
+    useInfinitePagination<InstallStatus>(endPoint, page_limit, category);
 
   const flatData = data?.pages.flatMap((page) => page.data);
 
@@ -45,7 +37,7 @@ const InstallationPage = () => {
       <Box>
         <Radio.Group value={category} onChange={handleCategoryChange}>
           {["전체", ...INSTALL_CATEGORY].map((data) => (
-            <Radio.Button key={data} value={data}>
+            <Radio.Button key={data} value={data === "전체" ? "" : data}>
               {data}
             </Radio.Button>
           ))}
@@ -68,30 +60,37 @@ export default InstallationPage;
 const Box = styled.div`
   margin: 40px 0px;
   width: 90%;
+
   .page-box {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     margin-top: 16px;
     gap: 20px;
+    min-height: 550px;
     flex-wrap: wrap;
+
     @media (max-width: 1150px) {
       display: flex;
       justify-content: center;
       align-items: center;
     }
+
     .card {
       position: relative;
       width: 240px;
       height: 240px;
+
       .tag-box {
         position: absolute;
         left: 0px;
         bottom: 50px;
+
         span {
           margin-right: 4px;
           cursor: pointer;
         }
       }
+
       .category-box {
         position: absolute;
         top: 0px;
@@ -102,12 +101,15 @@ const Box = styled.div`
         padding: 4px;
         text-align: center;
       }
+
       .ant-card-cover {
         height: 80%;
+
         img {
           width: 100%;
           height: 100%;
         }
+
         .spin-box {
           position: absolute;
           background-color: #000000;

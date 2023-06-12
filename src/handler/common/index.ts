@@ -67,7 +67,7 @@ export const infiniteHandler =
   ) => {
     const apiData = await getDbAllData<T>(endPoint);
 
-    const { page, size } = req.query;
+    const { page, size, category } = req.query;
 
     const startIndex = (Number(page) - 1) * Number(size);
     const endIndex = startIndex + Number(size);
@@ -78,6 +78,12 @@ export const infiniteHandler =
           ...data,
           key: idx,
         };
+      })
+      .filter((data) => {
+        if (category === "") {
+          return data;
+        }
+        return data.categori.includes(category as string);
       })
       .sort((x, y) => x.id - y.id)
       .slice(startIndex, endIndex);
