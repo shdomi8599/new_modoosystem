@@ -13,8 +13,22 @@ const endPoint = "installStatuses";
 const page_limit = 4;
 
 const InstallationPage = () => {
+  const [category, setCategory] = useState("전체");
+
+  const handleCategoryChange = (e: RadioChangeEvent) => {
+    setCategory(e.target.value);
+  };
+
+  const setEndPoint = () => {
+    if (category === "전체") {
+      return endPoint;
+    }
+    const newEndPoint = `${endPoint}?category=${category}`;
+    return newEndPoint;
+  };
+
   const { isLoading, error, data, fetchNextPage, hasNextPage, isFetching } =
-    useInfinitePagination<InstallStatus>(endPoint, page_limit);
+    useInfinitePagination<InstallStatus>(setEndPoint(), page_limit);
 
   const flatData = data?.pages.flatMap((page) => page.data);
 
@@ -24,20 +38,16 @@ const InstallationPage = () => {
     data,
   });
 
-  const [category, setCategory] = useState("");
-
-  const handleSizeChange = (e: RadioChangeEvent) => {
-    setCategory(e.target.value);
-  };
-
   if (error) return <div>잠시 후에 다시 시도해주세요.</div>;
   if (isLoading) return <Spin />;
   return (
     <>
       <Box>
-        <Radio.Group value={category} onChange={handleSizeChange}>
-          {INSTALL_CATEGORY.map((data) => (
-            <Radio.Button value={data}>{data}</Radio.Button>
+        <Radio.Group value={category} onChange={handleCategoryChange}>
+          {["전체", ...INSTALL_CATEGORY].map((data) => (
+            <Radio.Button key={data} value={data}>
+              {data}
+            </Radio.Button>
           ))}
         </Radio.Group>
         <div className="page-box">
