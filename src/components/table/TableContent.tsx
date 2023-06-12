@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { TableColumn } from "@/types";
 import { SELECT_SEARCH_ITEMS } from "@/datas/constants/constants";
 import useSearch from "@/hooks/useSearch";
+import { useRecoilValue } from "recoil";
+import { adminEndPointState } from "@/recoil/recoil";
 
 const layout = {
   labelCol: {
@@ -37,6 +39,10 @@ const TableContent = <T extends object>({
   const { asPath } = router;
   const isBtn = asPath === "/service/boards";
 
+  const adminEndPoint = useRecoilValue(adminEndPointState);
+  const isForm =
+    adminEndPoint.includes("install") || adminEndPoint.includes("request");
+
   const { setSearch } = useSearch();
 
   const [form] = Form.useForm();
@@ -45,10 +51,10 @@ const TableContent = <T extends object>({
     router.push(`${asPath}/create`);
   };
 
-  const onFinish = (values: { category: string; searchVal: string }) => {
+  const searchArticle = (values: { category: string; searchVal: string }) => {
     setSearch(values);
   };
-  
+
   return (
     <Box>
       {isBtn && (
@@ -64,36 +70,40 @@ const TableContent = <T extends object>({
         pagination={false}
       />
       <div className="bottom">
-        <Form
-          initialValues={{
-            ["category"]: "title",
-          }}
-          form={form}
-          {...layout}
-          name="control-hooks"
-          className="search-box"
-          onFinish={onFinish}
-        >
-          <Form.Item name="category">
-            <Select className="select" options={SELECT_SEARCH_ITEMS} />
-          </Form.Item>
-          <Form.Item
-            name="searchVal"
-            rules={[
-              {
-                required: true,
-                message: "검색어를 입력해주세요.",
-              },
-            ]}
+        {!isForm ? (
+          <Form
+            initialValues={{
+              ["category"]: "title",
+            }}
+            form={form}
+            {...layout}
+            name="control-hooks"
+            className="search-box"
+            onFinish={searchArticle}
           >
-            <Input className="input" placeholder="검색어" />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              확인
-            </Button>
-          </Form.Item>
-        </Form>
+            <Form.Item name="category">
+              <Select className="select" options={SELECT_SEARCH_ITEMS} />
+            </Form.Item>
+            <Form.Item
+              name="searchVal"
+              rules={[
+                {
+                  required: true,
+                  message: "검색어를 입력해주세요.",
+                },
+              ]}
+            >
+              <Input className="input" placeholder="검색어" />
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                확인
+              </Button>
+            </Form.Item>
+          </Form>
+        ) : (
+          <div></div>
+        )}
         <Pagination
           className="pagination"
           current={page}
