@@ -27,8 +27,8 @@ export const HEADER_ITEMS: HeaderItem[] = [
       { name: "주차권발행방식", href: "/products/주차권발행방식" },
       { name: "차량번호인식방식", href: "/products/차량번호인식방식" },
       { name: "요금계산기", href: "/products/요금계산기" },
-      { name: "주차부스", href: "/products/주차부스" },
       { name: "신호관제", href: "/products/신호관제" },
+      { name: "주차부스", href: "/products/주차부스" },
     ],
   },
   {

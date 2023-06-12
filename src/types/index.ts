@@ -51,3 +51,16 @@ export type SkeletonProos = {
   width: number | string;
   height: number | string;
 };
+
+export interface Product {
+  name: string;
+  outline: string;
+  characteristic?: string[];
+  specification: Specification[];
+  src: string;
+}
+
+export interface Specification {
+  name: string;
+  content: string;
+}

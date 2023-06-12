@@ -1,4 +1,6 @@
-export const PRODUCTS = [
+import { Product } from "@/types";
+
+export const PRODUCTS_CATEGORIES: Product[][] = [
   [
     {
       name: "차량 차단기 (MDS - 100)",
@@ -17,7 +19,7 @@ export const PRODUCTS = [
       specification: [
         { name: "입력 전원", content: "AC 220V / 60Hz" },
         { name: "사용 전력", content: "DC 24V" },
-        { name: "사용 온도", content: "-20℃ ~ 60℃" },
+        { name: "사용 온도", content: "-20~60℃" },
         { name: "동작 속도", content: "1~3초 이내 (90˚ 개방시간)" },
         { name: "외함 재질", content: "스틸(Steel1.6T), 분체도장" },
         { name: "외함 규격", content: "275(d) * 320(w) * 1005(h)" },
@@ -85,11 +87,11 @@ export const PRODUCTS = [
           name: "송신 스팩트럼 마스크",
           content: "ISO-18000-6 Air Interface 준수",
         },
-        { name: "수신 범위", content: "-25dBm ~ 70dBm" },
+        { name: "수신 범위", content: "-25~70dBm" },
         { name: "주파수정확도", content: "10PPM" },
         { name: "인식거리", content: "0-7m (Tag Dependent)" },
         { name: "전원", content: "24V DC/24W" },
-        { name: "동작온도", content: "-10℃~+60℃" },
+        { name: "동작온도", content: "-10~+60℃" },
         { name: "크기", content: "250*250*50mm" },
         { name: "중량", content: "2.5kg" },
       ],
@@ -122,7 +124,7 @@ export const PRODUCTS = [
           content: "기본(RS-232C,RS-485) / Optional(TCP/IP)",
         },
         { name: "전원", content: "24V DC /24W" },
-        { name: "동작온도", content: "-30℃ ̴ 70℃" },
+        { name: "동작온도", content: "-30~70℃" },
         { name: "크기", content: "235×255×55mm" },
         { name: "중량", content: "1Kg" },
         { name: "인식거리", content: "0 - 6m(Tag Dependent)" },
@@ -147,13 +149,13 @@ export const PRODUCTS = [
       ],
       specification: [
         { name: "공급 전원", content: "AC 220V(50~60Hz)" },
-        { name: "사용 전력", content: "30W ~ 50W" },
+        { name: "사용 전력", content: "30~50W" },
         { name: "외형 치수", content: "500(L) x 350(W) x 1250(H)" },
         { name: "인쇄 속도", content: "8Cm /Sec" },
         { name: "인자 방식", content: "Thermal" },
         { name: "용지 크기", content: "57mm" },
         { name: "통신 방식", content: "Serial (RS-232C 또는 RS-422)" },
-        { name: "사용 환경", content: "온도 -30 ~ 50℃, 습도 10 ~ 85%" },
+        { name: "사용 환경", content: "온도 -30~50℃, 습도 10~85%" },
         { name: "헤드 수명", content: "50Km (Full Dots 인쇄시)" },
         { name: "커터 수명", content: "1,500,000회" },
         { name: "동작 방식", content: "자동 / 수동" },
@@ -175,7 +177,7 @@ export const PRODUCTS = [
       ],
       specification: [
         { name: "사용 전원", content: "AC 220V" },
-        { name: "사용 온도", content: "-30 ~ +60°C" },
+        { name: "사용 온도", content: "-30~+60°C" },
         { name: "인식률", content: "98%이상" },
         { name: "인식속도", content: "0.02초" },
         {
@@ -189,7 +191,6 @@ export const PRODUCTS = [
       src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2F%EC%B0%A8%EB%9F%89%20%EB%B2%88%ED%98%B8%20%EC%9D%B8%EC%8B%9D%EA%B8%B0.jfif?alt=media&token=cdebdb4d-6cbd-4509-bb6a-12b0efba583f&_gl=1*1czxj9w*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU4NDM2Ni41MC4xLjE2ODY1ODU4NjEuMC4wLjA.",
     },
   ],
-
   [
     {
       name: "요금계산기 (MDS-502)",
@@ -205,8 +206,8 @@ export const PRODUCTS = [
       ],
       specification: [
         { name: "전원", content: "AC 220V, 50~60Hz" },
-        { name: "소비 전력", content: "20W ~ 55W(최대)" },
-        { name: "사용 환경", content: "온도 0 ~ 45℃, 습도 90%이하" },
+        { name: "소비 전력", content: "20~55W(최대)" },
+        { name: "사용 환경", content: "온도 0~45℃, 습도 90%이하" },
         { name: "프린터", content: "도트 또는 써멀" },
         { name: "정전 보상", content: "60일" },
         { name: "구성", content: "PC, 스캐너, 프린터, 주차권 리더기, 돈통" },
@@ -223,7 +224,7 @@ export const PRODUCTS = [
         { name: "전원", content: "AC 220V, 60Hz" },
         { name: "소비 전력", content: "작동시 40W" },
         { name: "내장품", content: "회전 신호용 전구, Buzzer" },
-        { name: "경보 타이머", content: "1 ~ 60sec(검지기 출력 조정)" },
+        { name: "경보 타이머", content: "1~60sec(검지기 출력 조정)" },
         { name: "외형 재질", content: "Stainless Steel 1.0T" },
         { name: "설치 유형", content: "천정형, 벽부형, 자립형 (별도 주문)" },
       ],
@@ -237,11 +238,11 @@ export const PRODUCTS = [
         { name: "전원", content: "AC 220V, 60Hz" },
         { name: "소비 전력", content: "작동시 120W" },
         { name: "내장품", content: "백열전구 2개, Buzzer" },
-        { name: "경보 타이머", content: "1 ~ 60sec(검지기 출력 조정)" },
+        { name: "경보 타이머", content: "1~60sec(검지기 출력 조정)" },
         { name: "외형 재질", content: "Stainless Steel 1.2T" },
         { name: "설치 유형", content: "자립형, 벽부형" },
       ],
-      src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2F%EC%B6%9C%EC%B0%A8%EC%A3%BC%EC%9D%98%EB%93%B1.jfif?alt=media&token=1c122057-37bb-43fd-a63e-eb1cd248636a&_gl=1*1kpc28l*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU4NDM2Ni41MC4xLjE2ODY1ODYyNzguMC4wLjA.",
+      src: "https://firebasestorage.googleapis.com/v0/b/modoosystem-af119.appspot.com/o/products%2F%EC%B6%9C%EC%B0%A8%EC%A3%BC%EC%9D%98%EB%93%B1.png?alt=media&token=db7c9e9c-5575-495e-b507-bc0847c9c1ee&_gl=1*z4msl4*_ga*MTcwNjMwNjA1Ny4xNjg1MzcwOTMz*_ga_CW55HF8NVT*MTY4NjU5MjQ1MC41MS4xLjE2ODY1OTI1NTAuMC4wLjA.",
     },
     {
       name: "차량검지기 (MDS-603)",
@@ -250,7 +251,7 @@ export const PRODUCTS = [
       specification: [
         { name: "전원", content: "AC 220V, 50~60Hz" },
         { name: "소비 전력", content: "상시 2W, 작동시 25W" },
-        { name: "사용 환경", content: "온도 -20℃ ~ +50℃, 습도 30% ~ 85%" },
+        { name: "사용 환경", content: "온도 -20~+50℃, 습도 30~85%" },
         { name: "외함 재질", content: "ABS / Steel" },
         { name: "설치 유형", content: "매립형 / 노출형" },
         {
@@ -262,7 +263,7 @@ export const PRODUCTS = [
           content: "경자동차 이상 감지, 현장여건에 따라 감도조정 가능",
         },
         { name: "감도 조정", content: "고감도에서 저감도까지 10단계로 구성" },
-        { name: "타이머", content: "1 ~ 60초 임의로 조정 가능" },
+        { name: "타이머", content: "1~60초 임의로 조정 가능" },
         { name: "리셋 기능", content: "오동작 발생시 Auto Reset" },
         {
           name: "방향판별 기능",
