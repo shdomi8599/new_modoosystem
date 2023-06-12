@@ -10,7 +10,7 @@ const OrganizationPage = () => {
     <Box>
       <Collapse defaultActiveKey={["대표이사"]}>
         <Panel header="대표이사" key="대표이사">
-          <p>대표이사</p>
+          <p>회사의 경영과 전략을 총괄하는 역할을 맡습니다.</p>
         </Panel>
       </Collapse>
       <Collapse

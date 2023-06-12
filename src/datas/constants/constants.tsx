@@ -173,24 +173,41 @@ export const DEPARTMENTS = [
     name: "관리부",
     key: "관리부",
     subDepartments: [
-      { name: "총무팀", content: "cc" },
-      { name: "회계팀", content: "dd" },
+      { name: "총무팀", content: "회사의 일반적인 행정 업무를 담당합니다." },
+      {
+        name: "회계팀",
+        content: "회사의 재무 관리와 회계 업무를 담당합니다.",
+      },
     ],
   },
   {
     name: "영업부",
     key: "영업부",
     subDepartments: [
-      { name: "영업1팀", content: "ff" },
-      { name: "영업2팀", content: "ee" },
+      {
+        name: "영업1팀",
+        content:
+          "특정 지역이나 고객 세그먼트를 담당하여 제품이나 서비스를 홍보하고 판매하는 업무를 수행합니다.",
+      },
+      {
+        name: "영업2팀",
+        content:
+          "다른 지역이나 고객 세그먼트를 담당하여 영업 활동을 수행합니다.",
+      },
     ],
   },
   {
     name: "기술부",
     key: "기술부",
     subDepartments: [
-      { name: "시공팀", content: "qq" },
-      { name: "연구개발팀", content: "ee" },
+      {
+        name: "시공팀",
+        content: "제품 또는 서비스의 현장 시공과 관련된 업무를 담당합니다.",
+      },
+      {
+        name: "연구개발팀",
+        content: "기술적인 혁신과 제품 개발에 관련된 업무를 담당합니다.",
+      },
     ],
   },
 ];
