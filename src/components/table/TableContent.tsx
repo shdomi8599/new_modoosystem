@@ -38,6 +38,7 @@ const TableContent = <T extends object>({
 
   const { asPath } = router;
   const isBtn = asPath === "/service/boards";
+  const isAdminPage = asPath.includes("admin");
 
   const adminEndPoint = useRecoilValue(adminEndPointState);
   const isForm =
@@ -70,7 +71,7 @@ const TableContent = <T extends object>({
         pagination={false}
       />
       <div className="bottom">
-        {!isForm ? (
+        {!isAdminPage || !isForm ? (
           <Form
             initialValues={{
               ["category"]: "title",

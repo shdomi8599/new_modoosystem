@@ -12,7 +12,7 @@ const Footer = () => {
   const onClickLink = (e: { preventDefault: () => void }, href: string) => {
     !href && e.preventDefault();
   };
-  
+
   return (
     <Box>
       <div className="logo-box">
@@ -33,6 +33,7 @@ const Footer = () => {
               {item.content.map((content) => (
                 <li key={content.name}>
                   <Link
+                    className={item.name === "회사소개" ? "disabled" : ""}
                     onClick={(e) => onClickLink(e, content.href)}
                     href={content.href}
                   >
@@ -59,6 +60,10 @@ const Box = styled.footer`
   @media (max-width: 960px) {
     flex-direction: column;
     gap: 40px;
+  }
+
+  .disabled {
+    cursor: text;
   }
 
   .logo-box {
