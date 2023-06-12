@@ -1,4 +1,5 @@
-import { paginationHandler } from "@/handler";
+import { paginationHandler } from "@/handler/common";
+
 import { Board } from "@/types/pageData";
 
 const endPoint = "boards";

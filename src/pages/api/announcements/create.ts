@@ -1,4 +1,5 @@
-import { articleCreateHandler } from "@/handler";
+import { articleCreateHandler } from "@/handler/common";
+
 const endPoint = "announcements";
 
 const handler = articleCreateHandler(endPoint);

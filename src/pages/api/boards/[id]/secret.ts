@@ -1,4 +1,4 @@
-import { checkSecretHandler } from "@/handler";
+import { checkSecretHandler } from "@/handler/common";
 
 const handler = checkSecretHandler();
 

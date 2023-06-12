@@ -1,4 +1,4 @@
-import { adminArticleDeleteHandler } from "@/handler";
+import { adminArticleDeleteHandler } from "@/handler/admin";
 
 const handler = adminArticleDeleteHandler();
 

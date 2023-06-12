@@ -1,4 +1,4 @@
-import { singleViewHandler } from "@/handler";
+import { singleViewHandler } from "@/handler/common";
 import { Announcement } from "@/types/pageData";
 
 const endPoint = "announcements";

@@ -1,4 +1,5 @@
-import { singleViewHandler } from "@/handler";
+import { singleViewHandler } from "@/handler/common";
+
 import { InstallStatus } from "@/types/pageData";
 
 const endPoint = "installStatuses";

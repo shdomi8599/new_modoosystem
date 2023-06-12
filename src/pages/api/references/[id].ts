@@ -1,4 +1,5 @@
-import { singleViewHandler } from "@/handler";
+import { singleViewHandler } from "@/handler/common";
+
 import { Reference } from "@/types/pageData";
 
 const endPoint = "references";

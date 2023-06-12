@@ -1,3 +1,8 @@
+export interface paginationHandlerResponse<T> {
+  data: T[];
+  totalElements: number;
+}
+
 export interface InstallStatus {
   categori: string[];
   src: string[];

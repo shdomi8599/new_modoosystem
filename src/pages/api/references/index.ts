@@ -1,4 +1,5 @@
-import { paginationHandler } from "@/handler";
+import { paginationHandler } from "@/handler/common";
+
 import { Reference } from "@/types/pageData";
 
 const endPoint = "references";

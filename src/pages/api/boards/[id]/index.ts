@@ -1,4 +1,5 @@
-import { singleViewHandler } from "@/handler";
+import { singleViewHandler } from "@/handler/common";
+
 import { Board } from "@/types/pageData";
 
 const endPoint = "boards";

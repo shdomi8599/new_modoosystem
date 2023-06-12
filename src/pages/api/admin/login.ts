@@ -1,4 +1,4 @@
-import { adminLoginHandler } from "@/handler";
+import { adminLoginHandler } from "@/handler/admin";
 
 const handler = adminLoginHandler();
 

@@ -1,4 +1,4 @@
-import { boardsDeleteHandler } from "@/handler";
+import { boardsDeleteHandler } from "@/handler/common";
 
 const handler = boardsDeleteHandler();
 

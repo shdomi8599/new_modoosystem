@@ -1,4 +1,4 @@
-import { requestHandler } from "@/handler";
+import { requestHandler } from "@/handler/common";
 
 const handler = requestHandler();
 

@@ -1,4 +1,4 @@
-import { adminDeleteAnswerHandler } from "@/handler";
+import { adminDeleteAnswerHandler } from "@/handler/admin";
 
 const handler = adminDeleteAnswerHandler();
 

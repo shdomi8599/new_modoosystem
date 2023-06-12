@@ -1,4 +1,4 @@
-import { adminRequestPaginationHandler } from "@/handler";
+import { adminRequestPaginationHandler } from "@/handler/admin";
 
 const handler = adminRequestPaginationHandler();
 

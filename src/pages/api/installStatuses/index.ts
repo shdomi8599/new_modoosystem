@@ -1,4 +1,5 @@
-import { infiniteHandler } from "@/handler";
+import { infiniteHandler } from "@/handler/common";
+
 import { InstallStatus } from "@/types/pageData";
 
 const endPoint = "installStatuses";
