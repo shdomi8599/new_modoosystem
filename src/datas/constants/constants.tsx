@@ -29,7 +29,6 @@ export const HEADER_ITEMS: HeaderItem[] = [
       { name: "요금계산기", href: "/products/요금계산기" },
       { name: "주차부스", href: "/products/주차부스" },
       { name: "신호관제", href: "/products/신호관제" },
-      { name: "기타제품", href: "/products/기타제품" },
     ],
   },
   {
@@ -248,7 +247,6 @@ export const INSTALL_CATEGORY = [
   "주차권발행방식",
   "차량번호인식방식",
   "요금계산기",
-  "주차부스",
   "신호관제",
-  "기타제품",
+  "주차부스",
 ];
