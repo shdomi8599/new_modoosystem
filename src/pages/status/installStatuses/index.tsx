@@ -1,53 +1,45 @@
-import { useEffect, useRef } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { Spin } from "antd";
+import { Radio, RadioChangeEvent, Spin } from "antd";
 
-import useInfinite from "@/hooks/useInfinite";
+import useInfinitePagination from "@/hooks/useInfinitePagination";
 import { InstallStatus } from "@/types/pageData";
 import CardSkeleton from "@/components/skeleton/CardSkeleton";
 import InstallStatusesCard from "@/components/card/InstallStatusesCard";
+import { INSTALL_CATEGORY } from "@/datas/constants/constants";
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 const endPoint = "installStatuses";
 const page_limit = 4;
 
 const InstallationPage = () => {
   const { isLoading, error, data, fetchNextPage, hasNextPage, isFetching } =
-    useInfinite<InstallStatus>(endPoint, page_limit);
+    useInfinitePagination<InstallStatus>(endPoint, page_limit);
 
   const flatData = data?.pages.flatMap((page) => page.data);
 
-  //무한 스크롤 effect
-  const target = useRef<HTMLDivElement>(null);
+  const { target } = useIntersectionObserver<InstallStatus>({
+    fetchNextPage,
+    hasNextPage,
+    data,
+  });
 
-  useEffect(() => {
-    if (target.current && !hasNextPage) {
-      return;
-    }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 1 }
-    );
+  const [category, setCategory] = useState("");
 
-    if (target.current) {
-      observer.observe(target.current);
-    }
-
-    return () => {
-      if (target.current) {
-        observer.unobserve(target.current);
-      }
-    };
-  }, [data?.pageParams, fetchNextPage, hasNextPage]);
+  const handleSizeChange = (e: RadioChangeEvent) => {
+    setCategory(e.target.value);
+  };
 
   if (error) return <div>잠시 후에 다시 시도해주세요.</div>;
   if (isLoading) return <Spin />;
   return (
     <>
       <Box>
+        <Radio.Group value={category} onChange={handleSizeChange}>
+          {INSTALL_CATEGORY.map((data) => (
+            <Radio.Button value={data}>{data}</Radio.Button>
+          ))}
+        </Radio.Group>
         <div className="page-box">
           {flatData?.map((data, idx) => (
             <InstallStatusesCard data={data} key={idx} />
