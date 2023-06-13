@@ -1,21 +1,24 @@
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 import Product from "@/components/product/Product";
 import { PRODUCTS_CATEGORIES } from "@/datas/constants/products";
-import { useRouter } from "next/router";
 import { INSTALL_CATEGORY } from "@/datas/constants/constants";
 
 const ProductPage = () => {
   const router = useRouter();
+  const { product } = router.query;
 
-  const product = router.query.product;
   const index = INSTALL_CATEGORY.findIndex((data) => data === product);
-
   const category = PRODUCTS_CATEGORIES[index];
 
   return (
     <Box>
-      <Product category={category} />
+      {product === "주차부스" ? (
+        <div>준비 중입니다.</div>
+      ) : (
+        <Product category={category} />
+      )}
     </Box>
   );
 };
