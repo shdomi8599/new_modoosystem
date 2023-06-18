@@ -1,6 +1,7 @@
 import { Announcement } from "@/types/pageData";
-import PaginationPage from "@/components/page/PaginationPage";
 import { generatePaginationProps } from "@/util/ssr";
+
+import PaginationPage from "@/components/page/PaginationPage";
 
 const endPoint = "announcements";
 const initialPage = 1;
