@@ -1,6 +1,7 @@
 import { Reference } from "@/types/pageData";
-import PaginationPage from "@/components/page/PaginationPage";
 import { generatePaginationProps } from "@/util/ssr";
+
+import PaginationPage from "@/components/page/PaginationPage";
 
 const endPoint = "references";
 const initialPage = 1;

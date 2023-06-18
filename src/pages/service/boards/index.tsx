@@ -1,6 +1,7 @@
 import { Board } from "@/types/pageData";
-import PaginationPage from "@/components/page/PaginationPage";
 import { generatePaginationProps } from "@/util/ssr";
+
+import PaginationPage from "@/components/page/PaginationPage";
 
 const endPoint = "boards";
 const initialPage = 1;

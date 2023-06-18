@@ -3,13 +3,13 @@ import { QueryClient, dehydrate } from "react-query";
 import { getData, getPageData } from "../api";
 import { REACT_QUERY_OPTIONS } from "@/datas/constants/constants";
 
-const queryClient = new QueryClient(REACT_QUERY_OPTIONS);
-
 export const generatePaginationProps = async <T>(
   endPoint: string,
   initialPage: number,
   initialSize: number
 ) => {
+  const queryClient = new QueryClient(REACT_QUERY_OPTIONS);
+
   await queryClient.prefetchQuery([endPoint, initialPage], () =>
     getPageData<T>(endPoint, initialPage, initialSize)
   );
@@ -22,6 +22,8 @@ export const generatePaginationProps = async <T>(
 };
 
 export const generateViewProps = async <T>(endPoint: string, id: string) => {
+  const queryClient = new QueryClient(REACT_QUERY_OPTIONS);
+
   await queryClient.prefetchQuery([endPoint, "view", id], () =>
     getData<T>(endPoint, id)
   );
