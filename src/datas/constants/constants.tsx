@@ -13,7 +13,7 @@ export const REACT_QUERY_OPTIONS = {
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
-      retry: 3,
+      retry: 4,
       staleTime: 1000 * 60 * 5,
     },
   },
