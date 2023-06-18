@@ -10,6 +10,7 @@ import styled from "styled-components";
 
 import Header from "@/components/header/Header";
 import Footer from "@/components/common/Footer";
+import { REACT_QUERY_OPTIONS } from "@/datas/constants/constants";
 
 const firebaseConfig = {
   apiKey: process.env.FIRE_BASE_API_KEY,
@@ -26,18 +27,9 @@ export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const db = getFirestore(app);
 
-const options = {
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-      staleTime: 1000 * 60 * 5,
-    },
-  },
-};
 export default function App({ Component, pageProps }: AppProps) {
-  const [queryClient] = useState(() => new QueryClient(options));
-  
+  const [queryClient] = useState(() => new QueryClient(REACT_QUERY_OPTIONS));
+
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>

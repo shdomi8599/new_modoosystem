@@ -9,6 +9,16 @@ import TableRequestStatusItem from "@/components/table/TableRequestStatusItem";
 import TableRequestTitleItem from "@/components/table/TableRequestTitleItem";
 import TableTitleItem from "@/components/table/TableTitleItem";
 
+export const REACT_QUERY_OPTIONS = {
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 3,
+      staleTime: 1000 * 60 * 5,
+    },
+  },
+};
+
 export const HEADER_ITEMS: HeaderItem[] = [
   {
     name: "회사소개",
