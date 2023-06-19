@@ -47,14 +47,11 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
 
   const { deleteAdminArticleMutate } = useAdminMutate();
 
-  const { postCheckSecretBoardMutate, deleteBoardMutate, onRouterLoading } =
-    useBoardsMutate({
-      setIsSecret,
-    });
+  const { postCheckSecretBoardMutate, deleteBoardMutate } = useBoardsMutate({
+    setIsSecret,
+  });
 
   const checkSecretEvent = () => {
-    onRouterLoading();
-
     const data = {
       password,
       id: id as string,
@@ -75,14 +72,12 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
 
   const deleteEvent = () => {
     confirmAlert("정말 삭제하시겠습니까?", "게시글 삭제가").then(() => {
-      onRouterLoading();
       deleteBoardMutate.mutate({ id: id as string, password });
     });
   };
 
   const adminDeleteEvent = () => {
     confirmAlert("정말 삭제하시겠습니까?", "게시글 삭제가").then(() => {
-      onRouterLoading();
       deleteAdminArticleMutate.mutate({ endPoint, id: id as string });
     });
   };

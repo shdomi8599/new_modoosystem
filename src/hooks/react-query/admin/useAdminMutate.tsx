@@ -131,7 +131,6 @@ const useAdminMutate = () => {
     deleteAdminArticleMutate,
     postAdminAnswerMutate,
     deleteAdminAnswerMutate,
-    onRouterLoading,
   };
 };
 

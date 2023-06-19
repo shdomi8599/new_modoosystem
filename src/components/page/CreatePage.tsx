@@ -33,7 +33,7 @@ const CreatePage = ({ endPoint }: { endPoint: string }) => {
       }
     : {};
 
-  const { postArticleMutate, onRouterLoading } = useArticleMutate();
+  const { postArticleMutate } = useArticleMutate();
 
   const [form] = Form.useForm();
 
@@ -44,8 +44,6 @@ const CreatePage = ({ endPoint }: { endPoint: string }) => {
   };
 
   const onFinish = (values: FormItem) => {
-    onRouterLoading();
-
     const data = { ...values, secret };
 
     postArticleMutate.mutate({ endPoint, data });

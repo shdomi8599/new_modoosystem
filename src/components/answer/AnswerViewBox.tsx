@@ -13,7 +13,7 @@ const AnswerViewBox = ({ answers }: { answers: Answer[] }) => {
 
   const isAdminLogined = useRecoilValue(isAdminLoginedState);
 
-  const { deleteAdminAnswerMutate, onRouterLoading } = useAdminMutate();
+  const { deleteAdminAnswerMutate } = useAdminMutate();
 
   const { id } = router.query;
 
@@ -21,8 +21,6 @@ const AnswerViewBox = ({ answers }: { answers: Answer[] }) => {
 
   const adminDeleteEvent = (answerId: number) => {
     confirmAlert("정말 삭제하시겠습니까?", "답변 삭제를").then(() => {
-      onRouterLoading();
-
       const data = {
         id: id as string,
         answerId,

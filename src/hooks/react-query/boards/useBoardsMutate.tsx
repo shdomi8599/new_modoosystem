@@ -65,7 +65,6 @@ const useBoardsMutate = ({ setIsSecret }: Props) => {
   return {
     postCheckSecretBoardMutate,
     deleteBoardMutate,
-    onRouterLoading,
   };
 };
 

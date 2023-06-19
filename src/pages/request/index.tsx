@@ -46,7 +46,7 @@ const RequestPage = () => {
     value && setDate(value.locale("ko").format("YYYY-MM-DD"));
   };
 
-  const { onRouterLoading, postRequestMutate } = useRequestMutate({
+  const { postRequestMutate } = useRequestMutate({
     setSuccess,
     setFormId,
   });
@@ -63,7 +63,6 @@ const RequestPage = () => {
   };
 
   const onFinish = (values: FormItem) => {
-    onRouterLoading();
     const id = uuidv4();
     const data: RequestForm = {
       ...address,
@@ -74,7 +73,7 @@ const RequestPage = () => {
     };
     postRequestMutate.mutate(data);
   };
-  
+
   return (
     <Box>
       {!success ? (
@@ -167,9 +166,7 @@ const RequestPage = () => {
           }
           extra={[
             <Button type="primary" key="console">
-              <Link onClick={onRouterLoading} href={"/request/check"}>
-                신청확인
-              </Link>
+              <Link href={"/request/check"}>신청확인</Link>
             </Button>,
           ]}
         />

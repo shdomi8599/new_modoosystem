@@ -61,7 +61,6 @@ const useRequestMutate = ({ setSuccess, setFormId, setRequestData }: Props) => {
   return {
     postRequestMutate,
     postCheckRequestMutate,
-    onRouterLoading,
   };
 };
 

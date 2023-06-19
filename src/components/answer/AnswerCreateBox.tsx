@@ -18,15 +18,13 @@ const { TextArea } = Input;
 const AnswerCreateBox = () => {
   const router = useRouter();
   
-  const { postAdminAnswerMutate, onRouterLoading } = useAdminMutate();
+  const { postAdminAnswerMutate } = useAdminMutate();
   
   const [form] = Form.useForm();
   
   const { id } = router.query;
 
   const onFinish = (values: { content: string }) => {
-    onRouterLoading();
-
     const data = {
       ...values,
       id: id as string,

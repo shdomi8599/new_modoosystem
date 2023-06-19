@@ -22,12 +22,11 @@ const AdminPage = () => {
 
   const [adminEndPoint, setAdminEndPoint] = useRecoilState(adminEndPointState);
 
-  const { postAdminLoginMutate, onRouterLoading } = useAdminMutate();
+  const { postAdminLoginMutate } = useAdminMutate();
 
   const { id, password, idHandler, passwordHandler } = useCustomForm();
 
   const checkSecretEvent = () => {
-    onRouterLoading();
     const data = { id, password };
     postAdminLoginMutate.mutate(data);
   };
