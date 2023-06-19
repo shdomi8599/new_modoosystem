@@ -6,44 +6,50 @@ import { Product } from "@/types";
 const Product = ({ category }: { category: Product[] }) => {
   return (
     <>
-      {category?.map((data, idx) => (
-        <Box key={idx}>
-          <div className="top">
-            <div className="img-box">
-              <img src={data.src} alt="product" />
+      {category?.map(
+        ({ src, specification, name, outline, characteristic }, idx) => (
+          <Box key={idx}>
+            <div className="top">
+              <div className="img-box">
+                <img src={src} alt="product" />
+              </div>
+              <div className="content-box">
+                <Descriptions column={8} title="사양" bordered>
+                  {specification.map((spec) => (
+                    <Descriptions.Item
+                      key={spec.name}
+                      span={8}
+                      label={spec.name}
+                    >
+                      {spec.content}
+                    </Descriptions.Item>
+                  ))}
+                </Descriptions>
+              </div>
             </div>
-            <div className="content-box">
-              <Descriptions column={8} title="사양" bordered>
-                {data.specification.map((spec) => (
-                  <Descriptions.Item key={spec.name} span={8} label={spec.name}>
-                    {spec.content}
+            <div className="bottom">
+              <Descriptions column={8} title="상품 소개" bordered>
+                <Descriptions.Item span={8} label="이름">
+                  {name}
+                </Descriptions.Item>
+                <Descriptions.Item span={8} label="개요">
+                  {outline}
+                </Descriptions.Item>
+                {characteristic && (
+                  <Descriptions.Item span={8} label="특징">
+                    {characteristic.map((text, idx) => (
+                      <>
+                        {text}
+                        <br key={idx} />
+                      </>
+                    ))}
                   </Descriptions.Item>
-                ))}
+                )}
               </Descriptions>
             </div>
-          </div>
-          <div className="bottom">
-            <Descriptions column={8} title="상품 소개" bordered>
-              <Descriptions.Item span={8} label="이름">
-                {data.name}
-              </Descriptions.Item>
-              <Descriptions.Item span={8} label="개요">
-                {data.outline}
-              </Descriptions.Item>
-              {data.characteristic && (
-                <Descriptions.Item span={8} label="특징">
-                  {data.characteristic.map((text, idx) => (
-                    <>
-                      {text}
-                      <br key={idx} />
-                    </>
-                  ))}
-                </Descriptions.Item>
-              )}
-            </Descriptions>
-          </div>
-        </Box>
-      ))}
+          </Box>
+        )
+      )}
     </>
   );
 };
