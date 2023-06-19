@@ -32,14 +32,13 @@ const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
 
   const { updateAdminRequestMutate } = useAdminMutate();
 
-  const { postCheckRequestMutate, onRouterLoading } = useRequestMutate({
+  const { postCheckRequestMutate } = useRequestMutate({
     setRequestData,
   });
 
   const [form] = Form.useForm();
 
   const onFinish = (values: { requestId: string }) => {
-    onRouterLoading();
     postCheckRequestMutate.mutate(values);
   };
 
