@@ -13,7 +13,11 @@ const useArticleMutate = () => {
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
 
   const postArticleMutate = useMutation(
-    (params: { endPoint: string; data: FormItem }) => postArticle(params),
+    (params: { endPoint: string; data: FormItem }) => {
+      onRouterLoading();
+
+      return postArticle(params);
+    },
     {
       onSuccess: () => {
         successAlert("등록되었습니다.", "게시글");

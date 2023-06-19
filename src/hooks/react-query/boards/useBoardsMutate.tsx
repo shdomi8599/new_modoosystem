@@ -23,7 +23,11 @@ const useBoardsMutate = ({ setIsSecret }: Props) => {
         id: string;
         password: string;
       };
-    }) => postCheckSecretBoard(params),
+    }) => {
+      onRouterLoading();
+
+      return postCheckSecretBoard(params);
+    },
     {
       onSuccess: () => {
         setIsSecret(false);
@@ -39,7 +43,11 @@ const useBoardsMutate = ({ setIsSecret }: Props) => {
   );
 
   const deleteBoardMutate = useMutation(
-    (params: { id: string; password: string }) => deleteBoard(params),
+    (params: { id: string; password: string }) => {
+      onRouterLoading();
+
+      return deleteBoard(params);
+    },
     {
       onSuccess: () => {
         successAlert("성공적으로 삭제되었습니다.", "게시글이");
@@ -48,7 +56,7 @@ const useBoardsMutate = ({ setIsSecret }: Props) => {
       },
       onError: () => {
         errorAlert("비밀번호를 확인해주세요.", "게시글");
-        
+
         offRouterLoading();
       },
     }

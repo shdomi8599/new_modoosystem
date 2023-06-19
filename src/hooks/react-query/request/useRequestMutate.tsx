@@ -17,7 +17,11 @@ const useRequestMutate = ({ setSuccess, setFormId, setRequestData }: Props) => {
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
 
   const postRequestMutate = useMutation(
-    (data: RequestForm) => postRequest(data),
+    (data: RequestForm) => {
+      onRouterLoading();
+
+      return postRequest(data);
+    },
     {
       onSuccess: (id: string) => {
         setFormId && setFormId(id);
@@ -35,7 +39,11 @@ const useRequestMutate = ({ setSuccess, setFormId, setRequestData }: Props) => {
   );
 
   const postCheckRequestMutate = useMutation(
-    (request: { requestId: string }) => postCheckRequest(request),
+    (request: { requestId: string }) => {
+      onRouterLoading();
+
+      return postCheckRequest(request);
+    },
     {
       onSuccess: (data) => {
         setRequestData && setRequestData(data);
@@ -44,7 +52,7 @@ const useRequestMutate = ({ setSuccess, setFormId, setRequestData }: Props) => {
       },
       onError: () => {
         errorAlert("신청번호를 확인해주세요.", "견적조회");
-        
+
         offRouterLoading();
       },
     }

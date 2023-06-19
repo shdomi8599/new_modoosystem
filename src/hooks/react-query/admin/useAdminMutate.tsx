@@ -22,7 +22,11 @@ const useAdminMutate = () => {
   const { onRouterLoading, offRouterLoading } = useRouterLoading();
 
   const postAdminLoginMutate = useMutation(
-    (data: { id: string; password: string }) => postAdminLogin(data),
+    (data: { id: string; password: string }) => {
+      onRouterLoading();
+
+      return postAdminLogin(data);
+    },
     {
       onSuccess: (res: { token: string }) => {
         successAlert("로그인되었습니다.", "관리자");
@@ -42,7 +46,11 @@ const useAdminMutate = () => {
   );
 
   const updateAdminRequestMutate = useMutation(
-    (data: { status: string; requestId: string }) => updateAdminRequest(data),
+    (data: { status: string; requestId: string }) => {
+      onRouterLoading();
+
+      return updateAdminRequest(data);
+    },
     {
       onSuccess: () => {
         successAlert("성공적으로 변경되었습니다.", "처리상태");
@@ -58,7 +66,11 @@ const useAdminMutate = () => {
   );
 
   const deleteAdminArticleMutate = useMutation(
-    (params: { endPoint: string; id: string }) => deleteAdminArticle(params),
+    (params: { endPoint: string; id: string }) => {
+      onRouterLoading();
+
+      return deleteAdminArticle(params);
+    },
     {
       onSuccess: () => {
         successAlert("삭제되었습니다.", "게시글");
@@ -74,7 +86,11 @@ const useAdminMutate = () => {
   );
 
   const postAdminAnswerMutate = useMutation(
-    (params: { id: string; content: string }) => postAdminAnswer(params),
+    (params: { id: string; content: string }) => {
+      onRouterLoading();
+
+      return postAdminAnswer(params);
+    },
     {
       onSuccess: () => {
         successAlert("작성되었습니다.", "답변");
@@ -90,7 +106,11 @@ const useAdminMutate = () => {
   );
 
   const deleteAdminAnswerMutate = useMutation(
-    (params: { id: string; answerId: number }) => deleteAdminAnswer(params),
+    (params: { id: string; answerId: number }) => {
+      onRouterLoading();
+
+      return deleteAdminAnswer(params);
+    },
     {
       onSuccess: () => {
         successAlert("삭제되었습니다.", "답변");
