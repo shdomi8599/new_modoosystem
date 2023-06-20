@@ -15,13 +15,9 @@ const Product = ({ category }: { category: Product[] }) => {
               </div>
               <div className="content-box">
                 <Descriptions column={8} title="사양" bordered>
-                  {specification.map((spec) => (
-                    <Descriptions.Item
-                      key={spec.name}
-                      span={8}
-                      label={spec.name}
-                    >
-                      {spec.content}
+                  {specification.map(({ name, content }) => (
+                    <Descriptions.Item key={name} span={8} label={name}>
+                      {content}
                     </Descriptions.Item>
                   ))}
                 </Descriptions>

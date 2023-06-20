@@ -36,10 +36,10 @@ const NavItem = ({ name, content }: HeaderItem) => {
       <div>{name}</div>
       {hover && (
         <ul className="flex-center">
-          {content.map((item) => (
-            <li key={item.name}>
-              <Link onClick={onRouterLoading} href={item.href}>
-                {item.name}
+          {content.map(({ name, href }) => (
+            <li key={name}>
+              <Link onClick={onRouterLoading} href={href}>
+                {name}
               </Link>
             </li>
           ))}

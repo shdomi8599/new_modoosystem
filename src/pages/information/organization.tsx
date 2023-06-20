@@ -16,10 +16,10 @@ const OrganizationPage = () => {
       <Collapse
         defaultActiveKey={DEPARTMENTS.map((department) => department.key)}
       >
-        {DEPARTMENTS.map((department) => (
-          <Panel header={department.name} key={department.key}>
+        {DEPARTMENTS.map(({ name, key, subDepartments }) => (
+          <Panel header={name} key={key}>
             <Collapse defaultActiveKey={[]}>
-              {department.subDepartments.map((subDepartment) => (
+              {subDepartments.map((subDepartment) => (
                 <Panel header={subDepartment.name} key={subDepartment.name}>
                   <p>{subDepartment.content}</p>
                 </Panel>

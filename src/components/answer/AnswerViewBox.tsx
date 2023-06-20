@@ -35,24 +35,24 @@ const AnswerViewBox = ({ answers }: { answers: Answer[] }) => {
       <div className="title">답변</div>
       <div className="content">
         {isAnswer ? (
-          answers.map((answer, idx) => (
+          answers.map(({ createAt, id, content }, idx) => (
             <div key={idx} className="answer">
               <div className="top">
                 <div>
-                  <span>작성일</span> : {answer.createAt}
+                  <span>작성일</span> : {createAt}
                 </div>
                 <div>
                   <span>작성자</span> : <span className="master">관리자</span>
                 </div>
                 {isAdminLogined && (
                   <div>
-                    <Button onClick={() => adminDeleteEvent(answer.id)}>
+                    <Button onClick={() => adminDeleteEvent(id)}>
                       삭제하기
                     </Button>
                   </div>
                 )}
               </div>
-              <div className="bottom">{answer.content}</div>
+              <div className="bottom">{content}</div>
             </div>
           ))
         ) : (

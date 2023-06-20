@@ -79,12 +79,8 @@ const Header = () => {
         </div>
         <nav className="nav-box">
           <ul>
-            {HEADER_ITEMS.map((item) => (
-              <NavItem
-                key={item.name}
-                name={item.name}
-                content={item.content}
-              />
+            {HEADER_ITEMS.map(({ name, content }) => (
+              <NavItem key={name} name={name} content={content} />
             ))}
           </ul>
         </nav>
@@ -93,12 +89,8 @@ const Header = () => {
         </div>
         <nav className="modal-nav">
           <ul className="modal-nav-list">
-            {HEADER_ITEMS.map((item) => (
-              <ModalNavItem
-                key={item.name}
-                name={item.name}
-                content={item.content}
-              />
+            {HEADER_ITEMS.map(({ name, content }) => (
+              <ModalNavItem key={name} name={name} content={content} />
             ))}
           </ul>
         </nav>

@@ -77,9 +77,9 @@ const RequestCheckPage = ({ adminRequestId }: { adminRequestId?: string }) => {
           )}
           <CheckBox>
             <Descriptions bordered title="견적신청조회">
-              {FORM_ITEMS.map((item) => (
-                <Descriptions.Item key={item.name} label={item.name}>
-                  {requestData[item.id] ? requestData[item.id] : "정보없음"}
+              {FORM_ITEMS.map(({ name, id }) => (
+                <Descriptions.Item key={name} label={name}>
+                  {requestData[id] ? requestData[id] : "정보없음"}
                 </Descriptions.Item>
               ))}
             </Descriptions>

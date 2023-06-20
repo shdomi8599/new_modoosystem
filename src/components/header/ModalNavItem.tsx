@@ -29,9 +29,9 @@ const ModalNavItem = ({ name, content }: HeaderItem) => {
       </div>
       {nav && (
         <ul className="content">
-          {content.map((content) => (
-            <li key={content.name}>
-              <Link href={content.href}>{content.name}</Link>
+          {content.map(({ name, href }) => (
+            <li key={name}>
+              <Link href={href}>{name}</Link>
             </li>
           ))}
         </ul>
