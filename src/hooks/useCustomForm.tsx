@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 
 const useCustomForm = () => {
   const [id, setId] = useState("");
@@ -7,17 +7,17 @@ const useCustomForm = () => {
 
   const [content, setContent] = useState("");
 
-  const idHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const idHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
-  };
+  }, []);
 
-  const passwordHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const passwordHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-  };
+  }, []);
 
-  const contentHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const contentHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setContent(e.target.value);
-  };
+  }, []);
 
   return {
     id,

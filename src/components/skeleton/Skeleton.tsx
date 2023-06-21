@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styled from "styled-components";
 
 import { SkeletonProos } from "@/types";
@@ -35,4 +36,4 @@ const SkeletonContainer = styled.div<SkeletonProos>`
   }
 `;
 
-export default Skeleton;
+export default memo(Skeleton);

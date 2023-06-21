@@ -1,5 +1,5 @@
+import { useState, useEffect, useCallback } from "react";
 import { useQuery } from "react-query";
-import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 import { getPageData } from "@/util/api";
@@ -24,10 +24,11 @@ const usePagination = <T,>({ endPoint }: Props) => {
     ? [endPoint, page, category, searchVal]
     : [endPoint, page];
 
-  const handlePageChange = (newPage: number, newSize: number) => {
+  const handlePageChange = useCallback((newPage: number, newSize: number) => {
     setPage(newPage);
     setSize(newSize);
-  };
+  }, []);
+
   const { data, isLoading, isError, refetch } = useQuery<{
     data: T[];
     totalElements: number;
