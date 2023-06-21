@@ -4,6 +4,7 @@ import { MyQuery } from "@/types";
 import { Announcement, Board, Reference } from "@/types/pageData";
 import { generateViewProps } from "@/util/ssr";
 import { adminEndPointState } from "@/recoil/recoil";
+
 import ViewPage from "@/components/page/ViewPage";
 import useCheckAdmin from "@/hooks/useCheckAdmin";
 

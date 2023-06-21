@@ -1,7 +1,8 @@
+import { useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 
 import { getPageData } from "@/util/api";
-import { useEffect } from "react";
+
 import useRouterLoading from "./useRouterLoading";
 
 type PageProps<T> = { data: T[]; totalElements: number };

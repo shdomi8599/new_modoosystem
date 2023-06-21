@@ -1,22 +1,23 @@
+import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import styled from "styled-components";
 import { Button, Collapse, Input, Spin } from "antd";
 import { useQuery } from "react-query";
 import { AiFillFileText } from "react-icons/ai";
 
 import { Announcement, Board, Reference } from "@/types/pageData";
+import { isAdminLoginedState } from "@/recoil/recoil";
+import { useRecoilState } from "recoil";
+import { confirmAlert } from "../alert/Alert";
 import { getData } from "@/util/api";
+
 import HeadTitle from "../common/HeadTitle";
 import AnswerViewBox from "../answer/AnswerViewBox";
 import WarningForm from "../warning/WarningForm";
 import useCustomForm from "@/hooks/useCustomForm";
-import { useRecoilState } from "recoil";
-import { isAdminLoginedState } from "@/recoil/recoil";
 import AnswerCreateBox from "../answer/AnswerCreateBox";
 import useBoardsMutate from "@/hooks/react-query/boards/useBoardsMutate";
 import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
-import { confirmAlert } from "../alert/Alert";
 
 const { Panel } = Collapse;
 

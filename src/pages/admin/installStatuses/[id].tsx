@@ -1,13 +1,14 @@
+import styled from "styled-components";
 import { Tag } from "antd";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import styled from "styled-components";
+
+import { InstallStatus } from "@/types/pageData";
+import { getData } from "@/util/api";
 
 import useCheckAdmin from "@/hooks/useCheckAdmin";
 import useRouterLoading from "@/hooks/useRouterLoading";
-import { InstallStatus } from "@/types/pageData";
-import { getData } from "@/util/api";
 
 const AdminViewPage = () => {
   useCheckAdmin();

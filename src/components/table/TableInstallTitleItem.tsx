@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 interface Props {
   id: number;

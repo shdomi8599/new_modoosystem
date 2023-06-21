@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import { Button, Input, Result } from "antd";
 import { ChangeEvent } from "react";
-import styled from "styled-components";
 
 interface Props {
   handleKeyPress: (e: { key: string }) => void;

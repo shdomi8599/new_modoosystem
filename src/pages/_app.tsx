@@ -1,4 +1,5 @@
 import "@/styles/App.css";
+import styled from "styled-components";
 import type { AppProps } from "next/app";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
@@ -6,11 +7,11 @@ import { getStorage } from "firebase/storage";
 import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
 import { RecoilRoot } from "recoil";
 import { useState } from "react";
-import styled from "styled-components";
+
+import { REACT_QUERY_OPTIONS } from "@/datas/constants/constants";
 
 import Header from "@/components/header/Header";
 import Footer from "@/components/common/Footer";
-import { REACT_QUERY_OPTIONS } from "@/datas/constants/constants";
 
 const firebaseConfig = {
   apiKey: process.env.FIRE_BASE_API_KEY,

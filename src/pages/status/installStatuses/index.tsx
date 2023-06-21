@@ -1,13 +1,15 @@
-import { useState } from "react";
 import styled from "styled-components";
+import { useState } from "react";
 import { Radio, RadioChangeEvent, Spin } from "antd";
 
-import useInfinitePagination from "@/hooks/useInfinitePagination";
 import { InstallStatus } from "@/types/pageData";
+import { INSTALL_CATEGORY } from "@/datas/constants/constants";
+
+import useInfinitePagination from "@/hooks/useInfinitePagination";
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
+
 import CardSkeleton from "@/components/skeleton/CardSkeleton";
 import InstallStatusesCard from "@/components/card/InstallStatusesCard";
-import { INSTALL_CATEGORY } from "@/datas/constants/constants";
-import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 const endPoint = "installStatuses";
 const page_limit = 4;

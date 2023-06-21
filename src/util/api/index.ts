@@ -1,5 +1,5 @@
-import { CheckForm, FormItem, RequestForm } from "@/types";
 import axios from "axios";
+import { CheckForm, FormItem, RequestForm } from "@/types";
 
 const baseURL =
   process.env.NODE_ENV === "production"

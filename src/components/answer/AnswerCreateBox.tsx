@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import { Button, Form, Input } from "antd";
 import { useRouter } from "next/router";
-import styled from "styled-components";
 
 import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
 
@@ -17,11 +17,11 @@ const { TextArea } = Input;
 
 const AnswerCreateBox = () => {
   const router = useRouter();
-  
+
   const { postAdminAnswerMutate } = useAdminMutate();
-  
+
   const [form] = Form.useForm();
-  
+
   const { id } = router.query;
 
   const onFinish = (values: { content: string }) => {

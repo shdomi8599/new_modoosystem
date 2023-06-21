@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 const TopTitle = ({ name }: { name: string | string[] | undefined }) => {
   const router = useRouter();

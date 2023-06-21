@@ -2,11 +2,10 @@ import styled from "styled-components";
 import { Button, Form, Input, Select, Space } from "antd";
 
 import { FormItem } from "@/types";
-import useRouterLoading from "@/hooks/useRouterLoading";
 import { INSTALL_CATEGORY } from "@/datas/constants/constants";
-import useCheckAdmin from "@/hooks/useCheckAdmin";
 
-const endPoint = "installStatuses";
+import useRouterLoading from "@/hooks/useRouterLoading";
+import useCheckAdmin from "@/hooks/useCheckAdmin";
 
 const layout = {
   labelCol: {

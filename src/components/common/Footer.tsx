@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
 import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import whiteLogo from "../../../public/logo/white_logo.png";
 import { FOOTER_ITEMS } from "@/datas/data/data";

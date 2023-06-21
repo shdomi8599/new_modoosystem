@@ -1,12 +1,13 @@
+import styled from "styled-components";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
-import styled from "styled-components";
 import { Button } from "antd";
 
 import { Answer } from "@/types/pageData";
 import { isAdminLoginedState } from "@/recoil/recoil";
-import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
 import { confirmAlert } from "../alert/Alert";
+
+import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
 
 const AnswerViewBox = ({ answers }: { answers: Answer[] }) => {
   const router = useRouter();

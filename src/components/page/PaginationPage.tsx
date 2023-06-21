@@ -1,7 +1,8 @@
+import { COLUMNS_DATA } from "@/datas/constants/constants";
+
 import usePagination from "@/hooks/usePagination";
 import TableContent from "@/components/table/TableContent";
 import TableSkeleton from "@/components/skeleton/TableSkeleton";
-import { COLUMNS_DATA } from "@/datas/constants/constants";
 
 const PaginationPage = <T extends object>({
   endPoint,

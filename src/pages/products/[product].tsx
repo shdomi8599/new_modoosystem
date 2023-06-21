@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
 
-import Product from "@/components/product/Product";
 import { PRODUCTS_CATEGORIES } from "@/datas/constants/products";
 import { INSTALL_CATEGORY } from "@/datas/constants/constants";
+
+import Product from "@/components/product/Product";
 
 const ProductPage = () => {
   const router = useRouter();

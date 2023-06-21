@@ -1,10 +1,11 @@
+import styled from "styled-components";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
-import styled from "styled-components";
 
-import useRouterLoading from "@/hooks/useRouterLoading";
 import { adminRequestIdState } from "@/recoil/recoil";
 import { RequestForm } from "@/types";
+
+import useRouterLoading from "@/hooks/useRouterLoading";
 
 interface Props {
   text: string;
