@@ -1,4 +1,5 @@
 import { Button } from "antd";
+
 import { confirmAlert } from "../alert/Alert";
 
 const TableInstallButtonItem = ({ id }: { id: number }) => {

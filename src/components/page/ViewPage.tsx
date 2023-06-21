@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { Button, Collapse, Input, Spin } from "antd";
+import { useQuery } from "react-query";
 import { AiFillFileText } from "react-icons/ai";
 
 import { Announcement, Board, Reference } from "@/types/pageData";
 import { getData } from "@/util/api";
-import { useQuery } from "react-query";
 import HeadTitle from "../common/HeadTitle";
 import AnswerViewBox from "../answer/AnswerViewBox";
 import WarningForm from "../warning/WarningForm";
