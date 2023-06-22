@@ -17,7 +17,7 @@ import {
  * 컬렉션명과 이름이 일치하는 데이터의 값을 수정할 수 있음
  * 일치하는 컬렉션명이 없다면 셋팅과 동시에 데이터를 추가할 수 있음
  */
-export const updateDbData = async <T extends {}>(
+export const updateDbData = async <T extends object>(
   collectionName: string,
   id: string,
   data: T
@@ -40,7 +40,7 @@ export const deleteDbData = async (collectionName: string, id: string) => {
  * 컬렉션에 데이터를 추가
  * 셋팅과 동시에 데이터를 추가할 수 있음
  */
-export const addDbData = async <T extends {}>(
+export const addDbData = async <T extends object>(
   collectionName: string,
   data: T
 ) => {
