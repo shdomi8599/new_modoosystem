@@ -25,6 +25,7 @@ export type TableColumn = {
 
 export interface MyQuery extends ParsedUrlQuery {
   id: string;
+  category: string;
 }
 
 export interface FormItem {
