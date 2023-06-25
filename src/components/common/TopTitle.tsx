@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
 
-const TopTitle = ({ name }: { name: string | string[] | undefined }) => {
+const TopTitle = ({ name }: { name: string }) => {
   const router = useRouter();
 
   const { asPath } = router;

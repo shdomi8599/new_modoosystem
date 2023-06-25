@@ -10,11 +10,13 @@ import { getData } from "@/util/api";
 import useCheckAdmin from "@/hooks/useCheckAdmin";
 import useRouterLoading from "@/hooks/useRouterLoading";
 
+import { MyQuery } from "@/types";
+
 const AdminViewPage = () => {
   useCheckAdmin();
 
   const router = useRouter();
-  const { id } = router.query;
+  const { id } = router.query as MyQuery;
 
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +24,7 @@ const AdminViewPage = () => {
 
   const { data, isError } = useQuery<InstallStatus>({
     queryKey: ["installStatuses", "view", id],
-    queryFn: () => getData<InstallStatus>("installStatuses", id as string),
+    queryFn: () => getData<InstallStatus>("installStatuses", id),
   });
 
   const handleImageLoad = () => {

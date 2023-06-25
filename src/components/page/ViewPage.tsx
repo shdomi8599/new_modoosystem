@@ -19,6 +19,8 @@ import AnswerCreateBox from "../answer/AnswerCreateBox";
 import useBoardsMutate from "@/hooks/react-query/boards/useBoardsMutate";
 import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
 
+import { MyQuery } from "@/types";
+
 const { Panel } = Collapse;
 
 const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
@@ -26,14 +28,14 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
 
   const [isAdminLogined] = useRecoilState(isAdminLoginedState);
 
-  const { id } = router.query;
+  const { id } = router.query as MyQuery;
 
   const isReference = router.asPath.includes("references");
   const isBoard = router.asPath.includes("boards");
 
   const { data, isLoading, isError } = useQuery<T>({
     queryKey: [endPoint, "view", id],
-    queryFn: () => getData<T>(endPoint, id as string),
+    queryFn: () => getData<T>(endPoint, id),
   });
 
   const { title, content, createAt, author } = data as T extends Announcement
@@ -58,7 +60,7 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
       id: id as string,
     };
 
-    postCheckSecretBoardMutate.mutate({ id: id as string, data });
+    postCheckSecretBoardMutate.mutate({ id: id, data });
   };
 
   const handleKeyPress = (e: { key: string }) => {
@@ -73,13 +75,13 @@ const ViewPage = <T,>({ endPoint }: { endPoint: string }) => {
 
   const deleteEvent = () => {
     confirmAlert("정말 삭제하시겠습니까?", "게시글 삭제가").then(() => {
-      deleteBoardMutate.mutate({ id: id as string, password });
+      deleteBoardMutate.mutate({ id: id, password });
     });
   };
 
   const adminDeleteEvent = () => {
     confirmAlert("정말 삭제하시겠습니까?", "게시글 삭제가").then(() => {
-      deleteAdminArticleMutate.mutate({ endPoint, id: id as string });
+      deleteAdminArticleMutate.mutate({ endPoint, id: id });
     });
   };
 

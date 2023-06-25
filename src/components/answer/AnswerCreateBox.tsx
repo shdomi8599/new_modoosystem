@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 
 import useAdminMutate from "@/hooks/react-query/admin/useAdminMutate";
 
+import { MyQuery } from "@/types";
+
 const layout = {
   labelCol: {
     span: 4,
@@ -22,12 +24,12 @@ const AnswerCreateBox = () => {
 
   const [form] = Form.useForm();
 
-  const { id } = router.query;
+  const { id } = router.query as MyQuery;
 
   const onFinish = (values: { content: string }) => {
     const data = {
       ...values,
-      id: id as string,
+      id: id,
     };
 
     postAdminAnswerMutate.mutate(data);

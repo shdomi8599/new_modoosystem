@@ -6,10 +6,11 @@ import { INSTALL_CATEGORY } from "@/datas/constants/constants";
 
 import Product from "@/components/product/Product";
 
+import { MyQuery } from "@/types";
+
 const ProductPage = () => {
   const router = useRouter();
-  const { product } = router.query;
-
+  const { product } = router.query as MyQuery;
   const index = INSTALL_CATEGORY.findIndex((data) => data === product);
   const category = PRODUCTS_CATEGORIES[index];
 

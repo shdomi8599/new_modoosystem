@@ -19,18 +19,20 @@ import HeadTitle from "../common/HeadTitle";
 import NavItem from "./NavItem";
 import ModalNavItem from "./ModalNavItem";
 
+import { MyQuery } from "@/types";
+
 const Header = () => {
   const router = useRouter();
 
   const { asPath } = router;
 
-  const { product } = router.query;
+  const { product } = router.query as MyQuery;
 
   const findCurrentPageName = () => {
     const page =
       ROUTER.find((data) => asPath === data.href) ||
       ROUTER.find((data) => asPath.includes(data.href));
-    return page?.name || (product as string);
+    return page?.name || product;
   };
 
   const currentPageName = findCurrentPageName();
