@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Descriptions } from "antd";
+import { Fragment } from "react";
 
 import { Product } from "@/types";
 
@@ -34,10 +35,10 @@ const Product = ({ category }: { category: Product[] }) => {
                 {characteristic && (
                   <Descriptions.Item span={8} label="특징">
                     {characteristic.map((text, idx) => (
-                      <>
+                      <Fragment key={idx}>
                         {text}
-                        <br key={idx} />
-                      </>
+                        <br />
+                      </Fragment>
                     ))}
                   </Descriptions.Item>
                 )}
