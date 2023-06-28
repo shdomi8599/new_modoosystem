@@ -1,4 +1,3 @@
-import { db } from "@/pages/_app";
 import {
   addDoc,
   collection,
@@ -6,8 +5,26 @@ import {
   doc,
   getDoc,
   getDocs,
+  getFirestore,
   setDoc,
 } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
+
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIRE_BASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIRE_BASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIRE_BASE_DATEBASE_URL,
+  projectId: process.env.REACT_APP_FIRE_BASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIRE_BASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIRE_BASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIRE_BASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIRE_BASE_MEASUREMENT_ID,
+};
+
+export const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);
+export const db = getFirestore(app);
 
 //언젠가는 파이어베이스의 문서이름들을 id와 통일시켜서 id만으로 데이터를
 //바로 가져올 수 있도록 리팩토링을 해야할 필요성을 느꼈다.

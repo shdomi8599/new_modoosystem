@@ -12,5 +12,4 @@ export default function HomePage() {
 }
 
 const Box = styled.div`
-  padding: 20px;
 `;
